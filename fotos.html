@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALERIA DE FOTOS: CLUBE FILATÉLICO DE LONDRINA.</title>
+
+    <style>
+      ul {
+            background-color: black;
+            font-family: Geneva;
+            font-size: 30px;
+            align-items: justify;
+            
+        }
+        a {
+            color: white;
+            font-family: Geneva;
+            font-size: 30px;
+            align-items: justify;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: yellow; /* Cor do link ao passar o mouse */
+        }
+
+        .separator {
+            color: white; /* Estilização do separador dos itens do menu */
+        }
+        
+        header {
+            text-align: center;
+            justify-content: center; 
+            align-items: center; 
+            background-color: white; 
+            padding: 20px; 
+        } 
+    
+        .logo { 
+            max-width: 250px; /* Ajuste conforme necessário */ 
+            height: auto; 
+        }
+
+        h1, h2, h3, h4, h5, h6, h7, h8, h9 {
+            font-family: Geneva; /* Formatação padrão do estílo dos títulos */
+            font-size: 45px;
+            text-align: center;
+        }
+        
+        body {
+            color: black; /* Formatação padrão do estilo de texto dentro da página web */
+            background-color: white;
+            font-family: Geneva;
+            font-size: 25px;
+        }
+        p {
+            font-family: Geneva; /* Formatação padrão do estílo dos parágrafos */
+            font-size: 25px;
+            text-align: justify;
+        }
+        footer {
+            font-family: Geneva; /* Formatação padrão nota de rodapé */
+            font-size: 14px;
+            text-align: center;
+        }
+
+        footer img { /* Formatação padrão para reduzir o tamanho da imagem do foorter */
+        height: auto;
+        }
+
+        button {
+            color: white; /* Formatação padrão de botões */
+            background-color: blueviolet;
+            font-family: Geneva;
+            font-size: 25px;
+            text-decoration: none;
+        }
+
+        /* Início do código de estilização da galeria */
+         body { font-family: Geneva, sans-serif; text-align: center; background-color: white; }
+        .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; max-width: 1000px; margin: auto; }
+        .gallery-item { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center; }
+        .gallery-item img { width: 100%; border-radius: 8px; cursor: pointer; }
+        .title { font-weight: bold; font-size: 18px; margin: 10px 0; }
+        .read-more { background-color: blueviolet; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 5px; font-size: 14px; }
+        .article { display: none; text-align: justify; max-width: 800px; margin: auto; }
+        .article img { width: 100%; border-radius: 8px; }
+        .back-button {  color: white; background-color: blueviolet; font-family: Geneva; font-size: 25px; text-decoration: none; }
+        @media (max-width: 800px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .gallery { grid-template-columns: repeat(1, 1fr); } }
+        /* Final do código de estilização da galeria */
+
+    </style>
+
+</head>
+
+<header>
+
+    <nav>
+    <ul>
+
+     <a href="agenda.html">AGENDA</a> <span class="separator">|</span> 
+     <a href="chat.html">CHAT INTERATIVO</a> <span class="separator">|</span> 
+     <a href="contatos.html">CONTATOS</a> <span class="separator">|</span>
+     <a href="index.html">INSTITUCIONAL</a> <span class="separator">|</span>
+     <a href="inscricao.html">INSCRIÇÃO</a> <span class="separator">|</span> 
+     <a href="manual.html">MANUAL</a> <span class="separator">|</span> 
+     <a href="noticias.html">NOTÍCIAS</a> <span class="separator">|</span> 
+     <a href="videos.html">VIDEOS</a> <span class="separator">|</span>
+        
+    </ul>
+    </nav>    
+
+    <img src=" https://d1yei2z3i6k35z.cloudfront.net/6946809/6997e91418cf0_IMG-20260219-WA0002.jpg" alt="Clube Filatélico de Londrina" class="logo">
+
+</header>
+
+
+<body>
+
+<h1>GALERIA DE FOTOS</h1>
+
+    <div class="gallery" id="gallery"></div>
+    <div id="article-view" class="article"></div>
+  
+<i>
+
+  <footer>
+    Site em desenvolvimento por Juliano Zanoni acadêmcio do 7º semestre do curso de Engenharia de Software da Universidade Anhenguera para projeto de extensão acadêmico.
+  </footer>
+ 
+</i>
+
+<script>
+
+const photos = [
+   
+    { src: "", title: " ", description: "" },
+
+    { src: "", title: " ", description: "" },
+   
+    { src: "", title: " ", description: "" },
+
+    { src: "", title: " ", description: "" },
+    
+    { src: "", title: " ", description: "" },
+
+    { src: "", title: " ", description: "" },
+
+    { src: "", title: " ", description: "" },
+
+    { src: "", title: " ", description: "" },
+
+]
+
+function loadGallery() {
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
+    photos.forEach((photo, index) => {
+        const item = document.createElement("div");
+        item.classList.add("gallery-item");
+        item.innerHTML = `
+            <img src="${photo.src}" alt="${photo.title}" onclick="showArticle(${index})">
+            <div class="title">${photo.title}</div>
+            <button class="read-more" onclick="showArticle(${index})">Ler mais</button>
+        `;
+        gallery.appendChild(item);
+    });
+}
+function showArticle(index) {
+    const photo = photos[index];
+    document.getElementById("gallery").style.display = "none";
+    document.getElementById("article-view").style.display = "block";
+    document.getElementById("article-view").innerHTML = `
+        <center>
+        <img src="${photo.src}" alt="${photo.title}">
+        </center>
+        <h2>${photo.title}</h2>
+        <p>${photo.description}</p>
+        <center>
+        <button class="back-button" onclick="closeArticle()">Voltar</button>
+        </center>
+    `;
+}
+function closeArticle() {
+    document.getElementById("article-view").style.display = "none";
+    document.getElementById("gallery").style.display = "grid";
+}
+loadGallery();
+</script>
+
+</body>
+
+
+</html>

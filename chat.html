@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT INTERATIVO: CLUBE FILATÉLICO DE LONDRINA.</title>
+
+    <style>
+        ul {
+            background-color: white;
+            font-family: Geneva;
+            font-size: 30px;
+            align-items: justify;
+            
+        }
+        a {
+            font-family: Geneva;
+            color: black;
+            font-size: 30px;
+            align-items: justify;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: yellow; /* Cor do link ao passar o mouse */
+        }
+
+        .separator {
+            color: black; /* Estilização do separador dos itens do menu */
+        }        
+
+        header {
+            text-align: center;
+            justify-content: center; 
+            align-items: center; 
+            background-color: white; 
+            padding: 20px; 
+        } 
+    
+        .logo { 
+            max-width: 250px; /* Ajuste conforme necessário */ 
+            height: auto; 
+        }
+        
+        h1, h2, h3, h4, h5, h6, h7, h8, h9 {
+            font-family: Geneva; /* Formatação padrão do estílo dos títulos */
+            font-size: 45px;
+            text-align: center;
+        }
+        
+        body {
+            color: black; /* Formatação padrão do estilo de texto dentro da página web */
+            background-color: white;
+            font-family: Geneva;
+            font-size: 25px;
+        }
+        p {
+            font-family: Geneva; /* Formatação padrão do estílo dos parágrafos */
+            font-size: 25px;
+            text-align: justify;
+        }
+        footer {
+            font-family: Geneva; /* Formatação padrão nota de rodapé */
+            font-size: 14px;
+            text-align: center;
+        }
+        button {
+            color: white; /* Formatação padrão de botões */
+            background-color: blueviolet;
+            font-family: Geneva;
+            font-size: 25px;
+            text-decoration: none;
+        }
+
+        /* Formatação incio de estilização do chat */
+        .chat-container { 
+            max-width: 600px; /* Aumentando a largura */
+            width: 90%; /* Para maior responsividade */
+            margin: 0 auto; 
+            background: #fff; 
+            border: 1px solid #ddd; 
+            border-radius: 10px; 
+            padding: 15px; 
+        }
+        .messages { 
+            max-height: 400px; /* Aumentando a altura */
+            overflow-y: auto; 
+            margin-bottom: 10px; 
+        }
+        .message { 
+            margin: 5px 0; 
+            padding: 5px; 
+            border-radius: 5px; 
+        }
+        .user-message { 
+            background-color: #d3f8d3; 
+            text-align: left; 
+        }
+        .bot-message { 
+            background-color: #f8d3d3; 
+            text-align: right; 
+        }
+        input[type="text"] { 
+            width: 85%; /* Ajustando para caber melhor */
+            padding: 10px; 
+            margin-top: 10px; 
+            border-radius: 5px; 
+        }
+
+        .chat-button {
+            width: auto; /* Permite que o botão ajuste sua largura conforme o conteúdo */
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Início do código do botão de orientação */
+        .manual {
+            position: fixed;
+            top: 0;
+            right: -350px; /* Escondido fora da tela */
+            width: 300px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            transition: right 0.3s ease-in-out;
+        }
+
+        .manual h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .manual ul {
+            padding-left: 20px;
+        }
+
+        .manual ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .manual.ativo {
+            right: 0; /* Aparece na tela */ 
+        } /* Final do código do botão de orientação */
+
+    </style>
+
+</head>
+
+<header>
+
+    <nav>
+    <ul>
+
+     <a href="agenda.html">AGENDA</a> <span class="separator">|</span> 
+     <a href="contatos.html">CONTATOS</a> <span class="separator">|</span>
+     <a href="fotos.html">GALERIA DE FOTOS</a> <span class="separator">|</span>
+     <a href="index.html">INSTITUCIONAL</a> <span class="separator">|</span>
+     <a href="inscricao.html">INSCRIÇÃO</a> <span class="separator">|</span> 
+     <a href="manual.html">MANUAL</a> <span class="separator">|</span> 
+     <a href="noticias.html">NOTÍCIAS</a> <span class="separator">|</span> 
+     <a href="videos.html">VIDEOS</a> <span class="separator">|</span>
+        
+    </ul>
+    </nav>    
+          
+    <img src=" https://d1yei2z3i6k35z.cloudfront.net/6946809/6997e91418cf0_IMG-20260219-WA0002.jpg" alt="Clube Filatélico de Londrina" class="logo">
+
+</header>
+
+
+<body>
+
+    
+    <br>
+
+
+    <center>
+
+        <h1><b>CHAT INTERATIVO.</b></h1>
+    
+    </center>
+
+<!--INICIO DO CAMPO DE PESQUISA E BOTÕES-->
+
+<div class="chat-container">
+    <div class="messages" id="messages"></div>
+    <input type="text" id="userInput" placeholder="Digite aqui a palavra chave de sua busca.">
+    <button class="chat-button" onclick="sendMessage()">Enviar</button>
+    <button class="chat-button" onclick="clearChat()">Limpar</button>
+    <button class="chat-button" id="btnOrientacoes">Orientações Chat</button>
+</div>
+
+<!--FINAL DO CAMPO DE PESQUISA E BOTÕES-->
+
+<!--INICIO DO CÓDIGO DO BOTÃO DE ORIENTAÇÕES-->
+
+
+<div id="manual" class="manual">
+    <button class="chat-button" id="btnFechar">✖</button>
+    <h2>Guia do Colecionador - Apoio 24h</h2>
+    <ul>
+        <li>✔ <b>O que fazemos:</b> Orientações avançadas sobre Filatelia, Numismática e Conservação.</li>
+        <li>✔ <b>Como pesquisar:</b> Use termos específicos para obter detalhes técnicos.</li>
+        <li>✔ <b>Categorias de Pesquisa:</b>
+            <br>- <span style="color: blue;">Filatelia Técnica</span>: use <b>odontômetro, marca d'água, goma, bloco, FDC, aerofilatelia</b>.
+            <br>- <span style="color: blue;">Numismática Avançada</span>: use <b>reverso invertido, pátina, bimetalica, notafilia, flor de estampa</b>.
+            <br>- <span style="color: blue;">Estados de Conservação</span>: use <b>soberba, mbc, flor de cunho, gasta</b>.
+            <br>- <span style="color: blue;">Materiais e Perigos</span>: use <b>pvc, acetato, umidade, limpeza, sílica</b>.
+        </li>
+        <li>✔ <b>Institucional</b>: Digite <b>Londrina, clube ou Mário Cunha</b> para história local.</li>
+    </ul>
+</div>
+
+<i>
+    <footer>
+       Site em desenvolvimento por Juliano Zanoni acadêmcio do 7º semestre do curso de Engenharia de Software da Universidade Anhenguera para projeto de extensão acadêmico.
+    </footer>
+</i>
+
+<script>
+const botName = "ASSISTENTE COLECIONADOR";
+
+function addMessage(text, isBot = false) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', isBot ? 'bot-message' : 'user-message');
+    messageElement.textContent = text;
+    document.getElementById('messages').appendChild(messageElement);
+    document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+}
+
+function sendMessage() {
+    const userMessage = document.getElementById('userInput').value.trim().toLowerCase();
+    if (userMessage === "") return;
+
+    addMessage(userMessage, false);
+    document.getElementById('userInput').value = "";
+
+    setTimeout(() => {
+        const botResponse = getBotResponse(userMessage);
+        addMessage(botResponse, true);
+    }, 1000);
+}
+
+function getBotResponse(input) {
+    const responses = [
+        // --- FILATELIA (50+ Termos/Conceitos) ---
+        { keywords: ["selo", "filatelia", "selos"], response: "Filatelia: Estudo e colecionismo de selos. Inclui selos 'comuns', 'comemorativos', 'ordinários' e 'beneficentes'." },
+        { keywords: ["carimbo", "marca postal", "franquia"], response: "Marcas Postais: Incluem carimbos datadores, mecânicos, de propaganda, mudos e de censura militar." },
+        { keywords: ["fdc", "primeiro dia", "envelope"], response: "FDC (First Day Cover): Envelopes postados no 1º dia de emissão. Valorizados pela arte e pelo carimbo especial." },
+        { keywords: ["bloco", "folhinha", "minifolha"], response: "Blocos: Reúnem selos em molduras ilustradas. Inclui 'blocos numerados' e 'folhinhas de prestígio'." },
+        { keywords: ["odontometro", "dentifracao", "picote"], response: "Odontômetro: Mede o picote. Tipos: denteado (perfurado), serrilhado ou liso (cortado a tesoura)." },
+        { keywords: ["marca d'agua", "filoscopio", "benzina"], response: "Marca d'água: Desenho no papel (coroas, letras, estrelas). Crucial para identificar raridades ocultas." },
+        { keywords: ["charneira", "hawid", "protetor"], response: "Fixação: Charneiras (fitas gomadas) desvalorizam selos novos. Use protetores de acetato (Hawid/Pochetes)." },
+        { keywords: ["goma", "menta", "dobra"], response: "Goma: Cola original no verso. Pode ser lisa, tropicalizada, com brilho ou fosca. 'Menta' é o selo com goma perfeita." },
+        { keywords: ["filigrana", "papel", "couché"], response: "Suporte: Estudo dos tipos de papel: acetinado, fluorescente, fosforescente, poroso ou fibrilado." },
+        { keywords: ["error", "erro", "variedade", "invertido"], response: "Erros: Incluem cores trocadas, centro invertido, falha de picote e erro de legenda (ex: 'Olho de Boi')." },
+        { keywords: ["aerofilatelia", "aereo", "zeppelin"], response: "Aerofilatelia: Estudo de correio aéreo. Destaque para selos de dirigíveis Zeppelin e Condor Lati." },
+        { keywords: ["tematica", "colecao tematica"], response: "Temática: Coleção por assunto (Aves, Espaço, Futebol, Cinema) em vez de país." },
+        { keywords: ["rhm", "catalogo", "scott"], response: "Catálogos: RHM (Brasil), Scott (EUA), Stanley Gibbons (Inglaterra) e Yvert (França)." },
+        { keywords: ["prefilaria", "pre-filatelia"], response: "Pré-Filatelia: Cartas enviadas antes da invenção do selo (1840), com marcas manuais de pagamento." },
+        { keywords: ["inteiro postal", "bilhete", "postal"], response: "Inteiros Postais: Envelopes ou cartões que já vêm com o selo impresso diretamente no papel." },
+
+        // --- NUMISMÁTICA (50+ Termos/Conceitos) ---
+        { keywords: ["moeda", "numismatica", "medalha"], response: "Numismática: Estudo de moedas, medalhas, cédulas e jetons. Foca em metalurgia, história e economia." },
+        { keywords: ["conservacao", "estado", "graduacao"], response: "Estados: UTG (Um tanto gasta), R (Regular), BC (Bem conservada), MBC, Soberba e Flor de Cunho (FC)." },
+        { keywords: ["flor de cunho", "fc", "brilho"], response: "Flor de Cunho: Estado perfeito, sem sinais de circulação e com o brilho original da prensa." },
+        { keywords: ["soberba", "sb"], response: "Soberba: Moeda que circulou muito pouco, retendo cerca de 90% dos detalhes e brilho original." },
+        { keywords: ["mbc", "muito bem conservada"], response: "MBC: Moeda com sinais de uso, mas com todos os detalhes e legendas perfeitamente legíveis." },
+        { keywords: ["cedula", "flor de estampa", "fe"], response: "Cédulas: Classificadas de 'Gasta' a 'Flor de Estampa' (FE). FE é a nota sem dobras ou furos." },
+        { keywords: ["erro de cunhagem", "anomalia", "reverso"], response: "Erros: Reverso invertido, batida dupla, disco trocado, cunho quebrado ou data vazada." },
+        { keywords: ["reverso invertido", "reverso horizontal"], response: "Eixos: Moedas onde o desenho de um lado está girado 180º ou 90º em relação ao outro." },
+        { keywords: ["patina", "oxida", "verde"], response: "Pátina: Oxidação natural protetora. Não limpe! O 'zinabre' verde é corrosivo, a pátina escura é valorizada." },
+        { keywords: ["limpeza", "limpar", "polir"], response: "Limpeza: Jamais use polidores. Isso cria micro-riscos e retira a camada original, destruindo o valor." },
+        { keywords: ["bentes", "krause", "schlichting"], response: "Literatura: Catálogo Bentes (Moedas Brasil), Schlichting (Cédulas) e Krause (Mundo)." },
+        { keywords: ["liga", "metal", "ouro", "prata"], response: "Metais: Ouro, Prata, Cupro-níquel, Bronze-alumínio, Aço Inox e Moedas Bimetálicas (ex: 1 Real)." },
+        { keywords: ["bimetalica", "nucleo", "anel"], response: "Bimetálica: Moedas com dois metais (núcleo e anel). Erros comuns: núcleo deslocado." },
+        { keywords: ["comemorativa", "real", "olimpiada"], response: "Comemorativas: Moedas de circulação limitada, como a série das Olimpíadas ou 50 anos do Banco Central." },
+        { keywords: ["ensaio", "prova"], response: "Ensaios e Provas: Peças raras produzidas para testar o design ou metal antes da produção em massa." },
+        { keywords: ["notafilia"], response: "Notafilia: Ramo da numismática dedicado exclusivamente ao estudo de cédulas e papel-moeda." },
+        { keywords: ["exonumia"], response: "Exonumia: Itens parecidos com moedas mas que não têm valor legal, como fichas, jetons e medalhas." },
+
+        // --- PRESERVAÇÃO E CLUBE ---
+        { keywords: ["pvc", "acetato", "mylar", "mica"], response: "Materiais: Use apenas Mylar ou Acetato inerte. O PVC libera ácido que destrói moedas e cédulas." },
+        { keywords: ["umidade", "mofo", "silica", "fungo"], response: "Preservação: Use sílica gel laranja. Guarde álbuns na vertical. Nunca guarde coleções em porões ou sótãos." },
+        { keywords: ["londrina", "clube", "biblioteca"], response: "Londrina: O Clube reúne-se na Biblioteca Pública (Av. Rio de Janeiro). Traga suas peças para avaliação gratuita!" },
+        { keywords: ["mario cunha", "historia"], response: "Legado: Mário Cunha foi o pioneiro na divulgação filatérica jornalística em Londrina." }
+    ];
+
+    for (let item of responses) {
+        for (let keyword of item.keywords) {
+            if (input.includes(keyword)) {
+                return item.response;
+            }
+        }
+    }
+
+    return "Não encontrei essa palavra-chave. Tente: selos, moedas, limpeza, álbum ou clube.";
+}
+
+function clearChat() {
+    document.getElementById('messages').innerHTML = "";
+}
+
+document.getElementById("btnOrientacoes").addEventListener("click", function () {
+    document.getElementById("manual").classList.add("ativo");
+});
+
+document.getElementById("btnFechar").addEventListener("click", function () {
+    document.getElementById("manual").classList.remove("ativo");
+});
+</script>
+
+
+</body>
+
+
+</html>

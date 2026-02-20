@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGENDA DE EVENTOS ANUAIS: GOVERNANÇA DE INOVAÇÃO DE CAMBÉ.</title>
+
+    <style>
+        /* Estilos do Menu */
+        ul {
+            background-color: black;
+            font-family: Geneva, sans-serif;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 15px;
+            margin: 0;
+        }
+        a {
+            color: white;
+            font-family: Geneva, sans-serif;
+            font-size: 22px;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+        a:hover { color: yellow; }
+        .separator { color: white; }        
+
+        header {
+            text-align: center;
+            background-color: white; 
+            padding: 20px; 
+        } 
+
+        /* AJUSTE TÉCNICO: SOBREPOSIÇÃO PARA COBRIR PARÊNTESES DA IMAGEM */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            max-width: 600px; 
+            margin: 0 auto;
+        }
+
+        .logo { 
+            width: 100%;
+            height: auto; 
+            display: block;
+        }
+
+        .data-sobreposta {
+            position: absolute;
+            /* Coordenadas ajustadas para centralizar e cobrir os parênteses */
+            top: 64.5%;    
+            left: 24.5%;   
+            transform: translate(-50%, -50%);
+            
+            color: #000000; 
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+            
+            /* FUNDO SÓLIDO AMPLIADO: Agora cobre os parênteses da imagem original */
+            background-color: #d8ba84; 
+            padding: 2px 10px;
+            min-width: 210px; /* Aumentado para suprimir os parênteses laterais */
+            border-radius: 2px;
+            line-height: 1.1;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: Geneva, sans-serif;
+            font-size: 45px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        body {
+            color: black;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        footer {
+            font-family: Geneva, sans-serif;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+            background: #f4f4f4;
+            margin-top: 50px;
+        }
+
+        label, select { font-size: 18px; margin: 10px; }
+
+        #eventos { margin-top: 20px; padding: 10px; min-height: 100px; }
+
+        .evento {
+            background: #fff;
+            padding: 15px;
+            margin: 10px auto;
+            width: 60%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid blueviolet;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="chat.html">CHAT INTERATIVO</a> <span class="separator">|</span> 
+                <a href="contatos.html">CONTATOS</a> <span class="separator">|</span>
+                <a href="fotos.html">GALERIA</a> <span class="separator">|</span>
+                <a href="index.html">INSTITUCIONAL</a> <span class="separator">|</span>
+                <a href="manual.html">MANUAL</a> <span class="separator">|</span> 
+                <a href="noticias.html">NOTÍCIAS</a>
+                <a href="videos.html">VIDEOS</a> <span class="separator">|</span>
+            </li>
+        </ul>
+    </nav>   
+
+    <div class="logo-container">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/6997e9837a00b_IMG-20260219-WA0003.jpg" alt="Agenda Londrina" class="logo">
+        <div id="dataEventoDinamica" class="data-sobreposta">--/--/----</div>
+    </div>
+</header>
+
+<h1>AGENDA DE EVENTOS ANUAIS: 2025.</h1>
+    
+    <label for="mes">Selecione um mês para ver a programação:</label>
+    <select id="mes" onchange="mostrarEventos()">
+        <option value="" selected>Selecionar</option>
+        <option value="janeiro">Janeiro</option>
+        <option value="fevereiro">Fevereiro</option>
+        <option value="marco">Março</option>
+        <option value="abril">Abril</option>
+        <option value="maio">Maio</option>
+        <option value="junho">Junho</option>
+        <option value="julho">Julho</option>
+        <option value="agosto">Agosto</option>
+        <option value="setembro">Setembro</option>
+        <option value="outubro">Outubro</option>
+        <option value="novembro">Novembro</option>
+        <option value="dezembro">Dezembro</option>
+    </select>
+
+    <div id="eventos"></div>
+
+    <footer>
+        <i>Site em desenvolvimento por Juliano Zanoni, acadêmico do 7º semestre de Engenharia de Software da Universidade Anhanguera - Projeto de Extensão Acadêmica.</i>
+    </footer>
+
+<script>
+const eventosPorMes = {
+    janeiro: [
+        { data: "10/01/2026", titulo: "Workshop I das 14:00 até às 18:00 horas" },
+        { data: "25/01/2026", titulo: "Workshop II das 14:00 até às 18:00 horas" }
+    ],
+    fevereiro: [
+        { data: "14/02/2026", titulo: "Workshop III das 14:00 até às 18:00 horas" },
+        { data: "28/02/2026", titulo: "Workshop IV das 14:00 até às 18:00 horas" }
+    ],
+    marco: [
+        { data: "07/03/2026", titulo: "REUNIÃO MENSAL - Clube Filatélico (Biblioteca Pública)" },
+        { data: "05/03/2026", titulo: "I Ciclo de Palestras das 08:00 até às 12:00 horas" }
+    ],
+    abril: [{ data: "12/04/2026", titulo: "III Ciclo de Palestras" }],
+    maio: [{ data: "08/05/2026", titulo: "I Encontro do Setor Industrial" }],
+    junho: [{ data: "15/06/2026", titulo: "III Encontro do Setor Industrial" }],
+    julho: [{ data: "10/07/2026", titulo: "IV Encontro do Setor Industrial" }],
+    agosto: [{ data: "05/08/2026", titulo: "I Seminário Comércio Exterior" }],
+    setembro: [{ data: "09/09/2026", titulo: "III Seminário Comércio Exterior" }],
+    outubro: [{ data: "07/10/2026", titulo: "V Seminário Comércio Exterior" }],
+    novembro: [{ data: "03/11/2026", titulo: "VII Seminário Comércio Exterior" }],
+    dezembro: [
+        { data: "12/12/2026", titulo: "IX Seminário Comércio Exterior" },
+        { data: "28/12/2026", titulo: "Encerramento Anual das Atividades"}
+    ]
+};
+
+function mostrarEventos() {
+    const mesSelecionado = document.getElementById("mes").value;
+    const eventosDiv = document.getElementById("eventos");
+    const campoDataBanner = document.getElementById("dataEventoDinamica");
+
+    eventosDiv.innerHTML = ""; 
+
+    if (mesSelecionado === "") {
+        eventosDiv.innerHTML = "<b><p>Selecione um mês para ver os eventos.</p></b>";
+        campoDataBanner.innerText = "--/--/----";
+        return;
+    }
+
+    const listaEventos = eventosPorMes[mesSelecionado];
+
+    if (listaEventos && listaEventos.length > 0) {
+        // Atualiza a imagem com a primeira data do mês selecionado
+        campoDataBanner.innerText = listaEventos[0].data;
+
+        listaEventos.forEach(evento => {
+            const eventoElemento = document.createElement("div");
+            eventoElemento.classList.add("evento");
+            eventoElemento.innerHTML = `<strong>${evento.data}:</strong> ${evento.titulo}`;
+            eventosDiv.appendChild(eventoElemento);
+        });
+    } else {
+        eventosDiv.innerHTML = "<p>Sem eventos cadastrados para este mês.</p>";
+        campoDataBanner.innerText = "SEM DATA";
+    }
+}
+
+window.onload = function() {
+    // Data padrão inicial (Março) para não começar vazio
+    document.getElementById("dataEventoDinamica").innerText = "07/03/2026";
+};
+</script>
+
+</body>
+</html>
