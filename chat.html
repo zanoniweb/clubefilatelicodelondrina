@@ -209,12 +209,77 @@
         <li>✔ <b>O que fazemos:</b> Orientações avançadas sobre Filatelia, Numismática e Conservação.</li>
         <li>✔ <b>Como pesquisar:</b> Use termos específicos para obter detalhes técnicos.</li>
         <li>✔ <b>Categorias de Pesquisa:</b>
-            <br>- <span style="color: blue;">Filatelia Técnica</span>: use <b>odontômetro, marca d'água, goma, bloco, FDC, aerofilatelia</b>.
-            <br>- <span style="color: blue;">Numismática Avançada</span>: use <b>reverso invertido, pátina, bimetalica, notafilia, flor de estampa</b>.
-            <br>- <span style="color: blue;">Estados de Conservação</span>: use <b>soberba, mbc, flor de cunho, gasta</b>.
+            <br>- <span style="color: blue;">Filatelia Técnica</span>: use <b>
+            
+            filatelia,
+
+            carimbo,
+
+            fdc,
+
+            bloco,
+ 
+            odontometro,
+
+            marca d'agua,
+
+            charneira,
+
+            goma,
+
+            papel,
+
+            erro,
+
+            aerofilatelia,
+
+            tematica,
+
+            catalogo, 
+
+            pre-filatelia,
+
+            bilhete.</b>.
+
+            <br>- <span style="color: blue;">Numismática Avançada</span>: use <b>
+            
+            numismatica,
+
+            notafilia,
+
+            exonumia,
+
+            comemorativa,
+
+            estado,
+
+            flor,
+
+            soberba,
+
+            mbc, 
+   
+            cedula,
+
+            metal,
+
+            bimetalica,
+
+            anomalia,
+
+            reverso, 
+
+            ensaio,
+
+            patina,
+
+            limpeza,
+
+            catálogos_numismáticos.</b>.
+
             <br>- <span style="color: blue;">Materiais e Perigos</span>: use <b>pvc, acetato, umidade, limpeza, sílica</b>.
         </li>
-        <li>✔ <b>Institucional</b>: Digite <b>Londrina, clube ou Mário Cunha</b> para história local.</li>
+        <li>✔ <b>Institucional</b>: Digite <!--<b>Londrina, clube ou Mário Cunha</b> para história local.</li>-->
     </ul>
 </div>
 
@@ -251,40 +316,42 @@ function sendMessage() {
 function getBotResponse(input) {
     const responses = [
         // --- FILATELIA (50+ Termos/Conceitos) ---
-        { keywords: ["selo", "filatelia", "selos"], response: "Filatelia: Estudo e colecionismo de selos. Inclui selos 'comuns', 'comemorativos', 'ordinários' e 'beneficentes'." },
-        { keywords: ["carimbo", "marca postal", "franquia"], response: "Marcas Postais: Incluem carimbos datadores, mecânicos, de propaganda, mudos e de censura militar." },
-        { keywords: ["fdc", "primeiro dia", "envelope"], response: "FDC (First Day Cover): Envelopes postados no 1º dia de emissão. Valorizados pela arte e pelo carimbo especial." },
-        { keywords: ["bloco", "folhinha", "minifolha"], response: "Blocos: Reúnem selos em molduras ilustradas. Inclui 'blocos numerados' e 'folhinhas de prestígio'." },
-        { keywords: ["odontometro", "dentifracao", "picote"], response: "Odontômetro: Mede o picote. Tipos: denteado (perfurado), serrilhado ou liso (cortado a tesoura)." },
-        { keywords: ["marca d'agua", "filoscopio", "benzina"], response: "Marca d'água: Desenho no papel (coroas, letras, estrelas). Crucial para identificar raridades ocultas." },
-        { keywords: ["charneira", "hawid", "protetor"], response: "Fixação: Charneiras (fitas gomadas) desvalorizam selos novos. Use protetores de acetato (Hawid/Pochetes)." },
-        { keywords: ["goma", "menta", "dobra"], response: "Goma: Cola original no verso. Pode ser lisa, tropicalizada, com brilho ou fosca. 'Menta' é o selo com goma perfeita." },
-        { keywords: ["filigrana", "papel", "couché"], response: "Suporte: Estudo dos tipos de papel: acetinado, fluorescente, fosforescente, poroso ou fibrilado." },
-        { keywords: ["error", "erro", "variedade", "invertido"], response: "Erros: Incluem cores trocadas, centro invertido, falha de picote e erro de legenda (ex: 'Olho de Boi')." },
-        { keywords: ["aerofilatelia", "aereo", "zeppelin"], response: "Aerofilatelia: Estudo de correio aéreo. Destaque para selos de dirigíveis Zeppelin e Condor Lati." },
-        { keywords: ["tematica", "colecao tematica"], response: "Temática: Coleção por assunto (Aves, Espaço, Futebol, Cinema) em vez de país." },
-        { keywords: ["rhm", "catalogo", "scott"], response: "Catálogos: RHM (Brasil), Scott (EUA), Stanley Gibbons (Inglaterra) e Yvert (França)." },
-        { keywords: ["prefilaria", "pre-filatelia"], response: "Pré-Filatelia: Cartas enviadas antes da invenção do selo (1840), com marcas manuais de pagamento." },
-        { keywords: ["inteiro postal", "bilhete", "postal"], response: "Inteiros Postais: Envelopes ou cartões que já vêm com o selo impresso diretamente no papel." },
+        { keywords: ["filatelia"], response: "Filatelia: Estudo e colecionismo de selos. Inclui selos 'comuns', 'comemorativos', 'ordinários' e 'beneficentes'." },
+        { keywords: ["carimbo"], response: "Marcas Postais: Incluem carimbos datadores, mecânicos, de propaganda, mudos e de censura militar." },
+        { keywords: ["fdc"], response: "FDC (First Day Cover): Envelopes postados no 1º dia de emissão. Valorizados pela arte e pelo carimbo especial." },
+        { keywords: ["bloco"], response: "Blocos: Reúnem selos em molduras ilustradas. Inclui 'blocos numerados' e 'folhinhas de prestígio'." },
+        { keywords: ["odontometro"], response: "Odontômetro: Mede o picote. Tipos: denteado (perfurado), serrilhado ou liso (cortado a tesoura)." },
+        { keywords: ["marca d'agua"], response: "Marca d'água: Desenho no papel (coroas, letras, estrelas). Crucial para identificar raridades ocultas." },
+        { keywords: ["charneira"], response: "Fixação: Charneiras (fitas gomadas) desvalorizam selos novos. Use protetores de acetato (Hawid/Pochetes)." },
+        { keywords: ["goma"], response: "Goma: Cola original no verso. Pode ser lisa, tropicalizada, com brilho ou fosca. 'Menta' é o selo com goma perfeita." },
+        { keywords: ["papel"], response: "Suporte: Estudo dos tipos de papel: acetinado, fluorescente, fosforescente, poroso ou fibrilado." },
+        { keywords: ["erro"], response: "Erros: Incluem cores trocadas, centro invertido, falha de picote e erro de legenda (ex: 'Olho de Boi')." },
+        { keywords: ["aerofilatelia"], response: "Aerofilatelia: Estudo de correio aéreo. Destaque para selos de dirigíveis Zeppelin e Condor Lati." },
+        { keywords: ["tematica"], response: "Temática: Coleção por assunto (Aves, Espaço, Futebol, Cinema) em vez de país." },
+        { keywords: ["catalogo"], response: "Catálogos: RHM (Brasil), Scott (EUA), Stanley Gibbons (Inglaterra) e Yvert (França)." },
+        { keywords: ["pre-filatelia"], response: "Pré-Filatelia: Cartas enviadas antes da invenção do selo (1840), com marcas manuais de pagamento." },
+        { keywords: ["bilhete"], response: "Inteiros Postais: Envelopes ou cartões que já vêm com o selo impresso diretamente no papel." },
+
 
         // --- NUMISMÁTICA (50+ Termos/Conceitos) ---
-        { keywords: ["moeda", "numismatica", "medalha"], response: "Numismática: Estudo de moedas, medalhas, cédulas e jetons. Foca em metalurgia, história e economia." },
-        { keywords: ["conservacao", "estado", "graduacao"], response: "Estados: UTG (Um tanto gasta), R (Regular), BC (Bem conservada), MBC, Soberba e Flor de Cunho (FC)." },
-        { keywords: ["flor de cunho", "fc", "brilho"], response: "Flor de Cunho: Estado perfeito, sem sinais de circulação e com o brilho original da prensa." },
-        { keywords: ["soberba", "sb"], response: "Soberba: Moeda que circulou muito pouco, retendo cerca de 90% dos detalhes e brilho original." },
-        { keywords: ["mbc", "muito bem conservada"], response: "MBC: Moeda com sinais de uso, mas com todos os detalhes e legendas perfeitamente legíveis." },
-        { keywords: ["cedula", "flor de estampa", "fe"], response: "Cédulas: Classificadas de 'Gasta' a 'Flor de Estampa' (FE). FE é a nota sem dobras ou furos." },
-        { keywords: ["erro de cunhagem", "anomalia", "reverso"], response: "Erros: Reverso invertido, batida dupla, disco trocado, cunho quebrado ou data vazada." },
-        { keywords: ["reverso invertido", "reverso horizontal"], response: "Eixos: Moedas onde o desenho de um lado está girado 180º ou 90º em relação ao outro." },
-        { keywords: ["patina", "oxida", "verde"], response: "Pátina: Oxidação natural protetora. Não limpe! O 'zinabre' verde é corrosivo, a pátina escura é valorizada." },
-        { keywords: ["limpeza", "limpar", "polir"], response: "Limpeza: Jamais use polidores. Isso cria micro-riscos e retira a camada original, destruindo o valor." },
-        { keywords: ["bentes", "krause", "schlichting"], response: "Literatura: Catálogo Bentes (Moedas Brasil), Schlichting (Cédulas) e Krause (Mundo)." },
-        { keywords: ["liga", "metal", "ouro", "prata"], response: "Metais: Ouro, Prata, Cupro-níquel, Bronze-alumínio, Aço Inox e Moedas Bimetálicas (ex: 1 Real)." },
-        { keywords: ["bimetalica", "nucleo", "anel"], response: "Bimetálica: Moedas com dois metais (núcleo e anel). Erros comuns: núcleo deslocado." },
-        { keywords: ["comemorativa", "real", "olimpiada"], response: "Comemorativas: Moedas de circulação limitada, como a série das Olimpíadas ou 50 anos do Banco Central." },
-        { keywords: ["ensaio", "prova"], response: "Ensaios e Provas: Peças raras produzidas para testar o design ou metal antes da produção em massa." },
+        { keywords: ["numismatica"], response: "Numismática: Estudo de moedas, medalhas, cédulas e jetons. Foca em metalurgia, história e economia." },
+        { keywords: ["estado"], response: "Estados: UTG (Um tanto gasta), R (Regular), BC (Bem conservada), MBC, Soberba e Flor de Cunho (FC)." },
+        { keywords: ["flor"], response: "Flor de Cunho: Estado perfeito, sem sinais de circulação e com o brilho original da prensa." },
+        { keywords: ["soberba"], response: "Soberba: Moeda que circulou muito pouco, retendo cerca de 90% dos detalhes e brilho original." },
+        { keywords: ["mbc"], response: "MBC: Moeda com sinais de uso, mas com todos os detalhes e legendas perfeitamente legíveis." },
+        { keywords: ["cedula"], response: "Cédulas: Classificadas de 'Gasta' a 'Flor de Estampa' (FE). FE é a nota sem dobras ou furos." },
+        { keywords: ["anomalia"], response: "Erros: Reverso invertido, batida dupla, disco trocado, cunho quebrado ou data vazada." },
+        { keywords: ["reverso"], response: "Eixos: Moedas onde o desenho de um lado está girado 180º ou 90º em relação ao outro." },
+        { keywords: ["patina"], response: "Pátina: Oxidação natural protetora. Não limpe! O 'zinabre' verde é corrosivo, a pátina escura é valorizada." },
+        { keywords: ["limpeza"], response: "Limpeza: Jamais use polidores. Isso cria micro-riscos e retira a camada original, destruindo o valor." },
+        { keywords: ["catálogos_numismáticos"], response: "Literatura: Catálogo Bentes (Moedas Brasil), Schlichting (Cédulas) e Krause (Mundo)." },
+        { keywords: ["metal"], response: "Metais: Ouro, Prata, Cupro-níquel, Bronze-alumínio, Aço Inox e Moedas Bimetálicas (ex: 1 Real)." },
+        { keywords: ["bimetalica"], response: "Bimetálica: Moedas com dois metais (núcleo e anel). Erros comuns: núcleo deslocado." },
+        { keywords: ["comemorativa"], response: "Comemorativas: Moedas de circulação limitada, como a série das Olimpíadas ou 50 anos do Banco Central." },
+        { keywords: ["ensaio"], response: "Ensaios e Provas: Peças raras produzidas para testar o design ou metal antes da produção em massa." },
         { keywords: ["notafilia"], response: "Notafilia: Ramo da numismática dedicado exclusivamente ao estudo de cédulas e papel-moeda." },
         { keywords: ["exonumia"], response: "Exonumia: Itens parecidos com moedas mas que não têm valor legal, como fichas, jetons e medalhas." },
+
 
         // --- PRESERVAÇÃO E CLUBE ---
         { keywords: ["pvc", "acetato", "mylar", "mica"], response: "Materiais: Use apenas Mylar ou Acetato inerte. O PVC libera ácido que destrói moedas e cédulas." },
