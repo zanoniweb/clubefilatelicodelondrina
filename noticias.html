@@ -6,95 +6,172 @@
     <title>NOTÍCIAS: CLUBE FILATÉLICO DE LONDRINA.</title>
 
     <style>
-      ul {
-            background-color: black;
-            font-family: Geneva;
-            font-size: 30px;
-            align-items: justify;
-            
-        }
-        a {
-            color: white;
-            font-family: Geneva;
-            font-size: 30px;
-            align-items: justify;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: yellow; /* Cor do link ao passar o mouse */
-        }
-
-        .separator {
-            color: white; /* Estilização do separador dos itens do menu */
-        }        
-
-        header {
-            text-align: center;
-            justify-content: center; 
-            align-items: center; 
-            background-color: white; 
-            padding: 20px; 
-        }    
     
-        .logo { 
-            max-width: 250px; /* Ajuste conforme necessário */ 
-            height: auto; 
+    /* Reset e Base */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        color: black;
+        margin: 0;
+        padding: 0; /* Ajustado para 0 para o header ocupar a largura total */
+        background-color: #f4f4f4;
+    }
+
+    /* --- MENU E CABEÇALHO --- */
+    ul {
+        background-color: black;
+        font-family: Geneva, sans-serif;
+        font-size: 30px; /* Mantida sua preferência de 30px */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding: 15px;
+        margin: 0;
+    }
+
+    a {
+        color: white;
+        font-family: Geneva, sans-serif;
+        font-size: 30px; /* Mantida sua preferência de 30px */
+        text-decoration: none;
+        padding: 5px 15px;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        color: yellow; /* Seu efeito de hover original */
+    }
+
+    .separator {
+        color: white; /* Seu separador original */
+        align-self: center;
+    }
+
+    header {
+        text-align: center;
+        background-color: white;
+        padding: 20px;
+    }
+
+    .logo {
+        max-width: 250px;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    /* --- ESTRUTURA DOS ARTIGOS (CORREÇÃO DO CORTE) --- */
+    .container {
+        display: flex;
+        flex-wrap: wrap; /* O segredo para não cortar: permite quebra de linha */
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Seletor unificado para .article e tag <article> */
+    .article, article {
+        background-color: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        flex: 1 1 45%; /* Tenta ocupar 45% da largura */
+        min-width: 350px; /* Impede que fique espremido como na foto */
+        max-width: 650px;
+        margin: 0; /* Resetado para funcionar com o flex-gap */
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+        font-family: Geneva, sans-serif;
+    }
+
+    p {
+        font-family: Geneva, sans-serif;
+        font-size: 25px; /* Mantida sua preferência original de 25px */
+        text-align: justify;
+        line-height: 1.4;
+    }
+
+    /* --- IMAGENS --- */
+    /* Estilo para imagens dentro de artigos e com classe outra-imagem */
+    article img, .article img, .outra-imagem {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 15px auto;
+        border: 5px solid #eaeaea; /* Sua borda original estilo moldura */
+        border-radius: 4px;
+        transition: transform 0.3s ease;
+    }
+
+    article img:hover, .article img:hover {
+        transform: scale(1.02);
+        border-color: #0056b3;
+    }
+
+    /* --- BUSCA E INTERATIVIDADE --- */
+    #searchInput:focus {
+        border-color: #0056b3;
+        box-shadow: 0 4px 12px rgba(0,86,179,0.2);
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .article.found {
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    #noResults {
+        text-align: center;
+        font-family: Geneva;
+        font-size: 20px;
+        color: #888;
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    #btnClear:hover { background: #f0f0f0; border-color: #999; }
+    #btnBack:hover { background: #000; transform: scale(1.05); }
+
+    /* --- RODAPÉ --- */
+    footer {
+        font-family: Geneva;
+        font-size: 14px;
+        text-align: center;
+        padding: 30px;
+        background-color: #eee;
+        margin-top: 20px;
+    }
+
+    /* --- RESPONSIVIDADE (CELULARES) --- */
+    @media (max-width: 768px) {
+        .article, article {
+            flex: 1 1 100%; /* No celular, ocupa a largura toda */
+            min-width: 100%;
         }
         
+        ul, a {
+            font-size: 20px; /* Reduz um pouco no celular para não quebrar o layout */
+        }
+
         p {
-            font-family: Geneva; /* Formatação padrão do estílo dos parágrafos */
-            font-size: 25px;
-            text-align: justify;
+            font-size: 20px; /* Ajuste para não ficar gigante em telas pequenas */
         }
-        footer {
-            font-family: Geneva; /* Formatação padrão nota de rodapé */
-            font-size: 14px;
-            text-align: center;
-        }
-
-
-        /* Início do código de estilização dos artigos */
-
-        body {
-            font-family: Arial, sans-serif;
-            color: black;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        
-        .container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-        
-        .article {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 45%;
-        }
-        
-        h2 {
-            color: #333;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            .article {
-                width: 100%;
-            }
-        }
-
-        /* Início do código de estilização dos artigos */
-
-
-        article { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; } /* O SEGREDO: Seleciona apenas imagens DENTRO do article */ article img { max-width: 100%; /* Faz a imagem ser responsiva */ height: auto; /* Mantém a proporção */ display: block; /* Remove espaços vazios abaixo da imagem */ margin: 15px auto; /* Centraliza a imagem */ border: 5px solid #eaeaea; /* Adiciona uma borda estilo moldura */ border-radius: 4px; transition: transform 0.3s ease; /* Efeito suave ao passar o mouse */ } /* Efeito de hover apenas na imagem do artigo */ article img:hover { transform: scale(1.02); border-color: #0056b3; } article h2 { color: #333; text-align: center; }
+    }
 
     </style>
 
@@ -121,6 +198,23 @@
 
 </header>
 
+<section style="text-align: center; margin: 20px 0; font-family: Geneva, sans-serif;">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 600px;">
+        <input type="text" id="searchInput" placeholder="Pesquisar por título, data ou palavra-chave..." 
+        style="width: 100%; padding: 15px 20px; font-size: 18px; border: 2px solid #ddd; border-radius: 50px; outline: none; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        
+        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+            <button id="btnClear" style="padding: 8px 20px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer; transition: 0.3s;">
+                Limpar Busca
+            </button>
+            <button id="btnBack" style="padding: 8px 20px; border-radius: 20px; border: none; background: #333; color: white; cursor: pointer; transition: 0.3s;">
+                Voltar ao Início
+            </button>
+        </div>
+        
+        <span id="searchCount" style="display: block; margin-top: 10px; color: #666; font-size: 14px;"></span>
+    </div>
+</section>
 
 <body>
 
@@ -131,8 +225,17 @@
         <!--
 
         <article class="article">
-            <h2>Artigo 7</h2>
-            <p>Este é o conteúdo do sexto artigo. Aqui você pode adicionar texto, imagens ou qualquer outro conteúdo relevante.</p>
+            <h2>Artigo</h2>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
         </article>
 
         -->
@@ -164,118 +267,175 @@
             
             <p>Primeiro Semestre: Encontros Regionais</p>
 
-<p>Janeiro
-29, 30 e 31 | Rio de Janeiro - RJ: Encontro de Colecionadores.
+            <p>Janeiro</p>
 
-30, 31 Jan e 01 Fev | Maceió - AL: Grupo de Multicolecionismo Alagoano.
+            <p>29, 30 e 31 | Rio de Janeiro - RJ: Encontro de Colecionadores.</p>
 
-Fevereiro
-27, 28 Fev e 01 Mar | Piracicaba - SP: Encontro de Colecionadores.
+            <p>30, 31 Jan e 01 Fev | Maceió - AL: Grupo de Multicolecionismo Alagoano.</p>
 
-Março
-07 | Joinville - SC: XX Encontro de Joinville (Sociedade Numismática de Joinville).
+            <p>Fevereiro</p>
 
-07 e 08 | Porto Alegre - RS: Sociedade Gaúcha de Numismática.
+            <p>27, 28 Fev e 01 Mar | Piracicaba - SP: Encontro de Colecionadores.</p>
 
-13 e 14 | Brasília - DF: Associação Filatélica e Numismática de Brasília.
+            <p>Março</p>
 
-13 e 14 | Canoas - RS: Encontro de Colecionadores.
+            <p>07 | Joinville - SC: XX Encontro de Joinville (Sociedade Numismática de Joinville).</p>
 
-21 e 22 | Bauru - SP: Clube Filatélico e Numismático de Bauru.
+            <p>07 e 08 | Porto Alegre - RS: Sociedade Gaúcha de Numismática.</p>
 
-27 e 28 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.
+            <p>13 e 14 | Brasília - DF: Associação Filatélica e Numismática de Brasília.</p>
 
-Abril
-10, 11 e 12 | Botucatu - SP: Encontro de Colecionadores.
+            <p>13 e 14 | Canoas - RS: Encontro de Colecionadores.</p>
 
-17 e 18 | Curitiba - PR: Sociedade Numismática Paranaense.
+            <p>21 e 22 | Bauru - SP: Clube Filatélico e Numismático de Bauru.</p>
 
-18, 19, 20 e 21 | Serra Negra - SP: Encontro de Colecionadores.
+            <p>27 e 28 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
 
-24, 25 e 26 | Campinas - SP: Encontro de Colecionadores.
+            <p>Abril</p>
 
-30 Abr, 01, 02 e 03 Mai | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.
+            <p>10, 11 e 12 | Botucatu - SP: Encontro de Colecionadores.</p>
 
-Maio
-07, 08 e 09 | Belo Horizonte - MG: Encontro de Colecionadores.
+            <p>17 e 18 | Curitiba - PR: Sociedade Numismática Paranaense.</p>
 
-15 e 16 | Goiânia - GO: Sociedade Goiana de Numismática.
+            <p>18, 19, 20 e 21 | Serra Negra - SP: Encontro de Colecionadores.</p>
 
-15, 16 e 17 | Igrejinha - RS: Encontro de Colecionadores.
+            <p>24, 25 e 26 | Campinas - SP: Encontro de Colecionadores.</p>
 
-22, 23 e 24 | Sorocaba - SP: Encontro de Colecionadores.
+            <p>30 Abr, 01, 02 e 03 Mai | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
 
-29, 30 e 31 | Vitória - ES: Sociedade Capixaba de Multicolecionismo.
+            <p>Maio</p>
 
-Junho
-06 e 07 | Guaratinguetá - SP: Sociedade Numismática de Guaratinguetá.
+            <p>07, 08 e 09 | Belo Horizonte - MG: Encontro de Colecionadores.</p>
 
-11, 12 e 13 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.
+            <p>15 e 16 | Goiânia - GO: Sociedade Goiana de Numismática.</p>
 
-19 e 20 | Timbó - SC: Associação Filatélica e Numismática de Timbó.</p>
-            
-<p>Segundo Semestre: Grandes Congressos e Feiras</p>
+            <p>15, 16 e 17 | Igrejinha - RS: Encontro de Colecionadores.</p>
 
-<p>
-Julho
-03, 04 e 05 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.
+            <p>22, 23 e 24 | Sorocaba - SP: Encontro de Colecionadores.</p>
 
-10, 11 e 12 | Presidente Prudente - SP: Associação Prudentina de Multicolecionismo.
+            <p>29, 30 e 31 | Vitória - ES: Sociedade Capixaba de Multicolecionismo.</p>
 
-17, 18 e 19 | Itu - SP: Encontro de Colecionadores.
+            <p>Junho</p>
 
-Agosto
-01 e 02 | Florianópolis - SC: Associação Filatélica e Numismática de Santa Catarina.
+            <p>06 e 07 | Guaratinguetá - SP: Sociedade Numismática de Guaratinguetá.</p>
 
-14, 15 e 16 | Ribeirão Preto - SP: Encontro de Colecionadores.
+            <p>11, 12 e 13 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
 
-21, 22 e 23 | Bauru - SP: Encontro de Colecionadores.
+            <p>19 e 20 | Timbó - SC: Associação Filatélica e Numismática de Timbó.</p>
 
-Setembro
-04, 05, 06 e 07 | Serra Negra - SP: Encontro de Colecionadores.
+            <p>Segundo Semestre: Grandes Congressos e Feiras</p>
 
-11 e 12 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.
+            <p>Julho</p>
 
-11, 12 e 13 | Botucatu - SP: Encontro de Colecionadores.
+            <p>03, 04 e 05 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
 
-18 e 19 | Joinville - SC: XXII Encontro de Joinville (Sociedade Numismática de Joinville).
+            <p>10, 11 e 12 | Presidente Prudente - SP: Associação Prudentina de Multicolecionismo.</p>
 
-25 e 26 | Juiz de Fora - MG: Encontro de Colecionadores.
+            <p>17, 18 e 19 | Itu - SP: Encontro de Colecionadores.</p>
 
-25, 26 e 27 | Campinas - SP: Encontro de Colecionadores.
+            <p>Agosto</p>
 
-Outubro
-08, 09 e 10 | Manaus - AM: Sociedade Numismática Amazonense.
+            <p>01 e 02 | Florianópolis - SC: Associação Filatélica e Numismática de Santa Catarina.</p>
 
-16, 17 e 18 | Piracicaba - SP: Encontro de Colecionadores.
+            <p>14, 15 e 16 | Ribeirão Preto - SP: Encontro de Colecionadores.</p>
 
-23 e 24 | Curitiba - PR: Sociedade Numismática Paranaense.
+            <p>21, 22 e 23 | Bauru - SP: Encontro de Colecionadores.</p>
 
-30 e 31 | Uberlândia - MG: Clube Filatélico e Numismático de Uberlândia.
+            <p>Setembro</p>
 
-Novembro
-06 e 07 | Brasília - DF: Associação Filatélica e Numismática de Brasília.
+            <p>04, 05, 06 e 07 | Serra Negra - SP: Encontro de Colecionadores.</p>
 
-13 e 14 | Caxias - RS: Encontro de Colecionadores.
+            <p>11 e 12 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
 
-14 e 15 | Pomerode - SC: Encontro de Colecionadores.
+            <p>11, 12 e 13 | Botucatu - SP: Encontro de Colecionadores.</p>
 
-26, 27 e 28 | Belo Horizonte - MG: Encontro de Colecionadores.
+            <p>18 e 19 | Joinville - SC: XXII Encontro de Joinville (Sociedade Numismática de Joinville).</p>
 
-Dezembro (O Ponto Alto do Ano)
-04, 05 e 06 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.
+            <p>25 e 26 | Juiz de Fora - MG: Encontro de Colecionadores.</p>
 
-04, 05 e 06 | Campo Grande - MS: Associação Numismática Sul-Mato-Grossense.
+            <p>25, 26 e 27 | Campinas - SP: Encontro de Colecionadores.</p>
 
-10, 11 e 12 | São Paulo - SP: XXX Congresso Brasileiro de Numismática SNB.
+            <p>Outubro</p>
 
-Eventos a Confirmar:
+            <p>08, 09 e 10 | Manaus - AM: Sociedade Numismática Amazonense.</p>
 
-Fortaleza - CE: Sociedade Numismática e Filatélica Cearense.
+            <p>16, 17 e 18 | Piracicaba - SP: Encontro de Colecionadores.</p>
 
-Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
+            <p>23 e 24 | Curitiba - PR: Sociedade Numismática Paranaense.</p>
+
+            <p>30 e 31 | Uberlândia - MG: Clube Filatélico e Numismático de Uberlândia.</p>
+
+            <p>Novembro</p>
+
+            <p>06 e 07 | Brasília - DF: Associação Filatélica e Numismática de Brasília.</p>
+
+            <p>13 e 14 | Caxias - RS: Encontro de Colecionadores.</p>
+
+            <p>14 e 15 | Pomerode - SC: Encontro de Colecionadores.</p>
+
+            <p>26, 27 e 28 | Belo Horizonte - MG: Encontro de Colecionadores.</p>
+
+            <p>Dezembro (O Ponto Alto do Ano)</p>
+
+            <p>04, 05 e 06 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
+
+            <p>04, 05 e 06 | Campo Grande - MS: Associação Numismática Sul-Mato-Grossense.</p>
+
+            <p>10, 11 e 12 | São Paulo - SP: XXX Congresso Brasileiro de Numismática SNB.</p>
+
+            <p>Eventos a Confirmar:</p>
+
+            <p>Fortaleza - CE: Sociedade Numismática e Filatélica Cearense.</p>
+
+            <p>Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
 
         </article>
+
+        <article class="article">
+            <h2>Exposição de cartões postais revela o olhar de uma Londrina eternizada em 2024.</h2>
+            <p>Com postais do colecionador Luiz Carlos Martins e retratos da fotógrafa Mirian Costa, a mostra promovida pelo Clube Filatélico acontecerá na Biblioteca Pública, entre 07 de novembro a 27 de dezembro</p>
+            <p>A partir do reconhecimento da importância artística e histórica dos cartões postais, o Clube Filatélico de Londrina vai promover, de hoje (7) a 27 de dezembro, no hall de entrada da Biblioteca Pública (Av. Rio de Janeiro, 413, Centro), a exposição “Do Passado ao Presente – Prédios Eternizados em Postais”. Na mostra será exibido o acervo de postais do colecionador Luiz Carlos Martins e postais recentes produzidos pela fotógrafa Mirian Costa. A visita é gratuita e pode ser feita de segunda a sexta-feira, das 7h30 às 18h.</p>
+            <p>Durante os 90 anos de sua existência, Londrina passou por diversas faces. Desta forma, os cartões postais vêm como registros destas mudanças, oferecendo contribuições importantes para a construção da memória, da identidade social e da noção de patrimônio cultural local.</p>
+            <p>Para Martins, colecionador, filatelista e comerciante de numismática –  estudo sob o ponto de vista histórico, artístico e econômico de moedas, cédulas e medalhas –, a paixão por Londrina o levou a iniciar, há 25 anos, uma coleção de postais que retratam a cidade. Entre seus favoritos, está o prédio dos Correios, uma escolha que ele atribui ao seu amor pela filatelia (ato de colecionador selos postais).</p>
+            <p>Já para a designer e fotógrafa Mirian Costa, o interesse pela documentação do patrimônio arquitetônico de Londrina foi o ponto de partida para seu trabalho fotográfico, iniciado em 2016. “No começo, a ideia era apenas identificar e registrar edifícios históricos. Foi só no início deste ano que resolvi usar essas imagens para a produção de cartões postais,” explicou.</p>
+            <p>As fotografias foram todas realizadas com uma câmera digital, posteriormente passando por um tratamento nas imagens para retirar elementos de poluição visual, como postes, fiação, placas e letreiros, a fim de evidenciar somente as linhas arquitetônicas dos edifícios.</p>
+            <p>Na exposição que se inicia hoje (7) estarão presentes 28 postais, sendo 14 da  coleção histórica de Martins e 14 de retratos modernos de Costa.</p>
+            <p>“Os postais representam ícones arquitetônicos da cidade, como a Antiga Rodoviária (atual Museu de Arte de Londrina), Museu Histórico Padre Carlos Weiss, Catedral, Concha Acústica, entre outros”, relatou Martins.</p>
+            <p>Já nas fotografias de Costa estão presentes um mergulho sobre os espaços da Biblioteca Pública, Museu Histórico de Londrina Padre Carlos Weiss,  Antiga Rodoviária (Atual Museu de Arte de Londrina),  Ouro Verde, Correios, Concha Acústica, Centro Comercial, Catedral, Praça Rocha Pombo, Relojão, Palacete da Família Garcia, Arcos da Antiga Rodoviária e o Edifício Júlio Fuganti.</p>
+            <p>“Neste momento, quando Londrina completa 90 anos, é importante nós podermos conhecer o passado de alguns prédios históricos e suas transformações ao longo do tempo. Nesse sentido, convido toda a população para vir até a biblioteca e visitar essa exposição que está belíssima”, relatou a diretora de Bibliotecas Públicas da Secretaria Municipal de Cultura (SMC), Leda Araújo.</p>
+            <p>Fonte:</p>
+            <p>BARIONI, Manu. <b>Exposição de cartões postais revela o olhar de uma Londrina eternizada.</b>Dispinivel em:https://jornaluniao.com.br/noticias/cultura/exposicao-de-cartoes-postais-revela-o-olhar-de-uma-londrina-eternizada  . Acessado em: 01 mar 2026.</p>
+        </article>
+
+        <article class="article">
+            <h2>A arte de colecionar.</h2>
+
+            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69a437a9d9895_luiscarlosmartins.jpg" class="outra-imagem" alt="Imagem Externa">
+            <center>
+            <alt>Colecionador entrevistado: Luis Carlos Martins.</alt>
+            </center>
+
+            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69a437d9e67e2_dionisioborsato.jpg" class="outra-imagem" alt="Imagem Externa">
+            <center>
+            <alt>Colecionador entrevistado: Dionisio Borsato.</alt>
+            </center>
+            
+            <p>"O Clube Filatélico de Londrina - associação londrinense voltada ao colecionismo, especialmente à numismática (coleção de cédulas e moedas) e filatelia (coleção de selos) - está promovendo uma mostra filatérica com a coleção temática de selos "Livro e Literatura". Criado em 1976, o clube é uma comprovação de que a atividade - de grande valor histórico e que reúne entusiastas pelo mundo todo - continua firme, apesar das inovações tecnológicas. Tanto que existe até data no calendário: 5 de março, Dia do Filatelista Brasileiro."</p>
+            <p>"É fato que, atualmente, o uso dos correios para a comunicação entre as pessoas caiu em desuso. Mas, para a alegria dos colecionistas, o lançamento dos selos continua acontecendo com a mesma frequência de antes."</p>
+            <p>"Essa, infelizmente, não é a realidade dos numismatas. Dionisio Borsato, colecionador de cédulas e moedas, ressalta que a atividade vai muito além de um "hobby". A numismática também faz uso de diversas áreas do conhecimento para estudar as moedas, buscando identificá-las e situá-las no tempo histórico. No entanto, a fabricação tende a se tornar cada vez mais rara."</p>
+            <p>"A gente está enfrentando uma crise das moedas. Antigamente, a emissão delas era bem maior, tinha uma cunhagem (fabricação de produtos em metal) muito grande. Hoje, por mais que a busca esteja fácil pela internet, com o uso do cartão de crédito e das compras online essa fabricação diminuiu."</p>
+            <p>Ele, que é professor de Química da Universidade Estadual de Londrina, conta que a paixão surgiu ainda na infância. Borsato nasceu em 1947 e com 10 anos de idade começou a colecionar carteiras de cigarro que encontrava pelo chão. Na sequência, vieram os selos. Ele tirava das cartas que recebia e guardava. A vizinhança, no bairro onde morava, já sabia do gosto do menino por selos e as pessoas guardavam os que recebiam para presenteá-lo.</p>
+            <p>"O que eu sinto pelo colecionismo é amor mesmo. Tem dias que eu estou em casa, pego meus álbuns e olho tudo outra vez. É um prazer e alegria constante", diz. Esse amor é tanto que, muitas vezes, acaba gerando pequenas discórdias familiares. "Não no meu caso, que a esposa já está até acostumada. Mas sei de casos em que as esposas reclamam muito das coleções. É difícil dividir a atenção com esse outro amor", conta aos risos.</p>
+            <p>O clube foi criado em 1976 e Borsato faz parte dele desde a fundação. Luiz Carlos Martins, secretário do clube e organizador da mostra, entrou no ano seguinte, com apenas 13 anos, e conta que foi lá que aprendeu tudo que sabe sobre o colecionismo. Em 1974, ele teve o seu primeiro selo. "A amizade é, por muitas vezes, mais importante que as trocas, até porque nem sempre os nossos familiares dividem esse mesmo amor pelo colecionismo".</p>
+            <p>Para os que ficaram curiosos e interessados pela atividade, a mostra fica aberta até o dia 22 de julho. Além do evento, o grupo tem se reunido todo o segundo sábado do mês, das 9 às 12 horas, mantendo uma tradição que remonta à sua fundação em 1976.</p>
+            <p>Gregório Devides, que disponibiliza um espaço no comércio que tem juntamente com a esposa Maria Tereza Carvalho Devides para que sejam realizadas as reuniões do grupo, conta que a ideia é transformar a loja em um ambiente de encontro cultural. "A nossa ideia é levar conhecimento para as pessoas que frequentam nossa papelaria. Então, tudo que se envolva com o cultural é mais do que válido e bem vindo aqui. Acho que é missão de todos ajudar a disseminar a cultura", acredita. Além de apoiar o colecionismo, eles também cedem espaço para palestras e minicursos no local.</p>
+            <p>A atividade não é apenas lúdica e continua cada vez mais valorizada: a quadra (quatro selos juntos) com a imagem do avião Jenny, o selo mais caro dos Estados Unidos, foi vendida recentemente por quase US$ 3 milhões. Moedas da época do Império, por exemplo, podem custar até R$ 20 mil.</p>
+            <p>Mas a idade nem sempre é o fator que agrega mais valor à coleção. Muitas vezes, existem moedas antigas, mas que foram produzidas em larga escala. Desse modo, uma moeda mais recente que, no entanto, teve uma cunhagem pequena, acaba sendo mais cara. O mesmo acontece com as cédulas e também com os selos.</p>
+            <p>Um caso recente, mas que exemplifica bem essa dinâmica, é a moeda de R$ 1 produzida durante a Olimpíada do Rio em 2016. Foram poucas as peças emitidas e, hoje, elas já estão sendo comercializadas por um valor próximo aos R$ 100. "Essa é uma coisa que pesa muito para a gente. Qualquer coisa que fuja do usual faz com que essas peças sejam valorizadas. Até mesmo erros de impressão estão inclusos nessa valorização", finaliza Luiz Carlos Martins. (D.S.)</p>
+            <p>Fonte:</p>
+            <p>SOUZA, Daneli. <b>A arte de colecionar.</b>Dispinivel em: https://www.folhadelondrina.com.br/folha-2/a-arte-de-colecionar-982256.html. Acessado em: .</p>
+        </article>
+
 
         <article class="article">
             
@@ -318,9 +478,8 @@ Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
             <p>Ele não tem o hábito de contar quantos objetos possui em sua coleção, mas garante que tem mais de 200 mil moedas e notas de dinheiro de mais de 130 países, entre elas a primeira nota usada no Brasil, com data de 1833, conhecida, segundo ele, como "troco do cobre". Campos guarda também, com cuidado, a primeira Constituição do Brasil, datada de 1824.</p>
             <p>O dinheiro japonês era a paixão do pai de Campos. Organizadas em pastas, as notas seguem um cronograma histórico mostrando as ocupações japonesas em diversas partes do mundo. Campos guarda moedas de 1900 lançadas no 4º centenário do descobrimento do Brasil, e uma antiguidade: uma moeda com data de 37 d.C., de Nero Cesar Augusto Atium, de Roma.</p>
             <p>"Se toda criança fosse estimulada pela família a adquirir o hábito de colecionar, qualquer coisa que seja, com certeza haveria menos crianças nas ruas. Esse hábito proporciona educação e conhecimento", ressalta. (F.B.)</p>
-            <p>Fonte:
-                BORGES, Fernanda. As coleções de seo Campos: à caça a pequenos tesouros. Folha de Londrina: página 11, 25 de dezembro de 2005.
-            </p>
+            <p>Fonte:</p>
+            <p>BORGES, Fernanda. <b>As coleções de seo Campos: à caça a pequenos tesouros.</b> Folha de Londrina: página 11, 25 de dezembro de 2005.</p>
         </article>
 
         <article class="article">
@@ -329,7 +488,7 @@ Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
             <p>Mário Cunha foi uma figura central e emblemática da filatelia em Londrina, sendo amplamente reconhecido como um dos grandes entusiastas e divulgadores desse hobby na região.</p>
             <p>De acordo com registros históricos e colunas sociais da cidade (como a de Oswaldo Militão na Folha de Londrina), aqui estão os pontos principais sobre sua trajetória:</p>
             <p>O Jornalista Filatélico: Mário Cunha não era apenas um colecionador, mas um comunicador da filatelia. Ele foi responsável por manter espaços dedicados ao tema na imprensa local, especialmente na Folha de Londrina. Suas colunas eram descritas como verdadeiras "aulas de história e geografia", onde ele utilizava os selos para explicar eventos mundiais e curiosidades culturais;</p>
-            <p>Atuação no Clube Filatélico de Londrina: Ele teve uma participação fundamental na consolidação do Clube Filatélico de Londrina (fundado em 1978). Mário atuava como um dos líderes intelectuais do grupo, ajudando a organizar encontros e exposições. Sua influência ajudou a manter viva a chama do colecionismo em Londrina durante décadas, atraindo novos membros e orientando iniciantes;</p>
+            <p>Atuação no Clube Filatélico de Londrina: Ele teve uma participação fundamental na consolidação do Clube Filatélico de Londrina (fundado em 1976). Mário atuava como um dos líderes intelectuais do grupo, ajudando a organizar encontros e exposições. Sua influência ajudou a manter viva a chama do colecionismo em Londrina durante décadas, atraindo novos membros e orientando iniciantes;</p>
             <p>Legado e Memória: Na comunidade filatélica paranaense, ele é lembrado com saudosismo. Seu trabalho ajudou a colocar Londrina no mapa da filatelia nacional, promovendo a ideia de que o selo é um documento de valor educativo. Após seu falecimento, ele passou a ser citado em crônicas locais como um dos nomes que mais contribuiu para a vida cultural e intelectual da cidade através do colecionismo;</p>
             <p>Resumo da sua importância: Educação: Transformou o ato de colecionar em uma ferramenta pedagógica; Divulgação: Usou o jornalismo para popularizar a filatelia além do círculo de especialistas; Liderança: Foi um dos pilares do movimento associativo em Londrina, especialmente nas décadas de 80 e 90.</p>
 
@@ -346,7 +505,7 @@ Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
 
             <h2>Quais foram os fundadores do clube filatélico de londrina?</h2>
             <p>A história detalhada sobre os fundadores nominais do Clube Filatélico de Londrina é um registro mais preservado em atas internas do que em arquivos digitais abertos, mas a memória da instituição destaca figuras que foram os pilares para a sua oficialização.</p>
-            <p>O clube foi registrado oficialmente em 30 de agosto de 1978, embora o movimento de colecionadores na cidade já fosse forte desde 1976. Entre os nomes historicamente ligados à liderança e à fundação do movimento filatélico e numismático em Londrina, destacam-se:</p>
+            <p>O clube foi oficialmente fundado em 07 de março de 1976. Entre os nomes historicamente ligados à liderança e à fundação do movimento filatélico e numismático em Londrina, destacam-se:</p>
             <p>Principais Figuras e Lideranças:</p>
             <p>Afonso José de Carvalho: Um dos nomes mais citados na história da organização do clube e na manutenção das atividades ao longo das décadas. Ele frequentemente atuou como um dos principais articuladores entre os colecionadores e os Correios;</p>
             <p>Wilson de Oliveira: Também figura entre os pioneiros que ajudaram a estruturar as primeiras reuniões, que inicialmente ocorriam de forma informal em cafés ou residências antes de ganharem espaço na Agência Central dos Correios e, posteriormente, na Biblioteca Pública;</p>;
@@ -374,7 +533,7 @@ Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
             <p>O Trigo e o Café: Representações da pujança agrícola que transformou Londrina na "Capital Mundial do Café".</p>
             <p>Significado Histórico: Naquele ano, a cidade vivia um boom de modernização. Além do selo, o jubileu foi marcado pela construção da barragem do Lago Igapó, um dos maiores cartões-postais da cidade hoje.</p>
             <p>O Jubileu de Ouro (1984)</p>
-            <p>Em 1984, quando Londrina completou 50 anos, houve uma grande movimentação filatérica, impulsionada pelo Clube Filatélico de Londrina (que já estava ativo há 6 anos).</p>
+            <p>Em 1984, quando Londrina completou 50 anos, houve uma grande movimentação filatérica, impulsionada pelo Clube Filatélico de Londrina (que já estava ativo há 8 anos).</p>
             <p>Lançamentos: Diferente de 1959, em 1984 as homenagens foram mais diversificadas. Além de carimbos comemorativos, houve o lançamento de selos que celebravam instituições locais que também faziam aniversário, como o café Cacique (que lançou um selo personalizado com a marca dos 75 anos de Londrina mais tarde).</p>
             <p>Envolvimento do Clube: Foi nessa época que o jornalista Mário Cunha e outros membros do clube intensificaram as exposições para mostrar a evolução da cidade através dos selos.</p>
             <p>Outros Marcos Filatéricos (75 e 90 anos)</p>
@@ -395,6 +554,67 @@ Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
   </footer>
  
 </i>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const btnClear = document.getElementById('btnClear');
+    const btnBack = document.getElementById('btnBack');
+    const articles = document.querySelectorAll('.article');
+    const searchCount = document.getElementById('searchCount');
+
+    // Função para normalizar texto (minúsculas e sem acentos)
+    function normalizeText(text) {
+        return text.toLowerCase()
+                   .normalize("NFD")
+                   .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function performSearch() {
+        const searchTerm = normalizeText(searchInput.value);
+        let count = 0;
+
+        articles.forEach(article => {
+            // Foco exclusivo no elemento H2 (Título)
+            const titleElement = article.querySelector('h2');
+            const titleText = normalizeText(titleElement.innerText);
+
+            if (searchTerm === "") {
+                // Se a busca estiver vazia, mostra todos
+                article.style.display = "block";
+                titleElement.style.color = "#333";
+            } else if (titleText.includes(searchTerm)) {
+                // Se o termo estiver no título, mostra o artigo
+                article.style.display = "block";
+                titleElement.style.color = "#0056b3"; // Destaque visual azul
+                count++;
+            } else {
+                // Se não estiver no título, esconde
+                article.style.display = "none";
+            }
+        });
+
+        // Atualiza o contador de resultados
+        searchCount.textContent = searchTerm !== "" ? `${count} resultado(s) encontrado(s)` : "";
+    }
+
+    // Eventos
+    searchInput.addEventListener('input', performSearch);
+
+    btnClear.addEventListener('click', function() {
+        searchInput.value = "";
+        performSearch();
+        searchInput.focus();
+    });
+
+    btnBack.addEventListener('click', function() {
+        searchInput.value = "";
+        performSearch();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+</script>
+
 
 </body>
 
