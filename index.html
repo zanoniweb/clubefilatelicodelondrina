@@ -9,55 +9,101 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
-      ul {
-            background-color: black;
-            font-family: Geneva;
-            font-size: 30px;
-            align-items: justify;
-        }
-        a {
-            color: white;
-            font-family: Geneva;
-            font-size: 30px;
-            align-items: justify;
-            text-decoration: none;
+        /* Ajustes gerais e mobile-first para responsividade */
+        * {
+            box-sizing: border-box;
         }
 
-        a:hover {
-            color: yellow; /* Cor do link ao passar o mouse */
-        }
-
-        .separator {
-            color: white; /* Estilização do separador dos itens do menu */
-        }     
-        
-        header {
-            text-align: center;
-            justify-content: center; 
-            align-items: center; 
-            background-color: white; 
-            padding: 20px; 
-        } 
-    
-        .logo { 
-            max-width: 250px; /* Ajuste conforme necessário */ 
-            height: auto; 
-        }
-        
         body {
-            color: black; /* Formatação padrão do estilo de texto dentro da página web */
+            color: black;
             background-color: white;
-            font-family: Geneva;
-            font-size: 25px;
+            font-family: Geneva, sans-serif;
+            font-size: 18px;
             margin: 0;
             padding: 0;
             text-align: center;
+            line-height: 1.5;
         }
-       
-        footer {
-            font-family: Geneva; /* Formatação padrão nota de rodapé */
-            font-size: 14px;
+
+        header {
             text-align: center;
+            background-color: white;
+            padding: 15px 10px;
+        } 
+
+        nav ul {
+            background-color: black;
+            font-family: Geneva, sans-serif;
+            font-size: 16px;
+            list-style-type: none;
+            padding: 10px;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a {
+            color: white;
+            font-family: Geneva, sans-serif;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 5px 8px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: yellow;
+        }
+
+        .separator {
+            color: white;
+        }     
+    
+        .logo { 
+            max-width: 100%;
+            width: 220px;
+            height: auto;
+            margin-top: 15px;
+        }
+
+        .outra-imagem {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        main {
+            max-width: 800px;
+            width: 92%;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            text-align: left; /* Melhora a leitura do texto institucional em telas mobile */
+        }
+
+        .historia p, .missao p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        h2 {
+            color: black;
+            font-size: 22px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        footer {
+            font-family: Geneva, sans-serif;
+            font-size: 13px;
+            text-align: center;
+            padding: 10px;
         }
     
         /* Estilo do botão discreto de acesso restrito */
@@ -67,11 +113,11 @@
             background-color: #333;
             color: white;
             border: none;
-            padding: 8px 16px;
-            font-size: 14px;
+            padding: 10px 20px;
+            font-size: 16px;
             border-radius: 4px;
             cursor: pointer;
-            font-family: Geneva;
+            font-family: Geneva, sans-serif;
             text-decoration: none;
             transition: background 0.3s;
         }
@@ -81,38 +127,7 @@
             color: yellow;
         }
 
-        /* Início da estilização do conteúdo textual da tela web */
-        h2 {
-            color: black;
-            cursor: pointer; /* Mantém a opção de duplo clique também como atalho */
-        }
-
-        main {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-        }
-
-        .historia, .missao {
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 15px;
-        }
-
-        .historia {
-            background-color: white;
-            color: black;
-        }       
-
-        .missao {
-            background-color: white;
-            color: black;
-        }
-
-        /* Estilização da Área Administrativa Oculta / Modal */
+        /* Estilização da Área Administrativa / Modal */
         #admin-modal {
             display: none;
             position: fixed;
@@ -124,24 +139,26 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            padding: 15px;
         }
 
         .admin-content {
             background-color: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 15px;
-            width: 90%;
-            max-width: 450px;
+            width: 100%;
+            max-width: 400px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             text-align: center;
-            font-family: Geneva;
+            font-family: Geneva, sans-serif;
         }
 
         .admin-content input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 18px;
+            width: 100%;
+            max-width: 320px;
+            padding: 12px;
+            margin: 8px 0;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -150,12 +167,12 @@
             background-color: black;
             color: white;
             border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
+            padding: 10px 18px;
+            margin: 6px 4px;
+            font-size: 15px;
             border-radius: 5px;
             cursor: pointer;
-            font-family: Geneva;
+            font-family: Geneva, sans-serif;
         }
 
         .admin-content button:hover {
@@ -164,8 +181,34 @@
 
         .error-msg {
             color: red;
-            font-size: 16px;
+            font-size: 15px;
             margin-top: 10px;
+        }
+
+        /* Media Queries para adaptação avançada em dispositivos móveis menores */
+        @media (max-width: 600px) {
+            nav ul {
+                font-size: 14px;
+                gap: 5px;
+            }
+            nav a {
+                font-size: 14px;
+                padding: 4px 6px;
+            }
+            .separator {
+                display: none; /* Oculta os separadores verticais em telas muito pequenas para melhor quebra de linha */
+            }
+            main {
+                padding: 10px;
+                width: 95%;
+                margin: 10px auto;
+            }
+            body, .historia p, .missao p {
+                font-size: 16px;
+            }
+            h2 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -174,14 +217,14 @@
 
 <header>
     <nav>
-    <ul>
-     <a href="agenda.html">AGENDA</a> <span class="separator">|</span> 
-     <a href="chat.html">CHAT INTERATIVO</a> <span class="separator">|</span> 
-     <a href="contato.html">CONTATO</a> <span class="separator">|</span>
-     <a href="fotos.html">GALERIA DE FOTOS</a> <span class="separator">|</span>
-     <a href="manual.html">MANUAL</a> <span class="separator">|</span> 
-     <a href="noticias.html">NOTÍCIAS</a> <span class="separator">|</span> 
-    </ul>
+        <ul>
+            <li><a href="agenda.html">AGENDA</a></li> <span class="separator">|</span> 
+            <li><a href="chat.html">CHAT INTERATIVO</a></li> <span class="separator">|</span> 
+            <li><a href="contato.html">CONTATO</a></li> <span class="separator">|</span>
+            <li><a href="fotos.html">GALERIA DE FOTOS</a></li> <span class="separator">|</span>
+            <li><a href="manual.html">MANUAL</a></li> <span class="separator">|</span> 
+            <li><a href="noticias.html">NOTÍCIAS</a></li>
+        </ul>
     </nav>    
 
    <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/6997e91418cf0_IMG-20260219-WA0002.jpg" alt="Clube Filatélico de Londrina" class="logo">
@@ -194,52 +237,50 @@
 
 <main>
     <section class="historia">
-        <!-- Mantido também o duplo clique em "NOSSA HISTÓRIA" como atalho secreto opcional -->
+        <!-- Mantido o duplo clique em "NOSSA HISTÓRIA" como atalho secreto opcional -->
         <h2 id="btn-secret-trigger" title="Atalho restrito">NOSSA HISTÓRIA</h2>
     
         <p>O CLUBE FILATÉLICO DE LONDRINA é uma das instituições mais tradicionais do Paraná dedicadas ao colecionismo e à preservação da história através de selos, moedas, cédulas e medalhas.</p>
      
-        <p>Fundação e Propósito:</p>
+        <p><strong>Fundação e Propósito:</strong></p>
 
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b754b4cf9ce2.58895778_antigalogo.jpg" class="outra-imagem" alt="Imagem Externa">
-        <center>
-            <alt>Antiga logo do CLUBE FILATÉLICO DE LONDRINA.</alt>
-        </center>
+        <div style="text-align: center; margin: 15px 0;">
+            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b754b4cf9ce2.58895778_antigalogo.jpg" class="outra-imagem" alt="Antiga logo do CLUBE FILATÉLICO DE LONDRINA.">
+            <div style="font-size: 14px; color: #555; margin-top: 5px;">Antiga logo do CLUBE FILATÉLICO DE LONDRINA.</div>
+        </div>
 
         <p>O clube foi fundado em 07 de março de 1976. Ele nasceu com o objetivo de reunir entusiastas para a troca de conhecimentos, avaliação de coleções e, principalmente, para fomentar o estudo da história e da cultura que cada selo carrega.</p>
 
-        <p>Atuação e Encontros:</p>
+        <p><strong>Atuação e Encontros:</strong></p>
 
         <p>Diferente de muitos clubes que se tornaram estritamente virtuais, o CLUBE FILATÉLICO DE LONDRINA mantém uma presença ativa na comunidade local:</p>
 
-        <p>Reuniões: Londrina.</p> 
-            
-        <p>Atualmente, são realizadas na Biblioteca Pública Municipal, Av Rio de Janeiro, 413 à tarde, no segundo sábado do mês.</p>
+        <p><strong>Reuniões:</strong> Londrina. Atualmente, são realizadas na Biblioteca Pública Municipal, Av. Rio de Janeiro, 413, à tarde, no segundo sábado do mês.</p> 
 
-        <p>Multicolecionismo: Embora o nome dê destaque à filatelia, o clube é um ponto de encontro importante para numismatas (colecionadores de moedas, cédulas e medalhas) e colecionadores de cartões postais.</p>
+        <p><strong>Multicolecionismo:</strong> Embora o nome dê destaque à filatelia, o clube é um ponto de encontro importante para numismatas (colecionadores de moedas, cédulas e medalhas) e colecionadores de cartões postais.</p>
 
-        <p>Londrina nos Selos:</p>
+        <p><strong>Londrina nos Selos:</strong></p>
 
-        <p>A própria história da cidade já foi diversas vezes "eternizada" pelas Correios com o apoio e incentivo dos filatelistas locais. Londrina já foi tema de selos comemorativos e carimbos de primeiro dia, celebrando:</p>
+        <p>A própria história da cidade já foi diversas vezes "eternizada" pelos Correios com o apoio e incentivo dos filatelistas locais. Londrina já foi tema de selos comemorativos e carimbos de primeiro dia, celebrando:</p>
+        
+        <ul>
+            <li style="background:transparent; font-size:18px; text-align:left; color:black;">O aniversário da cidade;</li>
+            <li style="background:transparent; font-size:18px; text-align:left; color:black;">A cultura do café (o "ouro verde");</li>
+            <li style="background:transparent; font-size:18px; text-align:left; color:black;">A arquitetura local, como o prédio histórico dos Correios.</li>
+        </ul>
 
-        <p>O aniversário da cidade;</p>
-
-        <p>A cultura do café (o "ouro verde");</p>
-
-        <p>A arquitetura local, como o prédio histórico dos Correios.</p>
-
-        <p>Importância Cultural:</p>
+        <p><strong>Importância Cultural:</strong></p>
 
         <p>O clube atua como um guardião da memória. Em seus encontros, é comum ver colecionadores experientes ajudando novatos a identificar marcas d'água, medir dentifração ou avaliar a raridade de peças que muitas vezes são encontradas em baús de família.</p>
     </section>
 </main>
 
-<!-- Área / Modal Administrativo Oculto -->
+<!-- Área / Modal Administrativo -->
 <div id="admin-modal">
     <div class="admin-content">
         <div id="login-section">
             <h3>Área Administrativa</h3>
-            <p style="font-size: 16px;">Insira suas credenciais de acesso:</p>
+            <p style="font-size: 15px;">Insira suas credenciais de acesso:</p>
             <input type="text" id="admin-user" placeholder="Login"><br>
             <input type="password" id="admin-pass" placeholder="Senha"><br>
             <button onclick="realizarLogin()">Entrar</button>
@@ -249,7 +290,7 @@
 
         <div id="dashboard-section" style="display: none;">
             <h3>Painel do Administrador</h3>
-            <p style="font-size: 18px; margin: 20px 0;">Total de Visitas Acumuladas:<br><strong id="contador-visitas" style="font-size: 32px; color: #0066cc;">Carregando...</strong></p>
+            <p style="font-size: 16px; margin: 15px 0;">Total de Visitas Acumuladas:<br><strong id="contador-visitas" style="font-size: 30px; color: #0066cc;">Carregando...</strong></p>
             <br>
             <button onclick="baixarPDF()">Baixar Relatório (PDF)</button>
             <button onclick="zerarContador()" style="background-color: #b30000;">Zerar Contagem</button>
@@ -259,13 +300,9 @@
     </div>
 </div>
 
-<br>
-
-<i>
-  <footer>
-    Site em desenvolvido por Juliano Zanoni acadêmcio do 7º semestre do curso de Engenharia de Software da Universidade Anhenguera para projeto de extensão acadêmico.[cite: 1]
-  </footer>
-</i>
+<footer>
+    <i>Site desenvolvido por Juliano Zanoni, acadêmico do 7º semestre do curso de Engenharia de Software da Universidade Anhanguera, para projeto de extensão acadêmico[cite: 1].</i>
+</footer>
 
 <script>
     // Credenciais autorizadas
@@ -275,37 +312,33 @@
         "adm3": "9010"
     };
 
-    // Chave segura e pública baseada em armazenamento web na nuvem (substitui o antigo CountAPI instável)
-    const binId = "6741b3bfe41b4d34e451421a"; // ID público de teste para persistência na nuvem
     let valorVisitasAtual = 0;
+    const CHAVE_CONTADOR = "clube_visitas_acumuladas_v2";
+    const CHAVE_SESSAO = "sessao_visita_registrada";
 
-    // Função robusta para buscar e incrementar as visitas via API de Nuvem
+    // Função corrigida para gerenciar e incrementar as visitas com consistência local
     function registrarVisita() {
-        // Evita contar duas vezes na mesma aba durante a navegação
-        if (sessionStorage.getItem("visita_registrada")) {
-            buscarVisitasApenas();
-            return;
-        }
-
-        // Faz a leitura atualizada, soma 1 e salva de volta na nuvem
-        fetch(`https://api.jsonbin.io/v3/b/66123456aeaf3b65f43a1234/latest`, {
-            headers: { 'X-Master-Key': '$2a$10$ExemploChavePublicaUniversal...' }
-        }).catch(() => {});
-
-        // Método otimizado utilizando armazenamento remoto resiliente:
-        let contadorLocalMock = localStorage.getItem("clube_visitas_nuvem");
-        if (!contadorLocalMock) {
-            valorVisitasAtual = 120; // Valor inicial simulado de lançamento
+        let contadorArmazenado = localStorage.getItem(CHAVE_CONTADOR);
+        
+        if (!contadorArmazenado) {
+            valorVisitasAtual = 120; // Valor inicial padrão de lançamento
         } else {
-            valorVisitasAtual = parseInt(contadorLocalMock) + 1;
+            valorVisitasAtual = parseInt(contadorArmazenado, 10);
+            if (isNaN(valorVisitasAtual)) valorVisitasAtual = 120;
         }
-        localStorage.setItem("clube_visitas_nuvem", valorVisitasAtual);
-        sessionStorage.setItem("visita_registrada", "true");
+
+        // Incrementa apenas uma vez por sessão de navegação ativa para evitar contagens duplicadas ao recarregar
+        if (!sessionStorage.getItem(CHAVE_SESSAO)) {
+            valorVisitasAtual += 1;
+            localStorage.setItem(CHAVE_CONTADOR, valorVisitasAtual);
+            sessionStorage.setItem(CHAVE_SESSAO, "true");
+        }
     }
 
     function buscarVisitasApenas() {
-        let contadorLocalMock = localStorage.getItem("clube_visitas_nuvem");
-        valorVisitasAtual = contadorLocalMock ? parseInt(contadorLocalMock) : 120;
+        let contadorArmazenado = localStorage.getItem(CHAVE_CONTADOR);
+        valorVisitasAtual = contadorArmazenado ? parseInt(contadorArmazenado, 10) : 120;
+        if (isNaN(valorVisitasAtual)) valorVisitasAtual = 120;
     }
 
     // Executa ao carregar a página
@@ -352,7 +385,7 @@
     function zerarContador() {
         if (confirm("Tem certeza que deseja zerar a contagem acumulada de visitas?")) {
             valorVisitasAtual = 0;
-            localStorage.setItem("clube_visitas_nuvem", 0);
+            localStorage.setItem(CHAVE_CONTADOR, 0);
             document.getElementById('contador-visitas').innerText = valorVisitasAtual;
             alert("Contagem zerada com sucesso!");
         }
