@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,107 +7,123 @@
 
     <style>
     
-    /* Reset e Base */
+    /* Reset e Base Responsiva */
     * {
         box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     body {
         font-family: Arial, sans-serif;
         color: black;
         margin: 0;
-        padding: 0; /* Ajustado para 0 para o header ocupar a largura total */
+        padding: 0;
         background-color: #f4f4f4;
+        overflow-x: hidden; /* Evita qualquer rolagem lateral indesejada no celular */
     }
 
     /* --- MENU E CABEÇALHO --- */
+    header {
+        text-align: center;
+        background-color: white;
+        padding: 15px 10px;
+        width: 100%;
+    }
+
+    nav {
+        width: 100%;
+    }
+
     ul {
         background-color: black;
         font-family: Geneva, sans-serif;
-        font-size: 30px; /* Mantida sua preferência de 30px */
+        font-size: 26px; 
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
         list-style: none;
-        padding: 15px;
+        padding: 10px;
         margin: 0;
+        gap: 8px;
     }
 
     a {
         color: white;
         font-family: Geneva, sans-serif;
-        font-size: 30px; /* Mantida sua preferência de 30px */
+        font-size: 24px; 
         text-decoration: none;
-        padding: 5px 15px;
+        padding: 4px 10px;
+        display: inline-block;
         transition: 0.3s;
     }
 
     a:hover {
-        color: yellow; /* Seu efeito de hover original */
+        color: yellow;
     }
 
     .separator {
-        color: white; /* Seu separador original */
+        color: white;
         align-self: center;
     }
 
-    header {
-        text-align: center;
-        background-color: white;
-        padding: 20px;
-    }
-
     .logo {
-        max-width: 250px;
+        max-width: 100%;
+        width: 220px;
         height: auto;
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
-    /* --- ESTRUTURA DOS ARTIGOS (CORREÇÃO DO CORTE) --- */
+    /* --- ESTRUTURA DOS ARTIGOS E CONTAINERS --- */
     .container {
         display: flex;
-        flex-wrap: wrap; /* O segredo para não cortar: permite quebra de linha */
+        flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
-        padding: 20px;
+        padding: 15px;
         max-width: 1400px;
         margin: 0 auto;
+        width: 100%;
     }
 
-    /* Seletor unificado para .article e tag <article> */
     .article, article {
         background-color: white;
-        padding: 25px;
+        padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        flex: 1 1 45%; /* Tenta ocupar 45% da largura */
-        min-width: 350px; /* Impede que fique espremido como na foto */
+        flex: 1 1 100%; /* No celular ocupa 100% da largura útil */
         max-width: 650px;
-        margin: 0; /* Resetado para funcionar com o flex-gap */
+        margin: 0;
+        width: 100%;
     }
 
     h2 {
         color: #333;
         text-align: center;
         font-family: Geneva, sans-serif;
+        font-size: 22px;
+        line-height: 1.3;
     }
 
     p {
         font-family: Geneva, sans-serif;
-        font-size: 25px; /* Mantida sua preferência original de 25px */
+        font-size: 20px; /* Ajustado proporcionalmente para leitura confortável em mobile sem perder legibilidade */
         text-align: justify;
-        line-height: 1.4;
+        line-height: 1.5;
     }
 
-    /* --- IMAGENS --- */
-    /* Estilo para imagens dentro de artigos e com classe outra-imagem */
+    /* --- IMAGENS 100% ADAPTÁVEIS --- */
     article img, .article img, .outra-imagem {
-        max-width: 100%;
-        height: auto;
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        max-height: 450px; /* Impede que imagens verticais fiquem gigantescas no celular */
         display: block;
         margin: 15px auto;
-        border: 5px solid #eaeaea; /* Sua borda original estilo moldura */
+        border: 5px solid #eaeaea;
         border-radius: 4px;
+        object-fit: contain;
         transition: transform 0.3s ease;
     }
 
@@ -138,7 +154,7 @@
     #noResults {
         text-align: center;
         font-family: Geneva;
-        font-size: 20px;
+        font-size: 18px;
         color: #888;
         margin-top: 30px;
         width: 100%;
@@ -150,58 +166,59 @@
     /* --- RODAPÉ --- */
     footer {
         font-family: Geneva;
-        font-size: 14px;
+        font-size: 13px;
         text-align: center;
-        padding: 30px;
+        padding: 20px;
         background-color: #eee;
         margin-top: 20px;
     }
 
-    /* --- RESPONSIVIDADE (CELULARES) --- */
-    @media (max-width: 768px) {
+    /* --- MEDIA QUERIES PARA COMPUTADORES E TELAS GRANDES --- */
+    @media (min-width: 768px) {
         .article, article {
-            flex: 1 1 100%; /* No celular, ocupa a largura toda */
-            min-width: 100%;
+            flex: 1 1 45%; /* Retorna ao layout de duas colunas lado a lado em telas maiores */
+            min-width: 350px;
         }
-        
-        ul, a {
-            font-size: 20px; /* Reduz um pouco no celular para não quebrar o layout */
+        ul {
+            font-size: 30px;
         }
-
+        a {
+            font-size: 30px;
+        }
         p {
-            font-size: 20px; /* Ajuste para não ficar gigante em telas pequenas */
+            font-size: 25px; /* Mantém o tamanho original de 25px em desktops */
+        }
+        h2 {
+            font-size: 26px;
         }
     }
 
     </style>
 
 </head>
+<body>
 
 <header>
-
     <nav>
     <ul>
-
      <a href="agenda.html">AGENDA</a> <span class="separator">|</span> 
      <a href="chat.html">CHAT INTERATIVO</a> <span class="separator">|</span> 
      <a href="contato.html">CONTATO</a> <span class="separator">|</span>
      <a href="fotos.html">GALERIA DE FOTOS</a> <span class="separator">|</span>
      <a href="index.html">INSTITUCIONAL</a> <span class="separator">|</span> 
      <a href="manual.html">MANUAL</a> <span class="separator">|</span> 
-        
     </ul>
     </nav>    
 
-    <img src=" https://d1yei2z3i6k35z.cloudfront.net/6946809/6997e91418cf0_IMG-20260219-WA0002.jpg" alt="Clube Filatélico de Londrina" class="logo">
-
+    <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/6997e91418cf0_IMG-20260219-WA0002.jpg" alt="Clube Filatélico de Londrina" class="logo">
 </header>
 
-<section style="text-align: center; margin: 20px 0; font-family: Geneva, sans-serif;">
-    <div style="position: relative; display: inline-block; width: 80%; max-width: 600px;">
+<section style="text-align: center; margin: 20px 0; font-family: Geneva, sans-serif; padding: 0 10px;">
+    <div style="position: relative; display: inline-block; width: 100%; max-width: 600px;">
         <input type="text" id="searchInput" placeholder="Pesquisar por título, data ou palavra-chave..." 
         style="width: 100%; padding: 15px 20px; font-size: 18px; border: 2px solid #ddd; border-radius: 50px; outline: none; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         
-        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
             <button id="btnClear" style="padding: 8px 20px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer; transition: 0.3s;">
                 Limpar Busca
             </button>
@@ -214,561 +231,418 @@
     </div>
 </section>
 
-<body>
+<div class="container">
+    <article class="article">
+        <h2>CLUBE FILÁTICO DE LONDRINA/PR COMERCIALIZADOU DUAS PEÇAS REFERENTES AOS 50 ANOS DA ENTIDADE.</h2>
+        <p>Autor: Juliano Zanoni</p>
 
+        <img src="imagens/mebrosclube2026.jpg" class="outra-imagem" alt="Imagem Externa">
+        <alt>Membros presentes na reunião do dia 10 de outubro de 2026.</alt>
 
-    <div class="container">
-
-
-        <!--
-
-        <article class="article">
-            <h2>Artigo</h2>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-        </article>
-
-        <article class="article">
-            <h2></h2>
-            
-            <img src="imagens/.jpg" class="outra-imagem" alt="Imagem Externa">
+        <b><p>SELO COMEMORATIVO DOS 50 ANOS DA ENTIDADE.</p></b>
         
-            <p></p>
-            <p></p>
-            <p></p>
+        <img src="imagens/selo 50 anos.jpg" class="outra-imagem" alt="Imagem Externa">
 
-        </article>
+        <p>Esta folha de selo personalizado emitida em parceria com os Correios celebra o Jubileu de Ouro (50 anos: 1976–2026) do Clube Filatélico de Londrina. A peça combina a marca oficial do evento com a estrutura clássica de um bloco/folha filatélica. Para o evento realizado no dia 10 de outubro de 2026 a entidade inicialmente produziu sete folhas contendo 12 selos em cada folha.</p> 
+        <b><p>1. Estrutura e Composição da Folha</p></b>
+        <p>A folha é composta por duas seções principais sobre um fundo amarelo:</p> 
+        <b><p>A) Imagem de Destaque / Vignette Superior</p></b>
+        <p>- Ampliação do Selo: Na parte superior da folha, destaca-se a reprodução em tamanho ampliado do design central do selo comemorativo, simulando a borda denteada (picotada) característica da filatelia sobre um fundo em tom dourado/oliva;</p>
+        <p>- Identificação Oficial: Na margem superior da folha encontram-se a logomarca e inscrições dos Correios / Brasil e da FEBRAF (Federação Brasileira de Filatelia), atestando o caráter oficial da emissão personalizada;</p> 
+        <p>- Código de Barras e Registro: Localizado no canto superior esquerdo, utilizado para controle e autenticidade da emissão técnica dos Correios.</p> 
+        <b><p>B) Bloco Comercial de Selos (Grade 3x4):</p></b>
+        <p>- Quantidade: A parte inferior contém uma grade com 12 selos destacados e picotados (3 linhas por 4 colunas);</p> 
+        <p>- Cabeçalho de cada Selo: Cada um dos 12 selos possui o logotipo dos Correios, a indicação do país (Brasil) e o valor/categoria postal no canto superior direito.</p> 
+        <b><p>2. Elementos da Marca dos 50 Anos (Vinheta Central):</p></b>
+        <p>A estampa contida no centro de cada selo e no destaque ampliado carrega forte simbologia filatélica e local:</p> 
+        <p>- Logotipo "50 anos": O numeral 50 aparece estilizado em destaque, com a palavra "anos" inserida em uma faixa horizontal vermelha à direita e "de Londrina" na curva inferior do círculo;</p> 
+        <p>- Identificação do Clube: A inscrição "Clube Filatélico" contorna o topo do medalhão circular;</p> 
+        <p>- Torre do Relógio / Calçadão de Londrina: Ao centro da esfera, encontra-se a ilustração estilizada da antiga Torre do Relógio do Calçadão de Londrina, um dos marcos urbanísticos mais icônicos da cidade;</p> 
+        <p>- Ramo de Louros: Acima da torre, ramos de louro em tom escuro simbolizam o jubileu, a vitória e a longevidade das cinco décadas de atividades da entidade (1976–2026);</p>
+        <p>Efeito Denteado: O fundo dourado/oliva possui o formato denteado, remetendo diretamente ao contorno de um selo postal tradicional.</p> 
+        <b><p>3. Significado para a Filatelia e para Londrina</p></b>
+        <p>- Preservação da Memória: A emissão de selos personalizados por clubes filatélicos é uma tradição para registrar efemérides e perpetuar a história das associações de colecionadores;</p>
+        <p>- Homenagem à Cidade: Ao incluir o símbolo do Calçadão e o nome da cidade, o Clube Filatélico de Londrina reforça seu compromisso com a valorização do patrimônio histórico e cultural do município ao longo de seus 50 anos de existência.</p> 
 
-        -->
+        <b><p>CÉDULA COMEMORATIVA DOS 50 ANOS DA ENTIDADE.</p></b>
 
-        <article class="article">
-            <h2>CLUBE FILÁTICO DE LONDRINA/PR COMERCIALIZADOU DUAS PEÇAS REFERENTES AOS 50 ANOS DA ENTIDADE.</h2>
-            <p>Autor: Juliano Zanoni</p>
+        <img src="imagens/anversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
+        <img src="imagens/reversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
 
-            <img src="imagens/mebrosclube2026.jpg" class="outra-imagem" alt="Imagem Externa">
-            <alt>Membros presentes na reunião do dia 10 de outubro de 2026.</alt>
+        <p>Esta peça comemorativa em formato de cédula celebra o Jubileu de Ouro (50 Anos: 1976 – 2026) do Clube Filatélico de Londrina. O design combina a estética das cédulas monetárias brasileiras com símbolos marcantes da história, da arquitetura e da economia de Londrina, além de referências ao universo da filatelia. Para o evento realizado no dia 10 de outubro de 2026 a entidade inicialmente produziu 60 unidades de cédulas.</p> 
+        <b><p>1. Anverso (Frente da Cédula)</p></b>
+        <p>O anverso reúne ícones urbanos, símbolos oficiais e instrumentos de pesquisa e coleção:</p> 
+        <b><p>Elementos Visuais e Arquitetura</p></b>
+        <p>- Catedral Metropolitana de Londrina (Catedral Basílica Menor Sagrado Coração de Jesus): Localizada ao centro, com suas linhas arquitetônicas em estilo moderno e formato que remete a uma tenda ou acampamento (alusão aos pioneiros);</p> 
+        <p>- Skyline Urbano e Prédios Históricos: Ao fundo da Catedral, sobressai o progresso vertical da "Capital do Café";</p>
+        <p>- Monumento "O Passageiro" / Calçadão: A escultura modernista (situada no centro de Londrina) é representada no topo central;</p> 
+        <p>- Araucária (Araucaria angustifolia): A árvore símbolo do estado do Paraná aparece em destaque ao lado dos edifícios.</p> 
+        <b><p>Economia e Riqueza Histórica</p></b>
+        <p>Ramo de Café com Frutos e Flores: O café foi o grande motor do povoamento e desenvolvimento econômico de Londrina e do Norte do Paraná a partir da década de 1930.</p> 
+        <b><p>Símbolos Filatélicos e Técnicos</p></b>
+        <p>Lente de Aumento (Lupa) e Selos Postais: Na parte inferior, uma lupa examina selos comemorativos:</p> 
+        <p>- Um dos selos traz a Catedral de Londrina com a inscrição "LONDRINA BRASIL".</p> 
+        <p>- O carimbo postal comemorativo apresenta a Araucária com as datas 1976 - 2026.</p> 
+        <b><p>Marca D'água e Elementos de Segurança:</p></b>
+        <p>- Bandeira do Estado do Paraná no canto superior esquerdo;</p> 
+        <p>- Inscrições em Braille para acessibilidade;</p> 
+        <p>- Selo Dourado comemorativo com a inscrição "Clube Filatélico de Londrina - 50 anos" e a ilustração da antiga Torre do Calçadão/Relógio;</p> 
+        <p>- Selo lateral com a rosa dos ventos / rosácea e número de série CL19762026;</p> 
+        <p>- Assinaturas e Diretores: Traz o nome e cargo de Luiz Roberto Serrano (Presidente do Clube Filatélico de Londrina) e Luiz Carlos Martins (Secretário Geral).</p> 
+        <b><p>2. Reverso (Verso da Cédula)</p></b>
+        <p>O reverso é focado nas origens do transporte, na colonização e na fundação do clube:</p> 
+        <b><p>História do Transporte e Povoamento</p></b>
+        <p>- Estação Ferroviária de Londrina: Representação detalhada da histórica estação de trem (hoje sede do Museu Histórico de Londrina). A chegada da ferrovia nos anos 1930/1940 foi determinante para o escoamento do café e para a atração de imigrantes e migrantes de todo o país;</p> 
+        <p>- Carroça com Tração Animal e Trabalhadores: À frente da estação, colonos e carroceiros simbolizam o trabalho rural e o transporte rudimentar do início da colonização pela Companhia de Terras Norte do Paraná;</p> 
+        <p>- Locomotiva a Vapor ("Maria Fumaça"): Ilustrada dentro do selo postal no canto direito, homenageando o modal ferroviário que conectava Londrina a São Paulo e ao porto de Santos.</p> 
+        <b><p>Homenagem e Símbolos do Clube:</p></b>
+        <p>- Medalhão de Mário Cunha (Fundador): Retrato do fundador do Clube Filatélico de Londrina;</p> 
+        <p>- Ramo de Café em Flor e Fruto: Guarnece o medalhão do fundador, reafirmando o laço entre a filatelia e a identidade cafeeira local;</p> 
+        <p>- Carimbo Postal Histórico: Carimbo circular com a fachada da antiga prefeitura/prédio histórico e as linhas postais;</p>
+        <p>- Banda Holográfica / Faixa de Segurança: Faixa azul vertical com a sigla CFL (Clube Filatélico de Londrina) e rosácea decorativa;</p> 
+        <p>- Selo Dourado Superior: Logotipo oficial do Clube Filatélico cercado por ramos de louros.</p>
+    </article>
 
-            <b><p>SELO COMEMORATIVO DOS 50 ANOS DA ENTIDADE.</p></b>
-            
-            <img src="imagens/selo 50 anos.jpg" class="outra-imagem" alt="Imagem Externa">
-
-            <p>Esta folha de selo personalizado emitida em parceria com os Correios celebra o Jubileu de Ouro (50 anos: 1976–2026) do Clube Filatélico de Londrina. A peça combina a marca oficial do evento com a estrutura clássica de um bloco/folha filatélica. Para o evento realizado no dia 10 de outubro de 2026 a entidade inicialmente produziu sete folhas contendo 12 selos em cada folha.</p> 
-            <b><p>1. Estrutura e Composição da Folha</p></b>
-            <p>A folha é composta por duas seções principais sobre um fundo amarelo:</p> 
-            <b><p>A) Imagem de Destaque / Vignette Superior</p></b>
-            <p>- Ampliação do Selo: Na parte superior da folha, destaca-se a reprodução em tamanho ampliado do design central do selo comemorativo, simulando a borda denteada (picotada) característica da filatelia sobre um fundo em tom dourado/oliva;</p>
-            <p>- Identificação Oficial: Na margem superior da folha encontram-se a logomarca e inscrições dos Correios / Brasil e da FEBRAF (Federação Brasileira de Filatelia), atestando o caráter oficial da emissão personalizada;</p> 
-            <p>- Código de Barras e Registro: Localizado no canto superior esquerdo, utilizado para controle e autenticidade da emissão técnica dos Correios.</p> 
-            <b><p>B) Bloco Comercial de Selos (Grade 3x4):</p></b>
-            <p>- Quantidade: A parte inferior contém uma grade com 12 selos destacados e picotados (3 linhas por 4 colunas);<p/> 
-            <p>- Cabeçalho de cada Selo: Cada um dos 12 selos possui o logotipo dos Correios, a indicação do país (Brasil) e o valor/categoria postal no canto superior direito. </p> 
-            <b><p>2. Elementos da Marca dos 50 Anos (Vinheta Central):</p><b>
-            <p>A estampa contida no centro de cada selo e no destaque ampliado carrega forte simbologia filatélica e local:</p> 
-            <p>- Logotipo "50 anos": O numeral 50 aparece estilizado em destaque, com a palavra "anos" inserida em uma faixa horizontal vermelha à direita e "de Londrina" na curva inferior do círculo;</p> 
-            <p>- Identificação do Clube: A inscrição "Clube Filatélico" contorna o topo do medalhão circular;</p> 
-            <p>- Torre do Relógio / Calçadão de Londrina: Ao centro da esfera, encontra-se a ilustração estilizada da antiga Torre do Relógio do Calçadão de Londrina, um dos marcos urbanísticos mais icônicos da cidade;</p> 
-            <p>- Ramo de Louros: Acima da torre, ramos de louro em tom escuro simbolizam o jubileu, a vitória e a longevidade das cinco décadas de atividades da entidade (1976–2026);</p>
-            <p>Efeito Denteado: O fundo dourado/oliva possui o formato denteado, remetendo diretamente ao contorno de um selo postal tradicional. </p> 
-            <b><p>3. Significado para a Filatelia e para Londrina</p></b>
-            <p>- Preservação da Memória: A emissão de selos personalizados por clubes filatélicos é uma tradição para registrar efemérides e perpetuar a história das associações de colecionadores;</p></b> 
-            <p>- Homenagem à Cidade: Ao incluir o símbolo do Calçadão e o nome da cidade, o Clube Filatélico de Londrina reforça seu compromisso com a valorização do patrimônio histórico e cultural do município ao longo de seus 50 anos de existência.</p> 
-
-            <b><p>CÉDULA COMEMORATIVA DOS 50 ANOS DA ENTIDADE.</p></b>
-
-            <img src="imagens/anversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
-            <img src="imagens/reversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
-
-            <p>Esta peça comemorativa em formato de cédula celebra o Jubileu de Ouro (50 Anos: 1976 – 2026) do Clube Filatélico de Londrina. O design combina a estética das cédulas monetárias brasileiras com símbolos marcantes da história, da arquitetura e da economia de Londrina, além de referências ao universo da filatelia. Para o evento realizado no dia 10 de outubro de 2026 a entidade inicialmente produziu 60 unidades de cédulas.</p> 
-            <b><p>1. Anverso (Frente da Cédula)</p></b>
-            <p>O anverso reúne ícones urbanos, símbolos oficiais e instrumentos de pesquisa e coleção:</p> 
-            <b><p>Elementos Visuais e Arquitetura</p></b>
-            <p>- Catedral Metropolitana de Londrina (Catedral Basílica Menor Sagrado Coração de Jesus): Localizada ao centro, com suas linhas arquitetônicas em estilo moderno e formato que remete a uma tenda ou acampamento (alusão aos pioneiros); </p> 
-            <p>- Skyline Urbano e Prédios Históricos: Ao fundo da Catedral, sobressai o progresso vertical da "Capital do Café"; </p>
-            <p>- Monumento "O Passageiro" / Calçadão: A escultura modernista (situada no centro de Londrina) é representada no topo central; </p> 
-            <p>- Araucária (Araucaria angustifolia): A árvore símbolo do estado do Paraná aparece em destaque ao lado dos edifícios. </p> 
-            <b><p>Economia e Riqueza Histórica</p></b>
-            <p>Ramo de Café com Frutos e Flores: O café foi o grande motor do povoamento e desenvolvimento econômico de Londrina e do Norte do Paraná a partir da década de 1930.</p> 
-            <b><p>Símbolos Filatélicos e Técnicos</p></b>
-            <p>Lente de Aumento (Lupa) e Selos Postais: Na parte inferior, uma lupa examina selos comemorativos:</p> 
-            <p>- Um dos selos traz a Catedral de Londrina com a inscrição "LONDRINA BRASIL". </p> 
-            <p> - O carimbo postal comemorativo apresenta a Araucária com as datas 1976 - 2026. </p> 
-            <b><p>Marca D'água e Elementos de Segurança:</p></b>
-            <p>- Bandeira do Estado do Paraná no canto superior esquerdo; </p> 
-            <p>- Inscrições em Braille para acessibilidade; </p> 
-            <p>- Selo Dourado comemorativo com a inscrição "Clube Filatélico de Londrina - 50 anos" e a ilustração da antiga Torre do Calçadão/Relógio; </p> 
-            <p>- Selo lateral com a rosa dos ventos / rosácea e número de série CL19762026; </p> 
-            <p>- Assinaturas e Diretores: Traz o nome e cargo de Luiz Roberto Serrano (Presidente do Clube Filatélico de Londrina) e Luiz Carlos Martins (Secretário Geral).</p> 
-            <b><p>2. Reverso (Verso da Cédula)</p></b>
-            <p>O reverso é focado nas origens do transporte, na colonização e na fundação do clube:</p> 
-            <b><p>História do Transporte e Povoamento</p></b>
-            <p>- Estação Ferroviária de Londrina: Representação detalhada da histórica estação de trem (hoje sede do Museu Histórico de Londrina). A chegada da ferrovia nos anos 1930/1940 foi determinante para o escoamento do café e para a atração de imigrantes e migrantes de todo o país;</p> 
-            <p>- Carroça com Tração Animal e Trabalhadores: À frente da estação, colonos e carroceiros simbolizam o trabalho rural e o transporte rudimentar do início da colonização pela Companhia de Terras Norte do Paraná; </p> 
-            <p>- Locomotiva a Vapor ("Maria Fumaça"): Ilustrada dentro do selo postal no canto direito, homenageando o modal ferroviário que conectava Londrina a São Paulo e ao porto de Santos. </p> 
-            <b><p>Homenagem e Símbolos do Clube:</></b>
-            <p>- Medalhão de Mário Cunha (Fundador): Retrato do fundador do Clube Filatélico de Londrina; </p> 
-            <p>- Ramo de Café em Flor e Fruto: Guarnece o medalhão do fundador, reafirmando o laço entre a filatelia e a identidade cafeeira local;</p> 
-            <p>- Carimbo Postal Histórico: Carimbo circular com a fachada da antiga prefeitura/prédio histórico e as linhas postais; </p>
-            <p>- Banda Holográfica / Faixa de Segurança: Faixa azul vertical com a sigla CFL (Clube Filatélico de Londrina) e rosácea decorativa; </p> 
-            <p>- Selo Dourado Superior: Logotipo oficial do Clube Filatélico cercado por ramos de louros. </p> 
-
-
-        </article>
-
-        <article class="article">
-            <h2>CONVITE ESPECIAL 50 ANOS DO CLUBE.</h2>
-            
-            <img src="imagens/CONVITE.jpg" class="outra-imagem" alt="Imagem Externa">
+    <article class="article">
+        <h2>CONVITE ESPECIAL 50 ANOS DO CLUBE.</h2>
         
-            <p>Este ano, o nosso Clube celebra 50 anos de história, tradição e momentos inesquecíveis!</p>
-            <p>Para marcar essa data tão especial, preparamos duas peças comemorativas exclusivas:</p>
-            <p>SELO PERSONALIZADO OFICIAL DOS CORREIOS.</p>
-            <b><p>Criado especialmente para celebrar os 50 anos do Clube.</p></b>
-            <p>(Texto no selo: Clube Filatélico de Londrina - Fundado em 1976)</p>
-            
-            <b><p>CÉDULA COMEMORATIVAS.</p></b>
+        <img src="imagens/CONVITE.jpg" class="outra-imagem" alt="Imagem Externa">
+    
+        <p>Este ano, o nosso Clube celebra 50 anos de história, tradição e momentos inesquecíveis!</p>
+        <p>Para marcar essa data tão especial, preparamos duas peças comemorativas exclusivas:</p>
+        <p>SELO PERSONALIZADO OFICIAL DOS CORREIOS.</p>
+        <b><p>Criado especialmente para celebrar os 50 anos do Clube.</p></b>
+        <p>(Texto no selo: Clube Filatélico de Londrina - Fundado em 1976)</p>
+        
+        <b><p>CÉDULA COMEMORATIVAS.</p></b>
 
-            <img src="imagens/anversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
-            <img src="imagens/reversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
+        <img src="imagens/anversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
+        <img src="imagens/reversocinquentaanos.jpg" class="outra-imagem" alt="Imagem Externa">
 
-            <p>Peças especiais e simbólicas para guardar como lembrança dessa história — não oficiais, naturalmente.</p>
-            <p>Neste sábado, estaremos disponibilizando as respectivas peças para venda e, para tornar esse momento ainda mais especial, teremos também um agradável café da tarde com salgadinhos.</p>
-            <p>Data: Neste sábado.</p>
-            <p>Horário: Das 14h às 17h.</p>
-            <p>Local: Biblioteca Pública Municipal.</p>
-            <p>Av. Rio de Janeiro, 413 (ao lado da Igreja Matriz).</p>
-            <b><p>CONFIRMAÇÃO DE PRESENÇA.</p></b>
-            <p>Para que possamos organizar tudo com carinho, pedimos que confirme sua presença no privado até amanhã, às 13h.</p>
-            <p>Esperamos você para comemorar conosco!</p>
-            <p>50 ANOS DE HISTÓRIA MERECEM SER CELEBRADOS!</p>
+        <p>Peças especiais e simbólicas para guardar como lembrança dessa história — não oficiais, naturalmente.</p>
+        <p>Neste sábado, estaremos disponibilizando as respectivas peças para venda e, para tornar esse momento ainda mais especial, teremos também um agradável café da tarde com salgadinhos.</p>
+        <p>Data: Neste sábado.</p>
+        <p>Horário: Das 14h às 17h.</p>
+        <p>Local: Biblioteca Pública Municipal.</p>
+        <p>Av. Rio de Janeiro, 413 (ao lado da Igreja Matriz).</p>
+        <b><p>CONFIRMAÇÃO DE PRESENÇA.</p></b>
+        <p>Para que possamos organizar tudo com carinho, pedimos que confirme sua presença no privado até amanhã, às 13h.</p>
+        <p>Esperamos você para comemorar conosco!</p>
+        <p>50 ANOS DE HISTÓRIA MERECEM SER CELEBRADOS!</p>
+    </article>
 
-        </article>
-
-        <article class="article">
-            <h2>O CLUBE FILATÉLICO DE LONDRINA lança em 2026, o selo personalisado dos 50 anos da entidade.</h2>
-            
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b6ae642a5e72.37273764_IMG-20260225-WA0004.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+    <article class="article">
+        <h2>O CLUBE FILATÉLICO DE LONDRINA lança em 2026, o selo personalisado dos 50 anos da entidade.</h2>
+        
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b6ae642a5e72.37273764_IMG-20260225-WA0004.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>Imagem alusiva do selo de 50 anos do CLUBE FILATÉLICO DE LONDRINA</alt>
-            
-            <p>Os interessados a comprar o exemplar devem procuar diretamente o CLUBE FILATÉLICO DE LONDRINA.</p>
-            
-           
-        </article>
-
-        <article class="article">
-
-            <h2>A Evolução da Moeda em Destaque: "História do Dinheiro - Do Ouro ao Bitcoin"</h2>
-
-            <p>A FILACAP, em sua edição especial de 2026 (Ano 52, nº 217A), apresenta uma obra indispensável para entusiastas e colecionadores: "História do Dinheiro: Do Ouro ao Bitcoin", de autoria de Rafael Augusto de Mattos Ferreira. Este material propõe uma jornada profunda pela evolução numismática e monetária, conectando o passado clássico às inovações digitais contemporâneas.</p>
-            <p>Conteúdo e Abordagem Numismática</p>
-            <p>O guia foi estruturado para oferecer uma visão abrangente sobre como o valor foi representado ao longo dos séculos:</p>
-            <p>Das Origens ao Metal: A obra explora desde as primeiras formas de escambo nas antigas civilizações até o surgimento das moedas metálicas.</p>
-            <p>Períodos Históricos: O material inclui seções detalhadas sobre as denominações romanas (como o Denário e o Sestércio), a produção de moedas na Idade Média e a evolução monetária no Século XX.</p>
-            <p>Brasil e Crises Econômicas: Apresenta a trajetória monetária do Brasil, abordando momentos críticos como as crises inflacionárias e mudanças de padrão monetário.</p>
-            <p>Modernidade: Finaliza com os modernos sistemas de pagamentos digitais e a ascensão do Bitcoin.</p>
-            <p>Um Guia para o Colecionador</p>
-            <p>Além do valor histórico, o livro serve como um guia introdutório prático. Ele é ricamente ilustrado, facilitando a identificação de peças e o entendimento de conceitos fundamentais para quem deseja iniciar ou aprimorar uma coleção de moedas e cédulas.</p>
-            <p>Como Adquirir</p>
-            <p>O exemplar especial pode ser adquirido individualmente por R$ 25,00 + frete. Há também a opção de associação à Filacap por uma anuidade de R$ 50,00, que garante o recebimento deste especial e de mais três edições ao longo do ano.</p>
-            <p>Contatos para aquisição:</p>
-            <p>Autor (Rafael Augusto): (35) 98806-0365.</p>
-            <p>Filacap: ac.filacap@gmail.com ou pelo contato de Maurício (12) 99151-3659.</p>
-
-        </article>
-
-        <article class="article">
-            <h2>Calendário Nacional de Numismática e Multicolecionismo 2026</h2>
-            <p>O ano de 2026 apresenta uma agenda intensa para colecionadores de moedas, cédulas e medalhas em todo o Brasil. Abaixo, os eventos estão organizados de forma cronológica, especificando datas, locais e as entidades organizadoras.</p>
-            
-            <p>Primeiro Semestre: Encontros Regionais</p>
-
-            <p>Janeiro</p>
-
-            <p>29, 30 e 31 | Rio de Janeiro - RJ: Encontro de Colecionadores.</p>
-
-            <p>30, 31 Jan e 01 Fev | Maceió - AL: Grupo de Multicolecionismo Alagoano.</p>
-
-            <p>Fevereiro</p>
-
-            <p>27, 28 Fev e 01 Mar | Piracicaba - SP: Encontro de Colecionadores.</p>
-
-            <p>Março</p>
-
-            <p>07 | Joinville - SC: XX Encontro de Joinville (Sociedade Numismática de Joinville).</p>
-
-            <p>07 e 08 | Porto Alegre - RS: Sociedade Gaúcha de Numismática.</p>
-
-            <p>13 e 14 | Brasília - DF: Associação Filatélica e Numismática de Brasília.</p>
-
-            <p>13 e 14 | Canoas - RS: Encontro de Colecionadores.</p>
-
-            <p>21 e 22 | Bauru - SP: Clube Filatélico e Numismático de Bauru.</p>
-
-            <p>27 e 28 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
-
-            <p>Abril</p>
-
-            <p>10, 11 e 12 | Botucatu - SP: Encontro de Colecionadores.</p>
-
-            <p>17 e 18 | Curitiba - PR: Sociedade Numismática Paranaense.</p>
-
-            <p>18, 19, 20 e 21 | Serra Negra - SP: Encontro de Colecionadores.</p>
-
-            <p>24, 25 e 26 | Campinas - SP: Encontro de Colecionadores.</p>
-
-            <p>30 Abr, 01, 02 e 03 Mai | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
-
-            <p>Maio</p>
-
-            <p>07, 08 e 09 | Belo Horizonte - MG: Encontro de Colecionadores.</p>
-
-            <p>15 e 16 | Goiânia - GO: Sociedade Goiana de Numismática.</p>
-
-            <p>15, 16 e 17 | Igrejinha - RS: Encontro de Colecionadores.</p>
-
-            <p>22, 23 e 24 | Sorocaba - SP: Encontro de Colecionadores.</p>
-
-            <p>29, 30 e 31 | Vitória - ES: Sociedade Capixaba de Multicolecionismo.</p>
-
-            <p>Junho</p>
-
-            <p>06 e 07 | Guaratinguetá - SP: Sociedade Numismática de Guaratinguetá.</p>
-
-            <p>11, 12 e 13 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
-
-            <p>19 e 20 | Timbó - SC: Associação Filatélica e Numismática de Timbó.</p>
-
-            <p>Segundo Semestre: Grandes Congressos e Feiras</p>
-
-            <p>Julho</p>
-
-            <p>03, 04 e 05 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
-
-            <p>10, 11 e 12 | Presidente Prudente - SP: Associação Prudentina de Multicolecionismo.</p>
-
-            <p>17, 18 e 19 | Itu - SP: Encontro de Colecionadores.</p>
-
-            <p>Agosto</p>
-
-            <p>01 e 02 | Florianópolis - SC: Associação Filatélica e Numismática de Santa Catarina.</p>
-
-            <p>14, 15 e 16 | Ribeirão Preto - SP: Encontro de Colecionadores.</p>
-
-            <p>21, 22 e 23 | Bauru - SP: Encontro de Colecionadores.</p>
-
-            <p>Setembro</p>
-
-            <p>04, 05, 06 e 07 | Serra Negra - SP: Encontro de Colecionadores.</p>
-
-            <p>11 e 12 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
-
-            <p>11, 12 e 13 | Botucatu - SP: Encontro de Colecionadores.</p>
-
-            <p>18 e 19 | Joinville - SC: XXII Encontro de Joinville (Sociedade Numismática de Joinville).</p>
-
-            <p>25 e 26 | Juiz de Fora - MG: Encontro de Colecionadores.</p>
-
-            <p>25, 26 e 27 | Campinas - SP: Encontro de Colecionadores.</p>
-
-            <p>Outubro</p>
-
-            <p>08, 09 e 10 | Manaus - AM: Sociedade Numismática Amazonense.</p>
-
-            <p>16, 17 e 18 | Piracicaba - SP: Encontro de Colecionadores.</p>
-
-            <p>23 e 24 | Curitiba - PR: Sociedade Numismática Paranaense.</p>
-
-            <p>30 e 31 | Uberlândia - MG: Clube Filatélico e Numismático de Uberlândia.</p>
-
-            <p>Novembro</p>
-
-            <p>06 e 07 | Brasília - DF: Associação Filatélica e Numismática de Brasília.</p>
-
-            <p>13 e 14 | Caxias - RS: Encontro de Colecionadores.</p>
-
-            <p>14 e 15 | Pomerode - SC: Encontro de Colecionadores.</p>
-
-            <p>26, 27 e 28 | Belo Horizonte - MG: Encontro de Colecionadores.</p>
-
-            <p>Dezembro (O Ponto Alto do Ano)</p>
-
-            <p>04, 05 e 06 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
-
-            <p>04, 05 e 06 | Campo Grande - MS: Associação Numismática Sul-Mato-Grossense.</p>
-
-            <p>10, 11 e 12 | São Paulo - SP: XXX Congresso Brasileiro de Numismática SNB.</p>
-
-            <p>Eventos a Confirmar:</p>
-
-            <p>Fortaleza - CE: Sociedade Numismática e Filatélica Cearense.</p>
-
-            <p>Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
-
-        </article>
-
-        <article class="article">
-            <h2>Exposição de cartões postais revela o olhar de uma Londrina eternizada em 2024.</h2>
-            <p>Com postais do colecionador Luiz Carlos Martins e retratos da fotógrafa Mirian Costa, a mostra promovida pelo Clube Filatélico acontecerá na Biblioteca Pública, entre 07 de novembro a 27 de dezembro</p>
-            <p>A partir do reconhecimento da importância artística e histórica dos cartões postais, o Clube Filatélico de Londrina vai promover, de hoje (7) a 27 de dezembro, no hall de entrada da Biblioteca Pública (Av. Rio de Janeiro, 413, Centro), a exposição “Do Passado ao Presente – Prédios Eternizados em Postais”. Na mostra será exibido o acervo de postais do colecionador Luiz Carlos Martins e postais recentes produzidos pela fotógrafa Mirian Costa. A visita é gratuita e pode ser feita de segunda a sexta-feira, das 7h30 às 18h.</p>
-            <p>Durante os 90 anos de sua existência, Londrina passou por diversas faces. Desta forma, os cartões postais vêm como registros destas mudanças, oferecendo contribuições importantes para a construção da memória, da identidade social e da noção de patrimônio cultural local.</p>
-            <p>Para Martins, colecionador, filatelista e comerciante de numismática –  estudo sob o ponto de vista histórico, artístico e econômico de moedas, cédulas e medalhas –, a paixão por Londrina o levou a iniciar, há 25 anos, uma coleção de postais que retratam a cidade. Entre seus favoritos, está o prédio dos Correios, uma escolha que ele atribui ao seu amor pela filatelia (ato de colecionador selos postais).</p>
-            <p>Já para a designer e fotógrafa Mirian Costa, o interesse pela documentação do patrimônio arquitetônico de Londrina foi o ponto de partida para seu trabalho fotográfico, iniciado em 2016. “No começo, a ideia era apenas identificar e registrar edifícios históricos. Foi só no início deste ano que resolvi usar essas imagens para a produção de cartões postais,” explicou.</p>
-            <p>As fotografias foram todas realizadas com uma câmera digital, posteriormente passando por um tratamento nas imagens para retirar elementos de poluição visual, como postes, fiação, placas e letreiros, a fim de evidenciar somente as linhas arquitetônicas dos edifícios.</p>
-            <p>Na exposição que se inicia hoje (7) estarão presentes 28 postais, sendo 14 da  coleção histórica de Martins e 14 de retratos modernos de Costa.</p>
-            <p>“Os postais representam ícones arquitetônicos da cidade, como a Antiga Rodoviária (atual Museu de Arte de Londrina), Museu Histórico Padre Carlos Weiss, Catedral, Concha Acústica, entre outros”, relatou Martins.</p>
-            <p>Já nas fotografias de Costa estão presentes um mergulho sobre os espaços da Biblioteca Pública, Museu Histórico de Londrina Padre Carlos Weiss,  Antiga Rodoviária (Atual Museu de Arte de Londrina),  Ouro Verde, Correios, Concha Acústica, Centro Comercial, Catedral, Praça Rocha Pombo, Relojão, Palacete da Família Garcia, Arcos da Antiga Rodoviária e o Edifício Júlio Fuganti.</p>
-            <p>“Neste momento, quando Londrina completa 90 anos, é importante nós podermos conhecer o passado de alguns prédios históricos e suas transformações ao longo do tempo. Nesse sentido, convido toda a população para vir até a biblioteca e visitar essa exposição que está belíssima”, relatou a diretora de Bibliotecas Públicas da Secretaria Municipal de Cultura (SMC), Leda Araújo.</p>
-            <p>Fonte:</p>
-            <p>BARIONI, Manu. <b>Exposição de cartões postais revela o olhar de uma Londrina eternizada.</b>Dispinivel em:https://jornaluniao.com.br/noticias/cultura/exposicao-de-cartoes-postais-revela-o-olhar-de-uma-londrina-eternizada  . Acessado em: 01 mar 2026.</p>
-        </article>
-
-        <article class="article">
-            <h2>A arte de colecionar.</h2>
-
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69a437a9d9895_luiscarlosmartins.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+        </center>
+        <p>Os interessados a comprar o exemplar devem procuar diretamente o CLUBE FILATÉLICO DE LONDRINA.</p>
+    </article>
+
+    <article class="article">
+        <h2>A Evolução da Moeda em Destaque: "História do Dinheiro - Do Ouro ao Bitcoin"</h2>
+
+        <p>A FILACAP, em sua edição especial de 2026 (Ano 52, nº 217A), apresenta uma obra indispensável para entusiastas e colecionadores: "História do Dinheiro: Do Ouro ao Bitcoin", de autoria de Rafael Augusto de Mattos Ferreira. Este material propõe uma jornada profunda pela evolução numismática e monetária, conectando o passado clássico às inovações digitais contemporâneas.</p>
+        <p>Conteúdo e Abordagem Numismática</p>
+        <p>O guia foi estruturado para oferecer uma visão abrangente sobre como o valor foi representado ao longo dos séculos:</p>
+        <p>Das Origens ao Metal: A obra explora desde as primeiras formas de escambo nas antigas civilizações até o surgimento das moedas metálicas.</p>
+        <p>Períodos Históricos: O material inclui seções detalhadas sobre as denominações romanas (como o Denário e o Sestércio), a produção de moedas na Idade Média e a evolução monetária no Século XX.</p>
+        <p>Brasil e Crises Econômicas: Apresenta a trajetória monetária do Brasil, abordando momentos críticos como as crises inflacionárias e mudanças de padrão monetário.</p>
+        <p>Modernidade: Finaliza com os modernos sistemas de pagamentos digitais e a ascensão do Bitcoin.</p>
+        <p>Um Guia para o Colecionador</p>
+        <p>Além do valor histórico, o livro serve como um guia introdutório prático. Ele é ricamente ilustrado, facilitando a identificação de peças e o entendimento de conceitos fundamentais para quem deseja iniciar ou aprimorar uma coleção de moedas e cédulas.</p>
+        <p>Como Adquirir</p>
+        <p>O exemplar especial pode ser adquirido individualmente por R$ 25,00 + frete. Há também a opção de associação à Filacap por uma anuidade de R$ 50,00, que garante o recebimento deste especial e de mais três edições ao longo do ano.</p>
+        <p>Contatos para aquisição:</p>
+        <p>Autor (Rafael Augusto): (35) 98806-0365.</p>
+        <p>Filacap: ac.filacap@gmail.com ou pelo contato de Maurício (12) 99151-3659.</p>
+    </article>
+
+    <article class="article">
+        <h2>Calendário Nacional de Numismática e Multicolecionismo 2026</h2>
+        <p>O ano de 2026 apresenta uma agenda intensa para colecionadores de moedas, cédulas e medalhas em todo o Brasil. Abaixo, os eventos estão organizados de forma cronológica, especificando datas, locais e as entidades organizadoras.</p>
+        
+        <p>Primeiro Semestre: Encontros Regionais</p>
+        <p>Janeiro</p>
+        <p>29, 30 e 31 | Rio de Janeiro - RJ: Encontro de Colecionadores.</p>
+        <p>30, 31 Jan e 01 Fev | Maceió - AL: Grupo de Multicolecionismo Alagoano.</p>
+        <p>Fevereiro</p>
+        <p>27, 28 Fev e 01 Mar | Piracicaba - SP: Encontro de Colecionadores.</p>
+        <p>Março</p>
+        <p>07 | Joinville - SC: XX Encontro de Joinville (Sociedade Numismática de Joinville).</p>
+        <p>07 e 08 | Porto Alegre - RS: Sociedade Gaúcha de Numismática.</p>
+        <p>13 e 14 | Brasília - DF: Associação Filatélica e Numismática de Brasília.</p>
+        <p>13 e 14 | Canoas - RS: Encontro de Colecionadores.</p>
+        <p>21 e 22 | Bauru - SP: Clube Filatélico e Numismático de Bauru.</p>
+        <p>27 e 28 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
+        <p>Abril</p>
+        <p>10, 11 e 12 | Botucatu - SP: Encontro de Colecionadores.</p>
+        <p>17 e 18 | Curitiba - PR: Sociedade Numismática Paranaense.</p>
+        <p>18, 19, 20 e 21 | Serra Negra - SP: Encontro de Colecionadores.</p>
+        <p>24, 25 e 26 | Campinas - SP: Encontro de Colecionadores.</p>
+        <p>30 Abr, 01, 02 e 03 Mai | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
+        <p>Maio</p>
+        <p>07, 08 e 09 | Belo Horizonte - MG: Encontro de Colecionadores.</p>
+        <p>15 e 16 | Goiânia - GO: Sociedade Goiana de Numismática.</p>
+        <p>15, 16 e 17 | Igrejinha - RS: Encontro de Colecionadores.</p>
+        <p>22, 23 e 24 | Sorocaba - SP: Encontro de Colecionadores.</p>
+        <p>29, 30 e 31 | Vitória - ES: Sociedade Capixaba de Multicolecionismo.</p>
+        <p>Junho</p>
+        <p>06 e 07 | Guaratinguetá - SP: Sociedade Numismática de Guaratinguetá.</p>
+        <p>11, 12 e 13 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
+        <p>19 e 20 | Timbó - SC: Associação Filatélica e Numismática de Timbó.</p>
+        <p>Segundo Semestre: Grandes Congressos e Feiras</p>
+        <p>Julho</p>
+        <p>03, 04 e 05 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
+        <p>10, 11 e 12 | Presidente Prudente - SP: Associação Prudentina de Multicolecionismo.</p>
+        <p>17, 18 e 19 | Itu - SP: Encontro de Colecionadores.</p>
+        <p>Agosto</p>
+        <p>01 e 02 | Florianópolis - SC: Associação Filatélica e Numismática de Santa Catarina.</p>
+        <p>14, 15 e 16 | Ribeirão Preto - SP: Encontro de Colecionadores.</p>
+        <p>21, 22 e 23 | Bauru - SP: Encontro de Colecionadores.</p>
+        <p>Setembro</p>
+        <p>04, 05, 06 e 07 | Serra Negra - SP: Encontro de Colecionadores.</p>
+        <p>11 e 12 | São Paulo - SP: Encontro de Colecionadores da Sociedade Numismática Brasileira.</p>
+        <p>11, 12 e 13 | Botucatu - SP: Encontro de Colecionadores.</p>
+        <p>18 e 19 | Joinville - SC: XXII Encontro de Joinville (Sociedade Numismática de Joinville).</p>
+        <p>25 e 26 | Juiz de Fora - MG: Encontro de Colecionadores.</p>
+        <p>25, 26 e 27 | Campinas - SP: Encontro de Colecionadores.</p>
+        <p>Outubro</p>
+        <p>08, 09 e 10 | Manaus - AM: Sociedade Numismática Amazonense.</p>
+        <p>16, 17 e 18 | Piracicaba - SP: Encontro de Colecionadores.</p>
+        <p>23 e 24 | Curitiba - PR: Sociedade Numismática Paranaense.</p>
+        <p>30 e 31 | Uberlândia - MG: Clube Filatélico e Numismático de Uberlândia.</p>
+        <p>Novembro</p>
+        <p>06 e 07 | Brasília - DF: Associação Filatélica e Numismática de Brasília.</p>
+        <p>13 e 14 | Caxias - RS: Encontro de Colecionadores.</p>
+        <p>14 e 15 | Pomerode - SC: Encontro de Colecionadores.</p>
+        <p>26, 27 e 28 | Belo Horizonte - MG: Encontro de Colecionadores.</p>
+        <p>Dezembro (O Ponto Alto do Ano)</p>
+        <p>04, 05 e 06 | João Pessoa - PB: Sociedade Filatélica e Numismática de João Pessoa.</p>
+        <p>04, 05 e 06 | Campo Grande - MS: Associação Numismática Sul-Mato-Grossense.</p>
+        <p>10, 11 e 12 | São Paulo - SP: XXX Congresso Brasileiro de Numismática SNB.</p>
+        <p>Eventos a Confirmar:</p>
+        <p>Fortaleza - CE: Sociedade Numismática e Filatélica Cearense.</p>
+        <p>Taquara - RS: Clube Filatélico e Numismático de Taquara.</p>
+    </article>
+
+    <article class="article">
+        <h2>Exposição de cartões postais revela o olhar de uma Londrina eternizada em 2024.</h2>
+        <p>Com postais do colecionador Luiz Carlos Martins e retratos da fotógrafa Mirian Costa, a mostra promovida pelo Clube Filatélico acontecerá na Biblioteca Pública, entre 07 de novembro a 27 de dezembro</p>
+        <p>A partir do reconhecimento da importância artística e histórica dos cartões postais, o Clube Filatélico de Londrina vai promover, de hoje (7) a 27 de dezembro, no hall de entrada da Biblioteca Pública (Av. Rio de Janeiro, 413, Centro), a exposição “Do Passado ao Presente – Prédios Eternizados em Postais”. Na mostra será exibido o acervo de postais do colecionador Luiz Carlos Martins e postais recentes produzidos pela fotógrafa Mirian Costa. A visita é gratuita e pode ser feita de segunda a sexta-feira, das 7h30 às 18h.</p>
+        <p>Durante os 90 anos de sua existência, Londrina passou por diversas faces. Desta forma, os cartões postais vêm como registros destas mudanças, oferecendo contribuições importantes para a construção da memória, da identidade social e da noção de patrimônio cultural local.</p>
+        <p>Para Martins, colecionador, filatelista e comerciante de numismática – estudo sob o ponto de vista histórico, artístico e econômico de moedas, cédulas e medalhas –, a paixão por Londrina o levou a iniciar, há 25 anos, uma coleção de postais que retratam a cidade. Entre seus favoritos, está o prédio dos Correios, uma escolha que ele atribui ao seu amor pela filatelia (ato de colecionador selos postais).</p>
+        <p>Já para a designer e fotógrafa Mirian Costa, o interesse pela documentação do patrimônio arquitetônico de Londrina foi o ponto de partida para seu trabalho fotográfico, iniciado em 2016. “No começo, a ideia era apenas identificar e registrar edifícios históricos. Foi só no início deste ano que resolvi usar essas imagens para a produção de cartões postais,” explicou.</p>
+        <p>As fotografias foram todas realizadas com uma câmera digital, posteriormente passando por um tratamento nas imagens para retirar elementos de poluição visual, como postes, fiação, placas e letreiros, a fim de evidenciar somente as linhas arquitetônicas dos edifícios.</p>
+        <p>Na exposição que se inicia hoje (7) estarão presentes 28 postais, sendo 14 da coleção histórica de Martins e 14 de retratos modernos de Costa.</p>
+        <p>“Os postais representam ícones arquitetônicos da cidade, como a Antiga Rodoviária (atual Museu de Arte de Londrina), Museu Histórico Padre Carlos Weiss, Catedral, Concha Acústica, entre outros”, relatou Martins.</p>
+        <p>Já nas fotografias de Costa estão presentes um mergulho sobre os espaços da Biblioteca Pública, Museu Histórico de Londrina Padre Carlos Weiss, Antiga Rodoviária (Atual Museu de Arte de Londrina), Ouro Verde, Correios, Concha Acústica, Centro Comercial, Catedral, Praça Rocha Pombo, Relojão, Palacete da Família Garcia, Arcos da Antiga Rodoviária e o Edifício Júlio Fuganti.</p>
+        <p>“Neste momento, quando Londrina completa 90 anos, é importante nós podermos conhecer o passado de alguns prédios históricos e suas transformações ao longo do tempo. Nesse sentido, convido toda a população para vir até a biblioteca e visitar essa exposição que está belíssima”, relatou a diretora de Bibliotecas Públicas da Secretaria Municipal de Cultura (SMC), Leda Araújo.</p>
+        <p>Fonte:</p>
+        <p>BARIONI, Manu. <b>Exposição de cartões postais revela o olhar de uma Londrina eternizada.</b>Dispinivel em:https://jornaluniao.com.br/noticias/cultura/exposicao-de-cartoes-postais-revela-o-olhar-de-uma-londrina-eternizada . Acessado em: 01 mar 2026.</p>
+    </article>
+
+    <article class="article">
+        <h2>A arte de colecionar.</h2>
+
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69a437a9d9895_luiscarlosmartins.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>Colecionador entrevistado: Luiz Carlos Martins.</alt>
-            </center>
+        </center>
 
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69a437d9e67e2_dionisioborsato.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69a437d9e67e2_dionisioborsato.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>Colecionador entrevistado: Dionisio Borsato.</alt>
-            </center>
-            
-            <p>"O CLUBE FILATÉLICO DE LONDRINA - associação londrinense voltada ao colecionismo, especialmente à numismática (coleção de cédulas e moedas) e filatelia (coleção de selos) - está promovendo uma mostra filatérica com a coleção temática de selos "Livro e Literatura". Criado em 1976, o clube é uma comprovação de que a atividade - de grande valor histórico e que reúne entusiastas pelo mundo todo - continua firme, apesar das inovações tecnológicas. Tanto que existe até data no calendário: 5 de março, Dia do Filatelista Brasileiro."</p>
-            <p>"É fato que, atualmente, o uso dos correios para a comunicação entre as pessoas caiu em desuso. Mas, para a alegria dos colecionistas, o lançamento dos selos continua acontecendo com a mesma frequência de antes."</p>
-            <p>"Essa, infelizmente, não é a realidade dos numismatas. Dionisio Borsato, colecionador de cédulas e moedas, ressalta que a atividade vai muito além de um "hobby". A numismática também faz uso de diversas áreas do conhecimento para estudar as moedas, buscando identificá-las e situá-las no tempo histórico. No entanto, a fabricação tende a se tornar cada vez mais rara."</p>
-            <p>"A gente está enfrentando uma crise das moedas. Antigamente, a emissão delas era bem maior, tinha uma cunhagem (fabricação de produtos em metal) muito grande. Hoje, por mais que a busca esteja fácil pela internet, com o uso do cartão de crédito e das compras online essa fabricação diminuiu."</p>
-            <p>Ele, que é professor de Química da Universidade Estadual de Londrina, conta que a paixão surgiu ainda na infância. Borsato nasceu em 1947 e com 10 anos de idade começou a colecionar carteiras de cigarro que encontrava pelo chão. Na sequência, vieram os selos. Ele tirava das cartas que recebia e guardava. A vizinhança, no bairro onde morava, já sabia do gosto do menino por selos e as pessoas guardavam os que recebiam para presenteá-lo.</p>
-            <p>"O que eu sinto pelo colecionismo é amor mesmo. Tem dias que eu estou em casa, pego meus álbuns e olho tudo outra vez. É um prazer e alegria constante", diz. Esse amor é tanto que, muitas vezes, acaba gerando pequenas discórdias familiares. "Não no meu caso, que a esposa já está até acostumada. Mas sei de casos em que as esposas reclamam muito das coleções. É difícil dividir a atenção com esse outro amor", conta aos risos.</p>
-            <p>O clube foi criado em 1976 e Borsato faz parte dele desde a fundação. Luiz Carlos Martins, secretário do clube e organizador da mostra, entrou no ano seguinte, com apenas 13 anos, e conta que foi lá que aprendeu tudo que sabe sobre o colecionismo. Em 1974, ele teve o seu primeiro selo. "A amizade é, por muitas vezes, mais importante que as trocas, até porque nem sempre os nossos familiares dividem esse mesmo amor pelo colecionismo".</p>
-            <p>Para os que ficaram curiosos e interessados pela atividade, a mostra fica aberta até o dia 22 de julho. Além do evento, o grupo tem se reunido todo o segundo sábado do mês, das 9 às 12 horas, mantendo uma tradição que remonta à sua fundação em 1976.</p>
-            <p>Gregório Devides, que disponibiliza um espaço no comércio que tem juntamente com a esposa Maria Tereza Carvalho Devides para que sejam realizadas as reuniões do grupo, conta que a ideia é transformar a loja em um ambiente de encontro cultural. "A nossa ideia é levar conhecimento para as pessoas que frequentam nossa papelaria. Então, tudo que se envolva com o cultural é mais do que válido e bem vindo aqui. Acho que é missão de todos ajudar a disseminar a cultura", acredita. Além de apoiar o colecionismo, eles também cedem espaço para palestras e minicursos no local.</p>
-            <p>A atividade não é apenas lúdica e continua cada vez mais valorizada: a quadra (quatro selos juntos) com a imagem do avião Jenny, o selo mais caro dos Estados Unidos, foi vendida recentemente por quase US$ 3 milhões. Moedas da época do Império, por exemplo, podem custar até R$ 20 mil.</p>
-            <p>Mas a idade nem sempre é o fator que agrega mais valor à coleção. Muitas vezes, existem moedas antigas, mas que foram produzidas em larga escala. Desse modo, uma moeda mais recente que, no entanto, teve uma cunhagem pequena, acaba sendo mais cara. O mesmo acontece com as cédulas e também com os selos.</p>
-            <p>Um caso recente, mas que exemplifica bem essa dinâmica, é a moeda de R$ 1 produzida durante a Olimpíada do Rio em 2016. Foram poucas as peças emitidas e, hoje, elas já estão sendo comercializadas por um valor próximo aos R$ 100. "Essa é uma coisa que pesa muito para a gente. Qualquer coisa que fuja do usual faz com que essas peças sejam valorizadas. Até mesmo erros de impressão estão inclusos nessa valorização", finaliza Luiz Carlos Martins. (D.S.)</p>
-            <p>Fonte:</p>
-            <p>SOUZA, Daneli. <b>A arte de colecionar.</b>Dispinivel em: https://www.folhadelondrina.com.br/folha-2/a-arte-de-colecionar-982256.html. Acessado em: 10 de mar 2026.</p>
-        </article>
+        </center>
+        
+        <p>"O CLUBE FILATÉLICO DE LONDRINA - associação londrinense voltada ao colecionismo, especialmente à numismática (coleção de cédulas e moedas) e filatelia (coleção de selos) - está promovendo uma mostra filatérica com a coleção temática de selos "Livro e Literatura". Criado em 1976, o clube é uma comprovação de que a atividade - de grande valor histórico e que reúne entusiastas pelo mundo todo - continua firme, apesar das inovações tecnológicas. Tanto que existe até data no calendário: 5 de março, Dia do Filatelista Brasileiro."</p>
+        <p>"É fato que, atualmente, o uso dos correios para a comunicação entre as pessoas caiu em desuso. Mas, para a alegria dos colecionistas, o lançamento dos selos continua acontecendo com a mesma frequência de antes."</p>
+        <p>"Essa, infelizmente, não é a realidade dos numismatas. Dionisio Borsato, colecionador de cédulas e moedas, ressalta que a atividade vai muito além de um "hobby". A numismática também faz uso de diversas áreas do conhecimento para estudar as moedas, buscando identificá-las e situá-las no tempo histórico. No entanto, a fabricação tende a se tornar cada vez mais rara."</p>
+        <p>"A gente está enfrentando uma crise das moedas. Antigamente, a emissão delas era bem maior, tinha uma cunhagem (fabricação de produtos em metal) muito grande. Hoje, por mais que a busca esteja fácil pela internet, com o uso do cartão de crédito e das compras online essa fabricação diminuiu."</p>
+        <p>Ele, que é professor de Química da Universidade Estadual de Londrina, conta que a paixão surgiu ainda na infância. Borsato nasceu em 1947 e com 10 anos de idade começou a colecionar carteiras de cigarro que encontrava pelo chão. Na sequência, vieram os selos. Ele tirava das cartas que recebia e guardava. A vizinhança, no bairro onde morava, já sabia do gosto do menino por selos e as pessoas guardavam os que recebiam para presenteá-lo.</p>
+        <p>"O que eu sinto pelo colecionismo é amor mesmo. Tem dias que eu estou em casa, pego meus álbuns e olho tudo outra vez. É um prazer e alegria constante", diz. Esse amor é tanto que, muitas vezes, acaba gerando pequenas discórdias familiares. "Não no meu caso, que a esposa já está até acostumada. Mas sei de casos em que as esposas reclamam muito das coleções. É difícil dividir a atenção com esse outro amor", conta aos risos.</p>
+        <p>O clube foi criado em 1976 e Borsato faz parte dele desde a fundação. Luiz Carlos Martins, secretário do clube e organizador da mostra, entrou no ano seguinte, com apenas 13 anos, e conta que foi lá que aprendeu tudo que sabe sobre o colecionismo. Em 1974, ele teve o seu primeiro selo. "A amizade é, por muitas vezes, mais importante que as trocas, até porque nem sempre os nossos familiares dividem esse mesmo amor pelo colecionismo".</p>
+        <p>Para os que ficaram curiosos e interessados pela atividade, a mostra fica aberta até o dia 22 de julho. Além do evento, o grupo tem se reunido todo o segundo sábado do mês, das 9 às 12 horas, mantendo uma tradição que remonta à sua fundação em 1976.</p>
+        <p>Gregório Devides, que disponibiliza um espaço no comércio que tem juntamente com a esposa Maria Tereza Carvalho Devides para que sejam realizadas as reuniões do grupo, conta que a ideia é transformar a loja em um ambiente de encontro cultural. "A nossa ideia é levar conhecimento para as pessoas que frequentam nossa papelaria. Então, tudo que se envolva com o cultural é mais do que válido e bem vindo aqui. Acho que é missão de todos ajudar a disseminar a cultura", acredita. Além de apoiar o colecionismo, eles também cedem espaço para palestras e minicursos no local.</p>
+        <p>A atividade não é apenas lúdica e continua cada vez mais valorizada: a quadra (quatro selos juntos) com a imagem do avião Jenny, o selo mais caro dos Estados Unidos, foi vendida recentemente por quase US$ 3 milhões. Moedas da época do Império, por exemplo, podem custar até R$ 20 mil.</p>
+        <p>Mas a idade nem sempre é o fator que agrega mais valor à coleção. Muitas vezes, existem moedas antigas, mas que foram produzidas em larga escala. Desse modo, uma moeda mais recente que, no entanto, teve uma cunhagem pequena, acaba sendo mais cara. O mesmo acontece com as cédulas e também com os selos.</p>
+        <p>Um caso recente, mas que exemplifica bem essa dinâmica, é a moeda de R$ 1 produzida durante a Olimpíada do Rio em 2016. Foram poucas as peças emitidas e, hoje, elas já estão sendo comercializadas por um valor próximo aos R$ 100. "Essa é uma coisa que pesa muito para a gente. Qualquer coisa que fuja do usual faz com que essas peças sejam valorizadas. Até mesmo erros de impressão estão inclusos nessa valorização", finaliza Luiz Carlos Martins. (D.S.)</p>
+        <p>Fonte:</p>
+        <p>SOUZA, Daneli. <b>A arte de colecionar.</b>Dispinivel em: https://www.folhadelondrina.com.br/folha-2/a-arte-de-colecionar-982256.html. Acessado em: 10 de mar 2026.</p>
+    </article>
 
-        <article class="article">
-            <h2>Coleção de selos resiste à era virtual: Em plena era das mensagens via internet, grupo de bancários alimenta paixão pela filatelia.</h2>
-            
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74b9497b4a3.06088827_luiz02.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+    <article class="article">
+        <h2>Coleção de selos resiste à era virtual: Em plena era das mensagens via internet, grupo de bancários alimenta paixão pela filatelia.</h2>
+        
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74b9497b4a3.06088827_luiz02.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>Colecionador entrevistado: Luiz Carlos Martins</alt>
-            </center>
+        </center>
 
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74be166c6c4.35064093_nelson2015.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74be166c6c4.35064093_nelson2015.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>Colecionador entrevistado: Nelson Lindolfo Porto Campos</alt>
-            </center>
+        </center>
+        
+        <p>No momento em que a maioria da população mundial se relaciona através da troca instantânea de mensagens eletrônicas, por meio das redes sociais e dos celulares, a filatelia resiste em meio a tanta tecnologia. Muito mais do que um hobby de colecionismo de selos, a filatelia é uma arte que apaixona pessoas das mais variadas idades e dos mais diversos lugares do mundo. Em Londrina, um grupo de bancários ativos e aposentados se reúne mensalmente com outros adeptos desta prática iniciada há mais de 200 anos para conferir as novidades.</p>
+        <p>Diferente do que podem pensar pessoas que nunca enviaram uma carta ou compraram um selo, o trabalho do filatelista não se resume em recolher selos e guardá-los. Trata-se também de organizá-los, separando-os de acordo com o país de origem, época, tema, variedade ou diversos outros critérios. Além do valor afetivo que inspira, uma coleção com selos raros pode valer muito dinheiro. Há coleções que ultrapassam os R$ 200 mil. Só para ter ideia, selos que foram comprados por R$ 1,00 podem valer R$ 40 mil no catálogo de cotação para os aficionados. Para um bom colecionador, uma peça desejada não tem preço.</p>
+        <p>A famosa série "Olho-de-boi", primeiro selo lançado no Brasil, em 1843, com valores de 30, 60 e 90 réis, é uma das mais requisitadas e custa em torno de R$ 1,2 mil cada. Nos encontros, organizados em vários Estados, colecionadores vendem, compram e trocam essas raridades.</p>
+        <p>No Brasil, estima-se que existam 100 mil colecionadores de selos e apenas 15 clubes filatélicos ativos. Um deles está em Londrina. O Clube de Filatelia de Londrina tem cerca de 30 membros fixos, que fazem reuniões mensais na Biblioteca Pública Municipal, e outros que aparecem esporadicamente para eventuais trocas.</p>
+        <p>O bancário Luiz Carlos Martins, escriturário da Caixa Econômica Federal na agência Londrina, é um dos colecionadores que frequenta o clube desde menino. É membro da diretoria, junto com dois outros bancários aposentados que participam das reuniões.</p>
+        <p>Colecionador desde 1974, quando tinha apenas 10 anos, Luiz Carlos começou a gostar de selos por conta da mãe, que recebia muitas correspondências de familiares e amigos residentes em São Paulo. "Comecei a guardar e fui me interessando cada vez mais", diz ele. Por volta de 1977, recém chegado a Londrina, ele descobriu a existência do Clube de Filatelia e passou a frequentá-lo, fazendo várias amizades, algumas que perduram até hoje.</p>
+        <p>De lá para cá, o bancário da Caixa passou a fazer duas coleções: uma clássica e outra temática. A clássica tem selos comemorativos do Brasil (a partir de 1900), como os que celebraram o 4º Centenário do Descobrimento do Brasil. Mas somente em 1906 foram feitas emissões comemorativas com repercussão no exterior, sendo alusivas ao 3º Congresso Pan-Americano. Entre os mais recentes desta coleção estão os dos Jogos Olímpicos e o aniversário de 450 anos do Rio de Janeiro, comemorado em fevereiro deste ano.</p>
+        <p>Na coleção temática há uma infinidade de temas retratando aspectos naturais, culturais e históricos, que vão desde raças de cães, passando pela Reforma Protestante e Inquisição, entre outros. O bancário também coleciona os selos dos países membros da União Postal.</p>
+        <p>...das Américas Espanha e Portugal (Upaep), que tem por objetivo difundir a cultura dos povos de todos esses países. Ao todo, juntando as duas coleções, são cerca de 4 mil selos.</p>
+        <p>Mas como saber se um selo tem valor? Luiz Carlos Martins diz que muitos fatores influenciam o valor de um selo, mas um é determinante para definir. "O que faz um selo ser raro é a quantidade emitida. Quanto menor a tiragem do selo, maior vai ser o preço dele. O fato dele ser novo e sem carimbo também o torna mais caro", explica Luiz Carlos, que diz não saber precisar o valor de sua coleção. "Não tenho essa expectativa. A satisfação de ter uma peça rara não tem preço."</p>
+        <p>Para ele, a paixão pela história e as amizades, em grande parte, motivam os filatelistas a perpetuarem esta arte. "É um hobby que permite a gente ter contato com todas as idades, dos 12 aos 80 anos. Não tenho dúvida de que a amizade é o principal benefício de você ser um colecionador de selos. Sem contar que aprende a ter disciplina e organização", completa.</p>
+        <p>Na esteira da filatelia, Luiz Carlos Martins também passou a se dedicar à numismática (coleção de cédulas e moedas) e à telecartofilia (coleções de cartões telefônicos). Para compartilhar seu conhecimento a respeito deste hobby e comercializar produtos com aqueles que estão começando, agora ele utiliza o site www.martinscolecoes.com.br.</p>
+        <p>Nelson Campos seguiu os caminhos do pai:</p>
+        <p>Presidente do Clube de Filatelia de Londrina, o ex-bancário do Banco Tozan, de Santos, Nelson Lindolfo Porto Campos, de 70 anos, diz que a filatelia não é só a arte de colecionar selos, mas também de apreciar fatos históricos importantes. Sobre as mensagens virtuais, que reduziram o volume de correspondências impressas, ele diz que tem seu lado positivo. "A internet has been excellent...", diz Nelson, que ganhou parte da coleção do pai, Euclides Paiva Campos, um dos fundadores, em 1939, do Clube de Filatelia de Santos. "Herdei este gosto dele...", comenta o ex-bancário, que também coleciona cédulas. Para ele, a filatelia é também uma forma de fazer amigos.</p>
+        <p>Fonte:</p>
+        <p>BARÃO, Vera. <b>Coleção de selos resiste à era virtual: Em plena era das mensagens via internet, grupo de bancários alimenta paixão pela filatelia.</b> Vida Bancária em Revista: p 18-19, mar 2015.</p>
+    </article>
 
-            
-            <p>No momento em que a maioria da população mundial se relaciona através da troca instantânea de mensagens eletrônicas, por meio das redes sociais e dos celulares, a filatelia resiste em meio a tanta tecnologia. Muito mais do que um hobby de colecionismo de selos, a filatelia é uma arte que apaixona pessoas das mais variadas idades e dos mais diversos lugares do mundo. Em Londrina, um grupo de bancários ativos e aposentados se reúne mensalmente com outros adeptos desta prática iniciada há mais de 200 anos para conferir as novidades.</p>
-            <p>Diferente do que podem pensar pessoas que nunca enviaram uma carta ou compraram um selo, o trabalho do filatelista não se resume em recolher selos e guardá-los. Trata-se também de organizá-los, separando-os de acordo com o país de origem, época, tema, variedade ou diversos outros critérios. Além do valor afetivo que inspira, uma coleção com selos raros pode valer muito dinheiro. Há coleções que ultrapassam os R$ 200 mil. Só para ter ideia, selos que foram comprados por R$ 1,00 podem valer R$ 40 mil no catálogo de cotação para os aficionados. Para um bom colecionador, uma peça desejada não tem preço.</p>
-            <p>A famosa série "Olho-de-boi", primeiro selo lançado no Brasil, em 1843, com valores de 30, 60 e 90 réis, é uma das mais requisitadas e custa em torno de R$ 1,2 mil cada. Nos encontros, organizados em vários Estados, colecionadores vendem, compram e trocam essas raridades.</p>
-            <p>No Brasil, estima-se que existam 100 mil colecionadores de selos e apenas 15 clubes filatélicos ativos. Um deles está em Londrina. O Clube de Filatelia de Londrina tem cerca de 30 membros fixos, que fazem reuniões mensais na Biblioteca Pública Municipal, e outros que aparecem esporadicamente para eventuais trocas.</p>
-            <p>O bancário Luiz Carlos Martins, escriturário da Caixa Econômica Federal na agência Londrina, é um dos colecionadores que frequenta o clube desde menino. É membro da diretoria, junto com dois outros bancários aposentados que participam das reuniões.</p>
-            <p>Colecionador desde 1974, quando tinha apenas 10 anos, Luiz Carlos começou a gostar de selos por conta da mãe, que recebia muitas correspondências de familiares e amigos residentes em São Paulo. "Comecei a guardar e fui me interessando cada vez mais", diz ele. Por volta de 1977, recém chegado a Londrina, ele descobriu a existência do Clube de Filatelia e passou a frequentá-lo, fazendo várias amizades, algumas que perduram até hoje.</p>
-            <p>De lá para cá, o bancário da Caixa passou a fazer duas coleções: uma clássica e outra temática. A clássica tem selos comemorativos do Brasil (a partir de 1900), como os que celebraram o 4º Centenário do Descobrimento do Brasil. Mas somente em 1906 foram feitas emissões comemorativas com repercussão no exterior, sendo alusivas ao 3º Congresso Pan-Americano. Entre os mais recentes desta coleção estão os dos Jogos Olímpicos e o aniversário de 450 anos do Rio de Janeiro, comemorado em fevereiro deste ano.</p>
-            <p>Na coleção temática há uma infinidade de temas retratando aspectos naturais, culturais e históricos, que vão desde raças de cães, passando pela Reforma Protestante e Inquisição, entre outros. O bancário também coleciona os selos dos países membros da União Postal.</p>
-            <p>...das Américas Espanha e Portugal (Upaep), que tem por objetivo difundir a cultura dos povos de todos esses países. Ao todo, juntando as duas coleções, são cerca de 4 mil selos.</p>
-            <p>Mas como saber se um selo tem valor? Luiz Carlos Martins diz que muitos fatores influenciam o valor de um selo, mas um é determinante para definir. "O que faz um selo ser raro é a quantidade emitida. Quanto menor a tiragem do selo, maior vai ser o preço dele. O fato dele ser novo e sem carimbo também o torna mais caro", explica Luiz Carlos, que diz não saber precisar o valor de sua coleção. "Não tenho essa expectativa. A satisfação de ter uma peça rara não tem preço."</p>
-            <p>Para ele, a paixão pela história e as amizades, em grande parte, motivam os filatelistas a perpetuarem esta arte. "É um hobby que permite a gente ter contato com todas as idades, dos 12 aos 80 anos. Não tenho dúvida de que a amizade é o principal benefício de você ser um colecionador de selos. Sem contar que aprende a ter disciplina e organização", completa.</p>
-            <p>Na esteira da filatelia, Luiz Carlos Martins também passou a se dedicar à numismática (coleção de cédulas e moedas) e à telecartofilia (coleções de cartões telefônicos). Para compartilhar seu conhecimento a respeito deste hobby e comercializar produtos com aqueles que estão começando, agora ele utiliza o site www.martinscolecoes.com.br.</p>
-            <p>Nelson Campos seguiu os caminhos do pai:</p>
-            <p>Presidente do Clube de Filatelia de Londrina, o ex-bancário do Banco Tozan, de Santos, Nelson Lindolfo Porto Campos, de 70 anos, diz que a filatelia não é só a arte de colecionar selos, mas também de apreciar fatos históricos importantes. Sobre as mensagens virtuais, que reduziram o volume de correspondências impressas, ele diz que tem seu lado positivo. "A internet tem sido excelente para o comércio e para divulgar o hobby", afirma Nelson, que ganhou parte da coleção do pai, Euclides Paiva Campos, um dos fundadores, em 1939, do Clube de Filatelia de Santos. "Herdei este gosto dele, pois não compro para ter lucro, mas para apreciar e mostrar às pessoas", comenta o ex-bancário, que também coleciona cédulas. Para ele, a filatelia é também uma forma de fazer amigos. "Nos encontros, fazemos muitas amizades", diz.</p>
-            <p>O filatelista possui em sua coleção os selos da antiga Panair do Brasil, que foi uma das companhias aéreas pioneiras do País no período de 1929 a 1954. Outra coleção rara que ele possui é do Japão, do ano de 1900. O selo do voo inaugural Brasil-Japão, de 1968, está disposto numa das páginas do álbum.</p>
-            <p>De posse de uma pinça e uma lupa, o ex-bancário dá dicas de como encontrar um selo perfeito. "Se tiver carimbo, não pode estar borrado", ensina. Outro detalhe importante é o picote dos selos adquiridos. Não pode estar com rasura. "Para ter durabilidade, devem ser guardados em envelopes, em local seco e sem poeira e sem luz direta do sol", afirma.</p>
-            
-            <p>Fonte:</p>
-            <p>BARÃO, Vera. <b>Coleção de selos resiste à era virtual: Em plena era das mensagens via internet, grupo de bancários alimenta paixão pela filatelia.</b>.Vida Bancária em Revista: p 18-19, mar 2015.</p>
+    <article class="article">
+        <h2>Memória Filatélica: O Pantanal no Selo do CLUBE FILATÉLICO DE LONDRINA: selo persolalizado referente ao aniversário do Clube Filatélico de Londrina ano 2010</h2>
+        
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/699e69cea5c52_anivers%C3%A1rio2010.jpg" class="outra-imagem" alt="Imagem Externa">
 
-        </article>
+        <p>Em 2010, o CLUBE FILATÉLICO DE LONDRINA (CFL), uma das associações mais tradicionais do Paraná, lançou uma folha de selos personalizados que se destaca pelo apuro visual e pela temática ecológica. O bloco utiliza a base dos Correios para selos personalizados, alternando vinhetas comemorativas do clube e imagens da fauna e flora do Pantanal.</p>
+        <p>Composição e Design<br>
+        A folha é composta por um conjunto de selos que apresentam ícones da biodiversidade pantaneira, incluindo:<br>
+        • A Onça-Pintada: O maior felino das Américas, representado em close.<br>
+        • A Arara-Azul-Grande: Símbolo de conservação da região.<br>
+        • Jacaré-do-Pantanal: Figura onipresente nas bacias do Centro-Oeste.<br>
+        • Flora: Imagens do Ipê-Rosa e da Vitória-Régia, que dão o tom vibrante à cartela.</p>
 
-        <article class="article">
-            
-            <h2>Memória Filatélica: O Pantanal no Selo do CLUBE FILATÉLICO DE LONDRINA: selo persolalizado referente ao aniversário do Clube Filatélico de Londrina ano 2010</h2>
-            
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/699e69cea5c52_anivers%C3%A1rio2010.jpg" class="outra-imagem" alt="Imagem Externa">
+        <p>Intercalados às imagens da natureza, estão os selos com a logomarca do Clube Filatélico de Londrina, marcando a identidade da instituição que, desde sua fundação, promove a cultura e a história através dos selos no norte do Paraná.</p>
+        
+        <p>Significado Cultural<br>
+        Selos personalizados como este possuem um valor especial para colecionadores de temática (fauna/flora) e para a história regional. Eles servem como registro de que a filatelia londrinense permanece ativa e conectada com as questões nacionais, como a preservação de nossos biomas.<br>
+        A margem da folha (o "margeado") é ricamente ilustrada, criando uma continuidade visual que transforma o bloco em uma pequena obra de arte, ideal para emoldurar ou enriquecer álbuns de coleções avançadas.<br>
+        Curiosidade: O ano de 2010 foi importante para o CFL, consolidando sua presença em exposições e mantendo viva a chama do colecionismo em uma era cada vez mais digital.</p>
+    </article>
 
-            <p>Em 2010, o CLUBE FILATÉLICO DE LONDRINA (CFL), uma das associações mais tradicionais do Paraná, lançou uma folha de selos personalizados que se destaca pelo apuro visual e pela temática ecológica. O bloco utiliza a base dos Correios para selos personalizados, alternando vinhetas comemorativas do clube e imagens da fauna e flora do Pantanal.</p>
-            <p>
-             Composição e Design
-             A folha é composta por um conjunto de selos que apresentam ícones da biodiversidade pantaneira, incluindo:
-            • A Onça-Pintada: O maior felino das Américas, representado em close.
-            • A Arara-Azul-Grande: Símbolo de conservação da região.
-            • Jacaré-do-Pantanal: Figura onipresente nas bacias do Centro-Oeste.
-            • Flora: Imagens do Ipê-Rosa e da Vitória-Régia, que dão o tom vibrante à cartela.
-            </p>
+    <article class="article">
+        <h2>As coleções de seo Campos</h2>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/699e690d0c75d_nelson2005.jpg" class="outra-imagem" alt="Imagem Externa">
+        <p>"Os jovens de hoje não têm o micróbio que estimula a coleção". É nesse tom de brincadeira que o aposentado Nelson Lindolfo Porto Campos, colecionador há 50 anos, comenta a falta de vontade de colecionar dos jovens. Campos herdou parte da coleção de selos, moedas e caixas de fósforos do pai, seo Euclides Paiva Campos. "A outra parte ficou com um irmão. Outros irmãos não tiveram interesse em dar continuidade à coleção. Eles não têm esse micróbio, essa coisa que nos estimula a colecionar", diz.</p>
+        <p>A coleção de Campos é grande e bem diversificada. São moedas, selos, relógios de corda (todos em funcionamento), fotos de Londrina, caixas de fósforo, postais japoneses, conchas de praia, chaveiros, lápis, cartões telefônicos e até penas de caneta.</p>
+        <p>Ele não tem o hábito de contar quantos objetos possui em sua coleção, mas garante que tem mais de 200 mil moedas e notas de dinheiro de mais de 130 países, entre elas a primeira nota usada no Brasil, com data de 1833, conhecida, segundo ele, como "troco do cobre". Campos guarda também, com cuidado, a primeira Constituição do Brasil, datada de 1824.</p>
+        <p>O dinheiro japonês era a paixão do pai de Campos. Organizadas em pastas, as notas seguem um cronograma histórico mostrando as ocupações japonesas em diversas partes do mundo. Campos guarda moedas de 1900 lançadas no 4º centenário do descobrimento do Brasil, e uma antiguidade: uma moeda com data de 37 d.C., de Nero Cesar Augusto Atium, de Roma.</p>
+        <p>"Se toda criança fosse estimulada pela família a adquirir o hábito de colecionar, qualquer coisa que seja, com certeza haveria menos crianças nas ruas. Esse hábito proporciona educação e conhecimento", ressalta. (F.B.)</p>
+        <p>Fonte:</p>
+        <p>BORGES, Fernanda. <b>As coleções de seo Campos: à caça a pequenos tesouros.</b> Folha de Londrina: página 11, 25 de dezembro de 2005.</p>
+    </article>
 
-            <p>Intercalados às imagens da natureza, estão os selos com a logomarca do Clube Filatélico de Londrina, marcando a identidade da instituição que, desde sua fundação, promove a cultura e a história através dos selos no norte do Paraná.</p>
-            
-            <p>Significado Cultural
-
-             Selos personalizados como este possuem um valor especial para colecionadores de temática (fauna/flora) e para a história regional. Eles servem como registro de que a filatelia londrinense permanece ativa e conectada com as questões nacionais, como a preservação de nossos biomas.
-             A margem da folha (o "margeado") é ricamente ilustrada, criando uma continuidade visual que transforma o bloco em uma pequena obra de arte, ideal para emoldurar ou enriquecer álbuns de coleções avançadas.
-             Curiosidade: O ano de 2010 foi importante para o CFL, consolidando sua presença em exposições e mantendo viva a chama do colecionismo em uma era cada vez mais digital.
-             </p>
-
-        </article>
-
-    </div>
-
-    <br>
-
-    <div class="container">
-
-        <article class="article">
-            <h2>As coleções de seo Campos</h2>
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/699e690d0c75d_nelson2005.jpg" class="outra-imagem" alt="Imagem Externa">
-            <p>"Os jovens de hoje não têm o micróbio que estimula a coleção". É nesse tom de brincadeira que o aposentado Nelson Lindolfo Porto Campos, colecionador há 50 anos, comenta a falta de vontade de colecionar dos jovens. Campos herdou parte da coleção de selos, moedas e caixas de fósforos do pai, seo Euclides Paiva Campos. "A outra parte ficou com um irmão. Outros irmãos não tiveram interesse em dar continuidade à coleção. Eles não têm esse micróbio, essa coisa que nos estimula a colecionar", diz.</p>
-            <p>A coleção de Campos é grande e bem diversificada. São moedas, selos, relógios de corda (todos em funcionamento), fotos de Londrina, caixas de fósforo, postais japoneses, conchas de praia, chaveiros, lápis, cartões telefônicos e até penas de caneta.</p>
-            <p>Ele não tem o hábito de contar quantos objetos possui em sua coleção, mas garante que tem mais de 200 mil moedas e notas de dinheiro de mais de 130 países, entre elas a primeira nota usada no Brasil, com data de 1833, conhecida, segundo ele, como "troco do cobre". Campos guarda também, com cuidado, a primeira Constituição do Brasil, datada de 1824.</p>
-            <p>O dinheiro japonês era a paixão do pai de Campos. Organizadas em pastas, as notas seguem um cronograma histórico mostrando as ocupações japonesas em diversas partes do mundo. Campos guarda moedas de 1900 lançadas no 4º centenário do descobrimento do Brasil, e uma antiguidade: uma moeda com data de 37 d.C., de Nero Cesar Augusto Atium, de Roma.</p>
-            <p>"Se toda criança fosse estimulada pela família a adquirir o hábito de colecionar, qualquer coisa que seja, com certeza haveria menos crianças nas ruas. Esse hábito proporciona educação e conhecimento", ressalta. (F.B.)</p>
-            <p>Fonte:</p>
-            <p>BORGES, Fernanda. <b>As coleções de seo Campos: à caça a pequenos tesouros.</b> Folha de Londrina: página 11, 25 de dezembro de 2005.</p>
-        </article>
-
-        <article class="article">
-            <h2>Exposição de colecionadores reuniu diversos objetos, incluindo desde cartões telefônicos até caixas de fósforo: Arapongas sedia encontro regional de colecionadores.</h2>
-            
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74a84638880.58580716_nelson1999.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+    <article class="article">
+        <h2>Exposição de colecionadores reuniu diversos objetos, incluindo desde cartões telefônicos até caixas de fósforo: Arapongas sedia encontro regional de colecionadores.</h2>
+        
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74a84638880.58580716_nelson1999.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>O aposentado Nelson Campos mostrou parte de sua coleção de moedas, com 85 mil unidades.</alt>
-            </center>
+        </center>
 
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74af47572a6.14164554_gean1999.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b74af47572a6.14164554_gean1999.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>Gean Carlos Cereia, coordenador do evento e colecionador: “O encontro é uma oportunidade para intercâmbio de informações”.</alt>
-            </center>
+        </center>
 
-            <p>Colecionadores participam de encontro em Arapongas: Evento regional reuniu desde cédulas e moedas a cartões telefônicos e caixas de fósforo.</p>
-            <p>Desde cédulas emitidas durante a Revolução Francesa a caixas de fósforo japonesas da década de 50 e cartões telefônicos brasileiros sobre os mais diversos temas estavam expostos ontem no 4º Encontro Regional de Colecionadores de Arapongas. Realizado no hall da Biblioteca Pública, o evento reuniu pessoas de várias cidades da região e ainda de Curitiba e do Estado de São Paulo, que cultivam o hobby de colecionar.</p>
-            <p>O motorista de transporte escolar Gean Carlos Cereia, colecionador há mais de 20 anos, foi o coordenador do encontro, que tem apoio do Departamento Municipal de Cultura. Ele diz que o objetivo é promover a confraternização da classe e incentivar as pessoas que estão começando na área. "É uma oportunidade para intercâmbio de informações e ainda troca, compra e venda", afirma. Segundo ele, foram convidados 280 colecionadores, dos quais apenas 20 para expor. "Não há espaço físico suficiente para abrigar a todos", explica.</p>
-            <p>Colecionador de tudo que se possa imaginar, incluindo caneta tinteiro, apólices de dívida pública, máquinas fotográficas, cédulas e moedas, Gean afirma que esse hobby é uma forma de aproximar as pessoas e também adquirir cultura. "As imagens e inscrições das moedas, por exemplo, oferecem uma fascinante visão da história de vários países", observa. Aliás, foi com uma moeda datada de 1944 que começou sua trajetória na área. Hoje, ele perdeu as contas do número que conseguiu reunir ao longo dos anos.</p>
-            <p>Das coleções que levou ao encontro, Gean destaca as de cédulas e moedas. Ele cita como exemplo uma cédula de 1794, o primeiro papel-moeda a circular na Europa, durante a Revolução Francesa. O colecionador orgulha-se também em possuir uma moeda do período do Império Romano.</p>
-            <p>EDUCATIVO:</p>
-            <p>Entre os expositores estava também o corretor de imóveis aposentado Nelson Campos, de Londrina, que cultiva o hobby há mais de 40 anos. "Coleciono de tudo, incluindo concha, penas de caneta, isqueiro, moedas, selos, cédulas, fichas telefônicas. Só não trouxe as duas primeiras", comenta.</p>
-            <p>O entusiasmo de Campos é visível. "É um hábito educativo e saudável. Se toda criança fizesse isso, não tínhamos tantas na rua", observa. Ele demonstra carinho especial pela coleção de moedas, que reúne mais de 85 mil. Entre elas, há quatro de prata datadas de 1800 e algumas moedas de ouro das de 1900, que foram lançadas no 4º centenário do descobrimento do Brasil. O bancário aposentado Rivaldo Bulhões, de Nova Esperança, também estava apresentando suas coleções, que vêm formando há mais de 30 anos. À exposição ele levou cédulas, moedas, cartões telefônicos, fichas telefônicas, condecorações, entre outras. “É um meio de fazer amigos e conhecer a história”, salienta.</p>
-            <p>Em seu acervo de cédulas há desde o cruzeiro, lançado em 1942, até o real, que começou a circular em 1994. Bulhões destaca ainda sua coleção de cartões telefônicos que apresenta os mais variados temas – a série que mostra museus conta com 97 unidades.</p>
-            <p>Há ainda raridades como o cartão que exibe uma tela de Aleijadinho, lançado em 92, e outro que traz o Museu de Arte de São Paulo (Masp), do mesmo ano. “Só se encontra na mão de colecionador”, completa.</p>
-            <p>Fonte:</p>
-            <p>PINHEIRO, LEIDI. <b>Exposição de colecionadores reuniu diversos objetos, incluindo desde cartões telefônicos até caixas de fósforo: Arapongas sedia encontro regional de colecionadores.</b> Diário do Paraná: 14 nov 1999.</p>
-        </article>
+        <p>Colecionadores participam de encontro em Arapongas: Evento regional reuniu desde cédulas e moedas a cartões telefônicos e caixas de fósforo.</p>
+        <p>Desde cédulas emitidas durante a Revolução Francesa a caixas de fósforo japonesas da década de 50 e cartões telefônicos brasileiros sobre os mais diversos temas estavam expostos ontem no 4º Encontro Regional de Colecionadores de Arapongas. Realizado no hall da Biblioteca Pública, o evento reuniu pessoas de várias cidades da região e ainda de Curitiba e do Estado de São Paulo, que cultivam o hobby de colecionar.</p>
+        <p>O motorista de transporte escolar Gean Carlos Cereia, colecionador há mais de 20 anos, foi o coordenador do encontro, que tem apoio do Departamento Municipal de Cultura. Ele diz que o objetivo é promover a confraternização da classe e incentivar as pessoas que estão começando na área. "É uma oportunidade para intercâmbio de informações e ainda troca, compra e venda", afirma. Segundo ele, foram convidados 280 colecionadores, dos quais apenas 20 para expor. "Não há espaço físico suficiente para abrigar a todos", explica.</p>
+        <p>Colecionador de tudo que se possa imaginar, incluindo caneta tinteiro, apólices de dívida pública, máquinas fotográficas, cédulas e moedas, Gean afirma que esse hobby é uma forma de aproximar as pessoas e também adquirir cultura. "As imagens e inscrições das moedas, por exemplo, oferecem uma fascinante visão da história de vários países", observa. Aliás, foi com uma moeda datada de 1944 que começou sua trajetória na área. Hoje, ele perdeu as contas do número que conseguiu reunir ao longo dos anos.</p>
+        <p>Das coleções que levou ao encontro, Gean destaca as de cédulas e moedas. Ele cita como exemplo uma cédula de 1794, o primeiro papel-moeda a circular na Europa, durante a Revolução Francesa. O colecionador orgulha-se também em possuir uma moeda do período do Império Romano.</p>
+        <p>EDUCATIVO:</p>
+        <p>Entre os expositores estava também o corretor de imóveis aposentado Nelson Campos, de Londrina, que cultiva o hobby há mais de 40 anos. "Coleciono de tudo, incluindo concha, penas de caneta, isqueiro, moedas, selos, cédulas, fichas telefônicas. Só não trouxe as duas primeiras", comenta.</p>
+        <p>O entusiasmo de Campos é visível. "É um hábito educativo e saudável. Se toda criança fizesse isso, não tínhamos tantas na rua", observa. Ele demonstra carinho especial pela coleção de moedas, que reúne mais de 85 mil. Entre elas, há quatro de prata datadas de 1800 e algumas moedas de ouro das de 1900, que foram lançadas no 4º centenário do descobrimento do Brasil. O bancário aposentado Rivaldo Bulhões, de Nova Esperança, também estava apresentando suas coleções, que vêm formando há mais de 30 anos. À exposição ele levou cédulas, moedas, cartões telefônicos, fichas telefônicas, condecorações, entre outras. “É um meio de fazer amigos e conhecer a história”, salienta.</p>
+        <p>Em seu acervo de cédulas há desde o cruzeiro, lançado em 1942, até o real, que começou a circular em 1994. Bulhões destaca ainda sua coleção de cartões telefônicos que apresenta os mais variados temas – a série que mostra museus conta com 97 unidades.</p>
+        <p>Há ainda raridades como o cartão que exibe uma tela de Aleijadinho, lançado em 92, e outro que traz o Museu de Arte de São Paulo (Masp), do mesmo ano. “Só se encontra na mão de colecionador”, completa.</p>
+        <p>Fonte:</p>
+        <p>PINHEIRO, LEIDI. <b>Exposição de colecionadores reuniu diversos objetos, incluindo desde cartões telefônicos até caixas de fósforo: Arapongas sedia encontro regional de colecionadores.</b> Diário do Paraná: 14 nov 1999.</p>
+    </article>
 
-        <article class="article">
+    <article class="article">
+        <h2>Mario Cunha e seu legado a filatelia londrinense e paranaense.</h2>
+        <p>Mário Cunha foi uma figura central e emblemática da filatelia em Londrina, sendo amplamente reconhecido como um dos grandes entusiastas e divulgadores desse hobby na região.</p>
+        <p>De acordo com registros históricos e colunas sociais da cidade (como a de Oswaldo Militão na Folha de Londrina), aqui estão os pontos principais sobre sua trajetória:</p>
+        <p>O Jornalista Filatélico: Mário Cunha não era apenas um colecionador, mas um comunicador da filatelia. Ele foi responsável por manter espaços dedicados ao tema na imprensa local, especialmente na Folha de Londrina. Suas colunas eram descritas como verdadeiras "aulas de história e geografia", onde ele utilizava os selos para explicar eventos mundiais e curiosidades culturais;</p>
+        <p>Atuação no Clube Filatélico de Londrina: Ele teve uma participação fundamental na consolidação do CLUBE FILATÉLICO DE LONDRINA (fundado em 1976). Mário atuava como um dos líderes intelectuais do grupo, ajudando a organizar encontros e exposições. Sua influência ajudou a manter viva a chama do colecionismo em Londrina durante décadas, atraindo novos membros e orientando iniciantes;</p>
+        <p>Legado e Memória: Na comunidade filatélica paranaense, ele é lembrado com saudosismo. Seu trabalho ajudou a colocar Londrina no mapa da filatelia nacional, promovendo a ideia de que o selo é um documento de valor educativo. Após seu falecimento, ele passou a ser citado em crônicas locais como um dos nomes que mais contribuiu para a vida cultural e intelectual da cidade através do colecionismo;</p>
+        <p>Resumo da sua importância: Educação: Transformou o ato de colecionar em uma ferramenta pedagógica; Divulgação: Usou o jornalismo para popularizar a filatelia além do círculo de especialistas; Liderança: Foi um dos pilares do movimento associativo em Londrina, especialmente nas décadas de 80 e 90.</p>
+    </article>
 
-            <h2>Mario Cunha e seu legado a filatelia londrinense e paranaense.</h2>
-            <p>Mário Cunha foi uma figura central e emblemática da filatelia em Londrina, sendo amplamente reconhecido como um dos grandes entusiastas e divulgadores desse hobby na região.</p>
-            <p>De acordo com registros históricos e colunas sociais da cidade (como a de Oswaldo Militão na Folha de Londrina), aqui estão os pontos principais sobre sua trajetória:</p>
-            <p>O Jornalista Filatélico: Mário Cunha não era apenas um colecionador, mas um comunicador da filatelia. Ele foi responsável por manter espaços dedicados ao tema na imprensa local, especialmente na Folha de Londrina. Suas colunas eram descritas como verdadeiras "aulas de história e geografia", onde ele utilizava os selos para explicar eventos mundiais e curiosidades culturais;</p>
-            <p>Atuação no Clube Filatélico de Londrina: Ele teve uma participação fundamental na consolidação do CLUBE FILATÉLICO DE LONDRINA (fundado em 1976). Mário atuava como um dos líderes intelectuais do grupo, ajudando a organizar encontros e exposições. Sua influência ajudou a manter viva a chama do colecionismo em Londrina durante décadas, atraindo novos membros e orientando iniciantes;</p>
-            <p>Legado e Memória: Na comunidade filatélica paranaense, ele é lembrado com saudosismo. Seu trabalho ajudou a colocar Londrina no mapa da filatelia nacional, promovendo a ideia de que o selo é um documento de valor educativo. Após seu falecimento, ele passou a ser citado em crônicas locais como um dos nomes que mais contribuiu para a vida cultural e intelectual da cidade através do colecionismo;</p>
-            <p>Resumo da sua importância: Educação: Transformou o ato de colecionar em uma ferramenta pedagógica; Divulgação: Usou o jornalismo para popularizar a filatelia além do círculo de especialistas; Liderança: Foi um dos pilares do movimento associativo em Londrina, especialmente nas décadas de 80 e 90.</p>
+    <article class="article">
+        <h2>Quais foram os fundadores do CLUBE FILATÉLICO DE LONDRINA?</h2>
+        <p>A história detalhada sobre os fundadores nominais do CLUBE FILATÉLICO DE LONDRINA é um registro mais preservado em atas internas do que em arquivos digitais abertos, mas a memória da instituição destaca figuras que foram os pilares para a sua oficialização.</p>
+        <p>O clube foi oficialmente fundado em 07 de março de 1976. Entre os nomes historicamente ligados à liderança e à fundação do movimento filatélico e numismático em Londrina, destacam-se:</p>
+        <p>Principais Figuras e Lideranças:</p>
+        <p>Afonso José de Carvalho: Um dos nomes mais citados na história da organização do clube e na manutenção das atividades ao longo das décadas. Ele frequentemente atuou como um dos principais articuladores entre os colecionadores e os Correios;</p>
+        <p>Wilson de Oliveira: Também figura entre os pioneiros que ajudaram a estruturar as primeiras reuniões, que inicialmente ocorriam de forma informal em cafés ou residências antes de ganharem espaço na Agência Central dos Correios e, posteriormente, na Biblioteca Pública;</p>
+        <p>José Carlos de Paula: Frequentemente lembrado pela sua contribuição na área de numismática (moedas) dentro do clube, ajudando a expandir o foco da associação para além dos selos.</p>
+        <p>Contexto da Fundação:</p>
+        <p>Na década de 70, Londrina vivia o auge da sua relevância econômica no Paraná. O clube surgiu não apenas como um hobby, mas como uma sociedade cultural que visava catalogar a história da colonização da região. Muitos dos fundadores eram profissionais liberais, bancários e professores que viam no selo um documento histórico.</p>
+    </article>
 
-        </article>
-
-    </div>
-
-    <br>
-
-    <div class="container">
-
-
-        <article class="article">
-
-            <h2>Quais foram os fundadores do CLUBE FILATÉLICO DE LONDRINA?</h2>
-            <p>A história detalhada sobre os fundadores nominais do CLUBE FILATÉLICO DE LONDRINA é um registro mais preservado em atas internas do que em arquivos digitais abertos, mas a memória da instituição destaca figuras que foram os pilares para a sua oficialização.</p>
-            <p>O clube foi oficialmente fundado em 07 de março de 1976. Entre os nomes historicamente ligados à liderança e à fundação do movimento filatélico e numismático em Londrina, destacam-se:</p>
-            <p>Principais Figuras e Lideranças:</p>
-            <p>Afonso José de Carvalho: Um dos nomes mais citados na história da organização do clube e na manutenção das atividades ao longo das décadas. Ele frequentemente atuou como um dos principais articuladores entre os colecionadores e os Correios;</p>
-            <p>Wilson de Oliveira: Também figura entre os pioneiros que ajudaram a estruturar as primeiras reuniões, que inicialmente ocorriam de forma informal em cafés ou residências antes de ganharem espaço na Agência Central dos Correios e, posteriormente, na Biblioteca Pública;</p>;
-            <p>José Carlos de Paula: Frequentemente lembrado pela sua contribuição na área de numismática (moedas) dentro do clube, ajudando a expandir o foco da associação para além dos selos.</p>
-            <p>Contexto da Fundação:</p>
-            <p>Na década de 70, Londrina vivia o auge da sua relevância econômica no Paraná. O clube surgiu não apenas como um hobby, mas como uma sociedade cultural que visava catalogar a história da colonização da região. Muitos dos fundadores eram profissionais liberais, bancários e professores que viam no selo um documento histórico.</p>
-
-
-        </article>
-
-        <article class="article">
-            <h2>A Filatelia em Londrina.</h2>
-            <p>Londrina perpetuou, com dois selos emitidos pelo Correio, sua pujança e sua riqueza. E faz parte, honrosamente, da história da filatelia internacional. Para comemorar o Jubileu de Prata da Cidade, foi emitido, a 27/09/1959, o primeiro selo. Era época de café. Londrina enveredou mais tarde para o desenvolvimento de outras atividades, como o cultivo da soja e do rami, fibra têxtil, de múltiplas utilidades e grande consumo mundial. Por isso, e tendo em vista a sua expressão de maior plantio, o Correio emitiu o segundo selo que retrata essa notável riqueza agrícola, de grande destaque na produção londrinense e em Uraí onde se sobrepõe às demais culturas.</p>
-            <p>O obelisco que serviu de símbolo para emissão do selo do Jubileu, localizava-se na entrada da cidade e foi destruído por um caminhão. A administração municipal não o reconstruiu, talvez por ter sido uma iniciativa de um prefeito anterior. O mesmo se sucede com outros monumentos aqui e em outros lugares do País. Mas ninguém apagará essa marca da administração Fernandes Sobrinho porque está eternizada através do selo do Jubileu.</p>
-            <p>Homens dedicados contribuíram para dar esta relevância através do selo postal: J. J. Puls, professor pioneiro e filatelista de renome. Ele lançou as bases para o selo do Jubileu e com a colaboração de Mario Cunha, então secretário da Prefeitura, conseguiu a concretização desse objetivo.</p>
-            <p>Como colunista filatélico, J. J. Puls publica suas matérias em generoso espaço, na "Folha de Londrina". O Clube Filatélico local, sob a direção de Mário Cunha, e com o incentivo do antigo companheiro de associação, ressurge com vigor e expressividade. E foi assim que o primeiro sugeriu a idéia da emissão do selo retratando a lavoura do rami. A sugestão recebeu aprovação da Diretoria Regional do Paraná e, concomitantemente, da Comissão Filatélica. E o selo foi incluído na série de "Tipos Regionais", entrando em circulação em 1979. A carreira que essa vinheta iria ter, mesmo sendo da categoria dos denominados ordinários ou comuns, seria espetacular. Foi capa da Revista da Associação Portuguesa de Maximafilia e foi estampada numa carteira de cigarros do Japão, em comemoração aos 60 anos da empresa Toyo-Sen-I, que cedeu a foto para sugestão do desenho do selo. Foi inserido no Boletim da Federação Alemã, que tem um grupo de filatelistas, que se dedica ao estudo do selo brasileiro. E com a recente visita do Papa João Paulo II ao Brasil, a foto do colhedor de rami foi incluída na caixa que continha o presente ofertado pela Toyo-Sen-I ao Pontífice. Assim, a mensagem sobre essa riqueza ímpar no Brasil — um dos maiores produtores de rami — está correndo o mundo, dando conhecimento, lá fora, de uma realidade brasileira, através de um pequeno retângulo de papel, que representa Londrina em todo o mundo.</p>
-            
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b6ae122a8bc8.90899847_rami.jpg" class="outra-imagem" alt="Imagem Externa">
-            <center>
+    <article class="article">
+        <h2>A Filatelia em Londrina.</h2>
+        <p>Londrina perpetuou, com dois selos emitidos pelo Correio, sua pujança e sua riqueza. E faz parte, honrosamente, da história da filatelia internacional. Para comemorar o Jubileu de Prata da Cidade, foi emitido, a 27/09/1959, o primeiro selo. Era época de café. Londrina enveredou mais tarde para o desenvolvimento de outras atividades, como o cultivo da soja e do rami, fibra têxtil, de múltiplas utilidades e grande consumo mundial. Por isso, e tendo em vista a sua expressão de maior plantio, o Correio emitiu o segundo selo que retrata essa notável riqueza agrícola, de grande destaque na produção londrinense e em Uraí onde se sobrepõe às demais culturas.</p>
+        <p>O obelisco que serviu de símbolo para emissão do selo do Jubileu, localizava-se na entrada da cidade e foi destruído por um caminhão. A administração municipal não o reconstruiu, talvez por ter sido uma iniciativa de um prefeito anterior. O mesmo se sucede com outros monumentos aqui e em outros lugares do País. Mas ninguém apagará essa marca da administração Fernandes Sobrinho porque está eternizada através do selo do Jubileu.</p>
+        <p>Homens dedicados contribuíram para dar esta relevância através do selo postal: J. J. Puls, professor pioneiro e filatelista de renome. Ele lançou as bases para o selo do Jubileu e com a colaboração de Mario Cunha, então secretário da Prefeitura, conseguiu a concretização desse objetivo.</p>
+        <p>Como colunista filatélico, J. J. Puls publica suas matérias em generoso espaço, na "Folha de Londrina". O Clube Filatélico local, sob a direção de Mário Cunha, e com o incentivo do antigo companheiro de associação, ressurge com vigor e expressividade. E foi assim que o primeiro sugeriu a idéia da emissão do selo retratando a lavoura do rami. A sugestão recebeu aprovação da Diretoria Regional do Paraná e, concomitantemente, da Comissão Filatélica. E o selo foi incluído na série de "Tipos Regionais", entrando em circulação em 1979. A carreira que essa vinheta iria ter, mesmo sendo da categoria dos denominados ordinários ou comuns, seria espetacular. Foi capa da Revista da Associação Portuguesa de Maximafilia e foi estampada numa carteira de cigarros do Japão, em comemoração aos 60 anos da empresa Toyo-Sen-I, que cedeu a foto para sugestão do desenho do selo. Foi inserido no Boletim da Federação Alemã, que tem um grupo de filatelistas, que se dedica ao estudo do selo brasileiro. E com a recente visita do Papa João Paulo II ao Brasil, a foto do colhedor de rami foi incluída na caixa que continha o presente ofertado pela Toyo-Sen-I ao Pontífice. Assim, a mensagem sobre essa riqueza ímpar no Brasil — um dos maiores produtores de rami — está correndo o mundo, dando conhecimento, lá fora, de uma realidade brasileira, através de um pequeno retângulo de papel, que representa Londrina em todo o mundo.</p>
+        
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/69b6ae122a8bc8.90899847_rami.jpg" class="outra-imagem" alt="Imagem Externa">
+        <center>
             <alt>Imagem ilustrativa do selos ordinário denominado "colhedor de rami".</alt>
-            
-            <p>Fonte:</p>
-            <p>BRANCO, Gustavo; LOPES, Pedro. <b>A Filatelia em Londrina.</b> Esperesas e gente: Londrina. Londrina: Ministério do Trabalho, Indústria e Comércio, década de 80.</p>
-            
-        </article>
+        </center>
+        <p>Fonte:</p>
+        <p>BRANCO, Gustavo; LOPES, Pedro. <b>A Filatelia em Londrina.</b> Esperesas e gente: Londrina. Londrina: Ministério do Trabalho, Indústria e Comércio, década de 80.</p>
+    </article>
 
-        <article class="article">
-            <h2>Exemplares do selo do jubileu de Londrina/Pr: no acervo da biblioteca pública muicipal.</h2>
-            <p>Consulte o link abaixo e visite as peças que estão acervadas na biblioteca pública de Londrina/Pr.</p>
-            
-           <p>Para consulta visual, acesse o link: 
-           <a href="https://online.fliphtml5.com/lusnq/guzc/" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           style="color: black; text-decoration: underline;">
-           https://online.fliphtml5.com/lusnq/guzc/
-           </a>
-           </p>
-            
-        </article>
+    <article class="article">
+        <h2>Exemplares do selo do jubileu de Londrina/Pr: no acervo da biblioteca pública muicipal.</h2>
+        <p>Consulte o link abaixo e visite as peças que estão acervadas na biblioteca pública de Londrina/Pr.</p>
+        
+        <p>Para consulta visual, acesse o link: 
+        <a href="https://online.fliphtml5.com/lusnq/guzc/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style="color: #0056b3; text-decoration: underline; word-break: break-all;">
+        https://online.fliphtml5.com/lusnq/guzc/
+        </a>
+        </p>
+    </article>
 
-         <article class="article">
+    <article class="article">
+        <h2>A história do selo de jubileu de Londrina/Pr.</h2>
 
-            <h2>A história do selo de jubileu de Londrina/Pr.</h2>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/699e6a969e161_1959jubileulondrina.jpg" class="outra-imagem" alt="Imagem Externa">
 
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/6946809/699e6a969e161_1959jubileulondrina.jpg" class="outra-imagem" alt="Imagem Externa">
+        <p>A história do Selo de Jubileu de Londrina remete principalmente a duas grandes celebrações da cidade: o Jubileu de Prata (25 anos) e o Jubileu de Ouro (50 anos). Na filatelia, o selo mais emblemático e colecionado é o de 1959.</p>
+        <p>Aqui estão os detalhes históricos dessas emissões:</p>
+        <p>O Selo do Jubileu de Prata (1959)</p>
+        <p>Este é o "clássico" entre os colecionadores de Londrina. Foi lançado em 27 de setembro de 1959 para celebrar os 25 anos de emancipação política da cidade (1934–1959).</p>
+        <p>Design: O selo (referência C-438 nos catálogos) apresenta uma composição simbólica muito rica da época:</p>
+        <p>O Obelisco: Imagem do monumento que marcava a entrada da cidade;</p>
+        <p>O Mapa: O contorno geográfico do município;</p>
+        <p>O Trigo e o Café: Representações da pujança agrícola que transformou Londrina na "Capital Mundial do Café".</p>
+        <p>Significado Histórico: Naquele ano, a cidade vivia um boom de modernização. Além do selo, o jubileu foi marcado pela construção da barragem do Lago Igapó, um dos maiores cartões-postais da cidade hoje.</p>
+        <p>O Jubileu de Ouro (1984)</p>
+        <p>Em 1984, quando Londrina completou 50 anos, houve uma grande movimentação filatélica, impulsionada pelo CLUBE FILATÉLICO DE LONDRINA (que já estava ativo há 8 anos).</p>
+        <p>Lançamentos: Diferente de 1959, em 1984 as homenagens foram mais diversificadas. Além de carimbos comemorativos, houve o lançamento de selos que celebravam instituições locais que também faziam aniversário, como o café Cacique (que lançou um selo personalizado com a marca dos 75 anos de Londrina mais tarde).</p>
+        <p>Envolvimento do Clube: Foi nessa época que o jornalista Mário Cunha e outros membros do clube intensificaram as exposições para mostrar a evolução da cidade através dos selos.</p>
+        <p>Outros Marcos Filatéricos (75 e 90 anos)</p>
+        <p>Mais recentemente, nos 75 anos (2009) e nos preparativos para os 90 anos (2024), os Correios e a Prefeitura mantiveram a tradição de lançar Selos Personalizados e Carimbos Comemorativos.</p>
+        <p>Estes selos modernos costumam destacar o "Skyline" de Londrina, o Calçadão ou a Catedral, simbolizando a transição da "Londrina Agrícola" para a "Londrina Metrópole".</p>
+        <p>Curiosidade para Colecionadores: O selo de 1959 (Jubileu de Prata) é relativamente fácil de encontrar em leilões de filatelia, mas exemplares em "quadras" (quatro selos juntos sem destacar) ou com o carimbo de Primeiro Dia de Circulação (FDC) feito em Londrina são muito valorizados por quem coleciona a história do Paraná.</p>
+    </article>
+</div>
 
-            <p>A história do Selo de Jubileu de Londrina remete principalmente a duas grandes celebrações da cidade: o Jubileu de Prata (25 anos) e o Jubileu de Ouro (50 anos). Na filatelia, o selo mais emblemático e colecionado é o de 1959.</p>
-            <p>Aqui estão os detalhes históricos dessas emissões:</p>
-            <p>O Selo do Jubileu de Prata (1959)</p>
-            <p>Este é o "clássico" entre os colecionadores de Londrina. Foi lançado em 27 de setembro de 1959 para celebrar os 25 anos de emancipação política da cidade (1934–1959).</p>
-            <p>Design: O selo (referência C-438 nos catálogos) apresenta uma composição simbólica muito rica da época:</p>
-            <p>O Obelisco: Imagem do monumento que marcava a entrada da cidade;</p>
-            <p>O Mapa: O contorno geográfico do município;</p>
-            <p>O Trigo e o Café: Representações da pujança agrícola que transformou Londrina na "Capital Mundial do Café".</p>
-            <p>Significado Histórico: Naquele ano, a cidade vivia um boom de modernização. Além do selo, o jubileu foi marcado pela construção da barragem do Lago Igapó, um dos maiores cartões-postais da cidade hoje.</p>
-            <p>O Jubileu de Ouro (1984)</p>
-            <p>Em 1984, quando Londrina completou 50 anos, houve uma grande movimentação filatérica, impulsionada pelo CLUBE FILATÉLICO DE LONDRINA (que já estava ativo há 8 anos).</p>
-            <p>Lançamentos: Diferente de 1959, em 1984 as homenagens foram mais diversificadas. Além de carimbos comemorativos, houve o lançamento de selos que celebravam instituições locais que também faziam aniversário, como o café Cacique (que lançou um selo personalizado com a marca dos 75 anos de Londrina mais tarde).</p>
-            <p>Envolvimento do Clube: Foi nessa época que o jornalista Mário Cunha e outros membros do clube intensificaram as exposições para mostrar a evolução da cidade através dos selos.</p>
-            <p>Outros Marcos Filatéricos (75 e 90 anos)</p>
-            <p>Mais recentemente, nos 75 anos (2009) e nos preparativos para os 90 anos (2024), os Correios e a Prefeitura mantiveram a tradição de lançar Selos Personalizados e Carimbos Comemorativos.</p>
-            <p>Estes selos modernos costumam destacar o "Skyline" de Londrina, o Calçadão ou a Catedral, simbolizando a transição da "Londrina Agrícola" para a "Londrina Metrópole".</p>
-            <p>Curiosidade para Colecionadores: O selo de 1959 (Jubileu de Prata) é relativamente fácil de encontrar em leilões de filatelia, mas exemplares em "quadras" (quatro selos juntos sem destacar) ou com o carimbo de Primeiro Dia de Circulação (FDC) feito em Londrina são muito valorizados por quem coleciona a história do Paraná.</p>
-            
-        </article>
-
-    </div>
-
-    <br>
- 
-<i>    
-
-  <footer>
-    Site desenvolvido por Juliano Zanoni acadêmcio do 7º semestre do curso de Engenharia de Software da Universidade Anhenguera para projeto de extensão acadêmico.
-  </footer>
- 
-</i>
+<footer>
+    <i>Site desenvolvido por Juliano Zanoni acadêmcio do 7º semestre do curso de Engenharia de Software da Universidade Anhenguera para projeto de extensão acadêmico.</i>
+</footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -778,7 +652,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const articles = document.querySelectorAll('.article');
     const searchCount = document.getElementById('searchCount');
 
-    // Função para normalizar texto (minúsculas e sem acentos)
     function normalizeText(text) {
         return text.toLowerCase()
                    .normalize("NFD")
@@ -790,30 +663,24 @@ document.addEventListener('DOMContentLoaded', function() {
         let count = 0;
 
         articles.forEach(article => {
-            // Foco exclusivo no elemento H2 (Título)
             const titleElement = article.querySelector('h2');
             const titleText = normalizeText(titleElement.innerText);
 
             if (searchTerm === "") {
-                // Se a busca estiver vazia, mostra todos
                 article.style.display = "block";
                 titleElement.style.color = "#333";
             } else if (titleText.includes(searchTerm)) {
-                // Se o termo estiver no título, mostra o artigo
                 article.style.display = "block";
-                titleElement.style.color = "#0056b3"; // Destaque visual azul
+                titleElement.style.color = "#0056b3";
                 count++;
             } else {
-                // Se não estiver no título, esconde
                 article.style.display = "none";
             }
         });
 
-        // Atualiza o contador de resultados
         searchCount.textContent = searchTerm !== "" ? `${count} resultado(s) encontrado(s)` : "";
     }
 
-    // Eventos
     searchInput.addEventListener('input', performSearch);
 
     btnClear.addEventListener('click', function() {
@@ -830,8 +697,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
 </body>
-
-
 </html>
