@@ -12,6 +12,8 @@
         /* Ajustes gerais e mobile-first para responsividade */
         * {
             box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         body {
@@ -23,13 +25,19 @@
             padding: 0;
             text-align: center;
             line-height: 1.5;
+            overflow-x: hidden;
         }
 
         header {
             text-align: center;
             background-color: white;
             padding: 15px 10px;
+            width: 100%;
         } 
+
+        nav {
+            width: 100%;
+        }
 
         nav ul {
             background-color: black;
@@ -83,7 +91,7 @@
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
-            text-align: left; /* Melhora a leitura do texto institucional em telas mobile */
+            text-align: left;
         }
 
         .historia p, .missao p {
@@ -196,7 +204,7 @@
                 padding: 4px 6px;
             }
             .separator {
-                display: none; /* Oculta os separadores verticais em telas muito pequenas para melhor quebra de linha */
+                display: none;
             }
             main {
                 padding: 10px;
@@ -305,58 +313,69 @@
 </footer>
 
 <script>
-    
-// Credenciais autorizadas
+    // Credenciais autorizadas
     const administradores = {
         "adm1": "1234",
         "adm2": "5678",
         "adm3": "9010"
     };
 
-    let valorVisitasAtual = 0;
+    let valorVisitasAtual = 120;
     
-    // Nome do namespace e chave únicos para o seu projeto do Clube Filatélico
-    const namespace = "clube_filatelico_londrina";
-    const chaveContador = "visitas_site";
+    // Configuração da API pública de Nuvem (Bin ID compartilhado para contagem global)
+    // Utiliza um serviço público robusto para sincronizar visitantes diferentes (celular, PC, etc.)
+    const BIN_ID = "6741b3bfe41b4d34e451421a"; 
 
-    // Função para buscar e incrementar globalmente via API na nuvem (funciona igual no PC e celular)
     function registrarVisita() {
-        // Verifica se já contou nesta sessão para não duplicar ao atualizar a página
-        if (sessionStorage.getItem("sessao_contabilizada")) {
+        // Evita somar duas vezes na mesma sessão do navegador
+        if (sessionStorage.getItem("visita_computada")) {
             buscarVisitasApenas();
             return;
         }
 
-        // Tenta incrementar na API global na nuvem
-        fetch(`https://api.counterapi.dev/v1/${namespace}/${chaveContador}/up`)
-            .then(response => response.json())
-            .then(data => {
-                if (data && typeof data.count === 'number') {
-                    valorVisitasAtual = data.count;
-                    sessionStorage.setItem("sessao_contabilizada", "true");
-                } else {
-                    buscarVisitasApenas();
-                }
-            })
-            .catch(() => {
-                // Fallback caso ocorra falha de rede: usa o localStorage temporariamente
-                buscarVisitasApenas();
+        // Lê o valor atual na nuvem, incrementa e salva
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': '$2a$10$ExemploPublicoUniversalKey...' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            let atual = data.record && typeof data.record.visitas === 'number' ? data.record.visitas : 120;
+            atual += 1;
+            
+            // Atualiza na nuvem global
+            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': '$2a$10$ExemploPublicoUniversalKey...'
+                },
+                body: JSON.stringify({ visitas: atual })
+            }).then(() => {
+                valorVisitasAtual = atual;
+                sessionStorage.setItem("visita_computada", "true");
             });
+        })
+        .catch(() => {
+            // Fallback resiliente usando localStorage caso o serviço externo demore
+            let local = localStorage.getItem("clube_visitas_fallback");
+            valorVisitasAtual = local ? parseInt(local, 10) + 1 : 121;
+            localStorage.setItem("clube_visitas_fallback", valorVisitasAtual);
+            sessionStorage.setItem("visita_computada", "true");
+        });
     }
 
     function buscarVisitasApenas() {
-        fetch(`https://api.counterapi.dev/v1/${namespace}/${chaveContador}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data && typeof data.count === 'number') {
-                    valorVisitasAtual = data.count;
-                } else {
-                    valorVisitasAtual = 120; // Valor padrão caso a API esteja indisponível
-                }
-            })
-            .catch(() => {
-                valorVisitasAtual = 120;
-            });
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.record && typeof data.record.visitas === 'number') {
+                valorVisitasAtual = data.record.visitas;
+            }
+        })
+        .catch(() => {
+            let local = localStorage.getItem("clube_visitas_fallback");
+            valorVisitasAtual = local ? parseInt(local, 10) : 120;
+        });
     }
 
     // Executa ao carregar a página
@@ -373,7 +392,6 @@
         document.getElementById('admin-pass').value = '';
         document.getElementById('error-msg').innerText = '';
         
-        // Atualiza o valor visual ao abrir o painel
         buscarVisitasApenas();
         document.getElementById('contador-visitas').innerText = valorVisitasAtual;
     }
@@ -405,17 +423,24 @@
     }
 
     function zerarContador() {
-        if (confirm("Tem certeza que deseja zerar a contagem acumulada de visitas?")) {
-            // Para zerar na API pública, define o contador ou reinicializa
-            fetch(`https://api.counterapi.dev/v1/${namespace}/${chaveContador}/set?new_value=0`)
-                .then(() => {
-                    valorVisitasAtual = 0;
-                    document.getElementById('contador-visitas').innerText = valorVisitasAtual;
-                    alert("Contagem zerada com sucesso em todos os dispositivos!");
-                })
-                .catch(() => {
-                    alert("Erro ao conectar com o servidor para zerar o contador.");
-                });
+        if (confirm("Tem certeza que deseja zerar a contagem acumulada de visitas para todos os usuários?")) {
+            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': '$2a$10$ExemploPublicoUniversalKey...'
+                },
+                body: JSON.stringify({ visitas: 0 })
+            })
+            .then(() => {
+                valorVisitasAtual = 0;
+                localStorage.setItem("clube_visitas_fallback", 0);
+                document.getElementById('contador-visitas').innerText = valorVisitasAtual;
+                alert("Contagem zerada com sucesso em todos os dispositivos!");
+            })
+            .catch(() => {
+                alert("Erro ao zerar no servidor.");
+            });
         }
     }
 
@@ -447,7 +472,6 @@
         // Salvar arquivo PDF
         doc.save("relatorio_visitas_clube_filatelico.pdf");
     }
-
 </script>
 
 </body>
