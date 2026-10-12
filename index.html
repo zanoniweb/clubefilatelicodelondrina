@@ -269,7 +269,7 @@
 
         <p><strong>Londrina nos Selos:</strong></p>
 
-        <p>A própria história da cidade já foi diversas vezes "eternizada" pelos Correios com o apoio e incentivo dos filatelistas locais. Londrina já foi tema de selos comemorativos e carimbos de primeiro dia, celebrando:</p>
+        <p>A própria história da cidade já foi diversas vezes "eternizada" pelas Correios com o apoio e incentivo dos filatelistas locais. Londrina já foi tema de selos comemorativos e carimbos de primeiro dia, celebrando:</p>
         
         <ul>
             <li style="background:transparent; font-size:18px; text-align:left; color:black;">O aniversário da cidade;</li>
@@ -298,11 +298,19 @@
 
         <div id="dashboard-section" style="display: none;">
             <h3>Painel do Administrador</h3>
-            <p style="font-size: 16px; margin: 15px 0;">Total de Visitas Acumuladas:<br><strong id="contador-visitas" style="font-size: 30px; color: #0066cc;">Carregando...</strong></p>
+            <p style="font-size: 16px; margin: 15px 0;">Total de Visitas Acumuladas:</p>
+            
+            <!-- Inserção do contador oficial na área restrita -->
+            <div align="center" style="margin: 15px 0;">
+                <a href='https://contador.s12.com.br'><img src='https://contador.s12.com.br/img-DyBc6514zBA2185B-1.gif' border='0' alt='contador de visitas'></a>
+                <script type='text/javascript' src='https://contador.s12.com.br/ad.js?id=DyBc6514zBA2185B'></script>
+            </div>
+
             <br>
+            <!--
             <button onclick="baixarPDF()">Baixar Relatório (PDF)</button>
-            <button onclick="zerarContador()" style="background-color: #b30000;">Zerar Contagem</button>
             <br><br>
+            -->
             <button onclick="fecharAdmin()">Fechar / Voltar</button>
         </div>
     </div>
@@ -320,69 +328,6 @@
         "adm3": "9010"
     };
 
-    let valorVisitasAtual = 120;
-    
-    // Configuração da API pública de Nuvem (Bin ID compartilhado para contagem global)
-    // Utiliza um serviço público robusto para sincronizar visitantes diferentes (celular, PC, etc.)
-    const BIN_ID = "6741b3bfe41b4d34e451421a"; 
-
-    function registrarVisita() {
-        // Evita somar duas vezes na mesma sessão do navegador
-        if (sessionStorage.getItem("visita_computada")) {
-            buscarVisitasApenas();
-            return;
-        }
-
-        // Lê o valor atual na nuvem, incrementa e salva
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': '$2a$10$ExemploPublicoUniversalKey...' }
-        })
-        .then(res => res.json())
-        .then(data => {
-            let atual = data.record && typeof data.record.visitas === 'number' ? data.record.visitas : 120;
-            atual += 1;
-            
-            // Atualiza na nuvem global
-            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': '$2a$10$ExemploPublicoUniversalKey...'
-                },
-                body: JSON.stringify({ visitas: atual })
-            }).then(() => {
-                valorVisitasAtual = atual;
-                sessionStorage.setItem("visita_computada", "true");
-            });
-        })
-        .catch(() => {
-            // Fallback resiliente usando localStorage caso o serviço externo demore
-            let local = localStorage.getItem("clube_visitas_fallback");
-            valorVisitasAtual = local ? parseInt(local, 10) + 1 : 121;
-            localStorage.setItem("clube_visitas_fallback", valorVisitasAtual);
-            sessionStorage.setItem("visita_computada", "true");
-        });
-    }
-
-    function buscarVisitasApenas() {
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.record && typeof data.record.visitas === 'number') {
-                valorVisitasAtual = data.record.visitas;
-            }
-        })
-        .catch(() => {
-            let local = localStorage.getItem("clube_visitas_fallback");
-            valorVisitasAtual = local ? parseInt(local, 10) : 120;
-        });
-    }
-
-    // Executa ao carregar a página
-    window.addEventListener('DOMContentLoaded', () => {
-        registrarVisita();
-    });
-
     // Funções de Controle do Modal Administrativo
     function abrirAdmin() {
         document.getElementById('admin-modal').style.display = 'flex';
@@ -391,9 +336,6 @@
         document.getElementById('admin-user').value = '';
         document.getElementById('admin-pass').value = '';
         document.getElementById('error-msg').innerText = '';
-        
-        buscarVisitasApenas();
-        document.getElementById('contador-visitas').innerText = valorVisitasAtual;
     }
 
     // Atalho secundário por duplo clique no título
@@ -414,33 +356,8 @@
             msgErro.innerText = '';
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('dashboard-section').style.display = 'block';
-            
-            buscarVisitasApenas();
-            document.getElementById('contador-visitas').innerText = valorVisitasAtual;
         } else {
             msgErro.innerText = 'Login ou senha incorretos!';
-        }
-    }
-
-    function zerarContador() {
-        if (confirm("Tem certeza que deseja zerar a contagem acumulada de visitas para todos os usuários?")) {
-            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': '$2a$10$ExemploPublicoUniversalKey...'
-                },
-                body: JSON.stringify({ visitas: 0 })
-            })
-            .then(() => {
-                valorVisitasAtual = 0;
-                localStorage.setItem("clube_visitas_fallback", 0);
-                document.getElementById('contador-visitas').innerText = valorVisitasAtual;
-                alert("Contagem zerada com sucesso em todos os dispositivos!");
-            })
-            .catch(() => {
-                alert("Erro ao zerar no servidor.");
-            });
         }
     }
 
@@ -463,7 +380,7 @@
         // Informações de Dados
         doc.setFontSize(11);
         doc.text(`Data de Emissão: ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR')}`, 20, 48);
-        doc.text(`Total Acumulado de Visitas: ${valorVisitasAtual}`, 20, 58);
+        doc.text("Total Acumulado de Visitas: Gerenciado pelo contador oficial do sistema.", 20, 58);
 
         // Rodapé do PDF
         doc.setFontSize(10);
