@@ -305,7 +305,8 @@
 </footer>
 
 <script>
-    // Credenciais autorizadas
+    
+// Credenciais autorizadas
     const administradores = {
         "adm1": "1234",
         "adm2": "5678",
@@ -313,32 +314,49 @@
     };
 
     let valorVisitasAtual = 0;
-    const CHAVE_CONTADOR = "clube_visitas_acumuladas_v2";
-    const CHAVE_SESSAO = "sessao_visita_registrada";
+    
+    // Nome do namespace e chave únicos para o seu projeto do Clube Filatélico
+    const namespace = "clube_filatelico_londrina";
+    const chaveContador = "visitas_site";
 
-    // Função corrigida para gerenciar e incrementar as visitas com consistência local
+    // Função para buscar e incrementar globalmente via API na nuvem (funciona igual no PC e celular)
     function registrarVisita() {
-        let contadorArmazenado = localStorage.getItem(CHAVE_CONTADOR);
-        
-        if (!contadorArmazenado) {
-            valorVisitasAtual = 120; // Valor inicial padrão de lançamento
-        } else {
-            valorVisitasAtual = parseInt(contadorArmazenado, 10);
-            if (isNaN(valorVisitasAtual)) valorVisitasAtual = 120;
+        // Verifica se já contou nesta sessão para não duplicar ao atualizar a página
+        if (sessionStorage.getItem("sessao_contabilizada")) {
+            buscarVisitasApenas();
+            return;
         }
 
-        // Incrementa apenas uma vez por sessão de navegação ativa para evitar contagens duplicadas ao recarregar
-        if (!sessionStorage.getItem(CHAVE_SESSAO)) {
-            valorVisitasAtual += 1;
-            localStorage.setItem(CHAVE_CONTADOR, valorVisitasAtual);
-            sessionStorage.setItem(CHAVE_SESSAO, "true");
-        }
+        // Tenta incrementar na API global na nuvem
+        fetch(`https://api.counterapi.dev/v1/${namespace}/${chaveContador}/up`)
+            .then(response => response.json())
+            .then(data => {
+                if (data && typeof data.count === 'number') {
+                    valorVisitasAtual = data.count;
+                    sessionStorage.setItem("sessao_contabilizada", "true");
+                } else {
+                    buscarVisitasApenas();
+                }
+            })
+            .catch(() => {
+                // Fallback caso ocorra falha de rede: usa o localStorage temporariamente
+                buscarVisitasApenas();
+            });
     }
 
     function buscarVisitasApenas() {
-        let contadorArmazenado = localStorage.getItem(CHAVE_CONTADOR);
-        valorVisitasAtual = contadorArmazenado ? parseInt(contadorArmazenado, 10) : 120;
-        if (isNaN(valorVisitasAtual)) valorVisitasAtual = 120;
+        fetch(`https://api.counterapi.dev/v1/${namespace}/${chaveContador}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data && typeof data.count === 'number') {
+                    valorVisitasAtual = data.count;
+                } else {
+                    valorVisitasAtual = 120; // Valor padrão caso a API esteja indisponível
+                }
+            })
+            .catch(() => {
+                valorVisitasAtual = 120;
+            });
     }
 
     // Executa ao carregar a página
@@ -354,6 +372,10 @@
         document.getElementById('admin-user').value = '';
         document.getElementById('admin-pass').value = '';
         document.getElementById('error-msg').innerText = '';
+        
+        // Atualiza o valor visual ao abrir o painel
+        buscarVisitasApenas();
+        document.getElementById('contador-visitas').innerText = valorVisitasAtual;
     }
 
     // Atalho secundário por duplo clique no título
@@ -384,10 +406,16 @@
 
     function zerarContador() {
         if (confirm("Tem certeza que deseja zerar a contagem acumulada de visitas?")) {
-            valorVisitasAtual = 0;
-            localStorage.setItem(CHAVE_CONTADOR, 0);
-            document.getElementById('contador-visitas').innerText = valorVisitasAtual;
-            alert("Contagem zerada com sucesso!");
+            // Para zerar na API pública, define o contador ou reinicializa
+            fetch(`https://api.counterapi.dev/v1/${namespace}/${chaveContador}/set?new_value=0`)
+                .then(() => {
+                    valorVisitasAtual = 0;
+                    document.getElementById('contador-visitas').innerText = valorVisitasAtual;
+                    alert("Contagem zerada com sucesso em todos os dispositivos!");
+                })
+                .catch(() => {
+                    alert("Erro ao conectar com o servidor para zerar o contador.");
+                });
         }
     }
 
@@ -419,6 +447,7 @@
         // Salvar arquivo PDF
         doc.save("relatorio_visitas_clube_filatelico.pdf");
     }
+
 </script>
 
 </body>
